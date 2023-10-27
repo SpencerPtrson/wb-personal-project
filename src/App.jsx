@@ -6,6 +6,7 @@ export default function App() {
   return (
     <>
       <MainNav/>
+      <p>THIS IS THE FRONT PAGE</p>
       <LoginForm />
     </>
   );

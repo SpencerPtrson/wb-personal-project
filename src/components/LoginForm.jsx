@@ -5,7 +5,7 @@ export default function LoginForm({ onLogin }) {
   const [passwordValue, setPasswordValue] = useState('');
 
   return (
-    <form
+    <form action='post'
       onSubmit={(e) => {
         onLogin(e, {
           email: emailValue,

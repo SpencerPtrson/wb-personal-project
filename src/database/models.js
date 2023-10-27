@@ -62,7 +62,6 @@ PokemonSpecies.init(
         },
         type2: {
             type: DataTypes.STRING,
-            allowNull: false
         },
         baseHP: {
             type: DataTypes.INTEGER,

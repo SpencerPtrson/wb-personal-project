@@ -8,7 +8,7 @@ export default function LoginPage() {
 
   const handleLogin = async (event, formData) => {
     event.preventDefault();
-
+    console.log("Handling login");
     const res = await axios.post('/api/auth', formData);
 
     if (res.data.success) {

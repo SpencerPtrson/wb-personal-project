@@ -31,9 +31,11 @@ app.post('/api/auth', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email: email } });
   
+    console.log("Post Login Attempted");
+
     if (user && user.password === password) {
-        req.session.userId = user.userId;
-        res.json({ success: true });
+      req.session.userId = user.userId;
+      res.json({ success: true });
     } else {
       res.json({ success: false });
     }

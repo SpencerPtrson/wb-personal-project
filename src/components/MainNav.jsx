@@ -2,33 +2,9 @@ import { Container, Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-bootstrap";
 
-export default function MainNav({ brand, leftLinks, rightLinks }) {
+export default function MainNav() {
   return (
     <>
-      <Navbar expand='lg' className="bg-success navbar-dark">
-        <Container fluid>
-          <Navbar.Brand href="#home">{brand}</Navbar.Brand>
-          <Navbar.Toggle />
-
-          <Navbar.Collapse>
-            <Nav className='me-auto'>
-              {leftLinks.map(({ url, text }) => (
-                <NavLink key={text} href={url}>
-                {text}
-              </NavLink>
-              ))}
-            </Nav>
-            <Nav>
-              {rightLinks.map(({ url, text }) => (
-                <NavLink key={text} href={url}>
-                  {text}
-                </NavLink>
-              ))}
-            </Nav>
-          </Navbar.Collapse>
-
-        </Container>
-      </Navbar>
       <Navbar expand='lg' className="bg-dark navbar-dark">
         <Container fluid>
           <Navbar.Brand href="#home">Personal Links</Navbar.Brand>

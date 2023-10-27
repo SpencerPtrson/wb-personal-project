@@ -93,6 +93,4 @@ PokemonSpecies.init(
         modelName: 'PokemonSpecies',
         sequelize: db
     }
-)
-
-await db.close();
+);

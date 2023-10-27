@@ -9,4 +9,4 @@ const user = await User.create({
 });
 
 
-// await db.close();
+await db.close();

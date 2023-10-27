@@ -2,6 +2,8 @@ import express from "express";
 import ViteExpress from "vite-express";
 import morgan from "morgan";
 
+import { User } from '../src/database/models.js'
+
 // create express instance
 const app = express();
 const PORT = 8000;
@@ -15,28 +17,45 @@ app.use(express.static('public'));
 // Import handler functions
 import handlerFunctions from "./controller.js"
 
+function loginRequired(req, res, next) {
+    if (!req.session.userId) {
+      res.status(401).json({ error: 'Unauthorized' });
+    } else {
+      next();
+    }
+}
 // ENDPOINTS
 
-    // BOARD GAME ENDPOINTS
-    // Get 1 Board Game
-    app.get('/games/:id', handlerFunctions.getBoardGameById);
-
-    // Get All Board Games
-    app.get('/games', handlerFunctions.getBoardGames);
-
-    // Get Favorite Board Games
-    app.get('/favorites', handlerFunctions.getFavoriteBoardGames);
-
-    // Create Board Game
-    app.post('/createGame', handlerFunctions.createBoardGame);
+// Authentification
+app.post('/api/auth', async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ where: { email: email } });
+  
+    if (user && user.password === password) {
+        req.session.userId = user.userId;
+        res.json({ success: true });
+    } else {
+      res.json({ success: false });
+    }
+});
     
-    // Edit Board Game
-    app.put('/editBoardGame/:id', handlerFunctions.editBoardGame);
+app.post('/api/logout', loginRequired, (req, res) => {
+    req.session.destroy();
+    res.json({ success: true });
+});
 
-    // Delete Board Game
-    app.delete('/deleteBoardGame/:id', handlerFunctions.deleteBoardGame);
 
+// POKEMON SPECIES
 
+// POKEMON INSTANCES
+
+// USERS
+
+// MOVES
+
+// ABILITIES
+
+  
 
 // Open Server
 ViteExpress.listen(app, PORT, () => {

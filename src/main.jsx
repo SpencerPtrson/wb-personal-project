@@ -10,7 +10,7 @@ import {
 import axios from 'axios';
 import App from './App.jsx';
 import IndexPage from './pages/IndexPage.jsx';
-
+import ErrorPage from './pages/ErrorPage.jsx';
 
 
 import AllPokemonSpeciesPage from './pages/AllPokemonSpeciesPage.jsx';
@@ -19,7 +19,7 @@ import LoginPage from './pages/LoginPage.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App />}>
+    <Route path='/' element={<App />} errorElement={<ErrorPage />}>
       <Route index element={<IndexPage />} />
 
       {/* All Pokemon Species */}

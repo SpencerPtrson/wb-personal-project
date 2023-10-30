@@ -10,10 +10,11 @@ export default function LoginPage() {
     event.preventDefault();
     console.log("Handling login");
     const res = await axios.post('/api/auth', formData);
-
-    if (res.data.success) {
-      navigate('/me');
+    if (res.data.success) { 
+      console.log("Login succeeded");
+      navigate('/pokemonspecies'); 
     }
+    else console.log("Login failed");
   };
 
   return (

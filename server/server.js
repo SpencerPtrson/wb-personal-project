@@ -59,33 +59,6 @@ app.post('/api/logout', loginRequired, async (req, res) => {
 })
 
 
-
-// Get All Ratings
-app.get('/api/ratings', loginRequired, async (req, res) => {
-  console.log("app.get: get all ratings started");
-  const user = await User.findByPk(req.session.userId);
-  const ratings = await user.getRatings({ 
-      include: {
-          model: Movie,
-          attributes: ['title'],
-      }
-  });
-  res.json(ratings);
-})
-
-// Rate a movie for the current user
-app.post('/api/ratings', loginRequired, async (req, res) => {
-  console.log("app.post: create rating started");
-  const { movieId, score } = req.body;
-  const user = await User.findByPk(req.session.userId);
-  const newRating = await user.createRating({
-      movieId: movieId,
-      score: score,
-  });
-  res.json(newRating);
-})
-
-
 // ENDPOINTS
 
 // POKEMON SPECIES

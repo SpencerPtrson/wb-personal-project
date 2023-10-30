@@ -28,6 +28,17 @@ export default function MainNav() {
             </Nav>
           </Navbar.Collapse>
 
+          <Navbar.Collapse>
+            <Nav className="me-auto">
+              <NavLink key={"login"} to="/login">
+                Login
+              </NavLink>
+              <NavLink key={"allpokemonspecies"} to="/pokemonspecies">
+                All Pokemon Species
+              </NavLink>
+            </Nav>
+          </Navbar.Collapse>
+
         </Container>
       </Navbar>
     </>

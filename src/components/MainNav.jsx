@@ -38,6 +38,9 @@ export default function MainNav() {
               <Link key={"allpokemonspecies"} to="/pokemonspecies">
                 All Pokemon Species
               </Link>
+              <Link key={"allpokemonspecies"} to="/moves">
+                All Moves
+              </Link>
             </Nav>
           </Navbar.Collapse>
 

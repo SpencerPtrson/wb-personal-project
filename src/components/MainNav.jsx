@@ -25,22 +25,12 @@ export default function MainNav() {
             </Nav>
             
             <Nav>
-              {/* <NavLink key={"login"} to="/login">
+              <NavLink key={"login"} href="/login">
                 Login
               </NavLink>
-              <NavLink key={"allpokemonspecies"} to="/pokemonspecies">
+              <NavLink key={"allpokemonspecies"} href="/pokemonspecies">
                 All Pokemon Species
               </NavLink>
-            </Nav> */}
-              <Link key={"login"} to="/login">
-                Login
-              </Link>
-              <Link key={"allpokemonspecies"} to="/pokemonspecies">
-                All Pokemon Species
-              </Link>
-              <Link key={"allpokemonspecies"} to="/moves">
-                All Moves
-              </Link>
             </Nav>
           </Navbar.Collapse>
 

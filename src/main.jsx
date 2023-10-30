@@ -50,9 +50,7 @@ const router = createBrowserRouter(
         element={<LoginPage/>}
       />
 
-    </Route>
-
-    
+    </Route> 
   )
 )
 

@@ -18,7 +18,6 @@ export default function MovieDetailPage() {
             <li>Base Special Attack: {baseSPATK}</li>
             <li>Base Special Defense: {baseSPDEF}</li>
             <li>Base Speed: {baseSPEED}</li>
-
         </ul>
       
     </>

@@ -6,22 +6,18 @@ await db.sync({force: true}); // Erases all previous data
 
 
 //#region Species
-    // Get the first 20 pokemon from the API
-    const pokemonSpeciesList = [];
-    for (let i = 1; i <= 20; i++) {
+    // Get pokemon from the API
+    const dbSpeciesList = [];
+    for (let i = 1; i <= 111; i++) {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
-        // const pokemon = response.data;
-        // console.log("Type 1:", pokemon.types[0].type.name);
-        // console.log("Type 2:", pokemon.types[1]?.type.name);
-        // console.log("Stats:", pokemon.stats);
-
-        pokemonSpeciesList.push(response.data);
+        dbSpeciesList.push(response.data);
     }
 
     // create database entries for each pokemon gotten from API
-    for(const pokemon of pokemonSpeciesList) {
-        const { sprites, name, types, stats} = pokemon;
+    for(const pokemon of dbSpeciesList) {
+        const { id, sprites, name, types, stats} = pokemon;
         const newEntry = await PokemonSpecies.create({
+            speciesId: id,
             sprite: sprites.front_default,
             name: name,
             type1: types[0].type.name,
@@ -40,9 +36,14 @@ await db.sync({force: true}); // Erases all previous data
     // Get types from the API
     const response = await axios.get(`https://pokeapi.co/api/v2/type`);
     const types = response.data.results;
+    console.log(types);
+
     // Add types to database
     for (const type of types) {
+        const id = type.url.replace('https://pokeapi.co/api/v2/type/', '').slice(0,-1);
+        console.log(id);
         const newType = await PokemonType.create({
+            typeId: id,
             name: type.name
         });
     }
@@ -54,15 +55,14 @@ await db.sync({force: true}); // Erases all previous data
     for (let i = 1; i <= 20; i++) {
         const response = await axios.get(`https://pokeapi.co/api/v2/move/${i}`);
         const move = response.data;
-        // console.log("effect_entries:", move.effect_entries);
-        // console.log("flavor_text_entries:", move.flavor_text_entries[0].flavor_text);
         moveList.push(response.data);
     }
 
     // create database entries for each move gotten from API
     for(const move of moveList) {
-        const { name, damage_class, type, power, accuracy, pp, priority, effect_entries, flavor_text_entries} = move;
+        const { id, name, damage_class, type, power, accuracy, pp, priority, effect_entries, flavor_text_entries} = move;
         const newEntry = await PokemonMove.create({
+            moveId: id,
             name: name,
             moveClass: damage_class.name,
             type: type.name,
@@ -79,7 +79,7 @@ await db.sync({force: true}); // Erases all previous data
 //#region Abilities
     // Get the first 20 moves from the API
     const abilityList = [];
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 1; i++) {
         const response = await axios.get(`https://pokeapi.co/api/v2/ability/${i}`);
         const ability = response.data;
         // console.log("effect_entries:", move.effect_entries);
@@ -89,17 +89,48 @@ await db.sync({force: true}); // Erases all previous data
 
     // create database entries for each move gotten from API
     for(const ability of abilityList) {
-        const { name, effect_entries, flavor_text_entries} = ability;
+        const { id, name, effect_entries, flavor_text_entries} = ability;
         const englishEffectDesc = effect_entries.filter(effect_entry => effect_entry.language.name === 'en')[0];
         const englishFlavorDesc = flavor_text_entries.filter(effect_entry => effect_entry.language.name === 'en')[0];
 
         const newEntry = await Ability.create({
+            abilityId: id,
             name: name,
             shortDescription: englishEffectDesc.short_effect,
             flavorText: englishFlavorDesc.flavor_text
         });
     }
 //#endregion Abilities
+
+
+// //#region Foreign Key Data
+// let specList = await PokemonSpecies.findAll({
+//     order: [['speciesId', 'ASC']]
+// });
+// for (const species of specList) {
+//     console.log("Checking if an ability lists", species.name, "as valid")
+//     // for each species, check if their name appears in the abilities response from the api
+
+//     for (let i = 0; i < abilityList.length; i++) {
+//         const ability = abilityList[i];
+//         console.log("Checking ability: ", ability.name)
+
+//         for (const pokemonList of ability.pokemon) {
+//             console.log("Ability is for:", pokemonList.pokemon.name);
+//             if (pokemonList.pokemon.name === species.name) {
+//                 console.log(`${species.name} has the ability ${ability.name}`)
+//                 const pokemonToAlter = await PokemonSpecies.findByPk(species.speciesId)
+//                 await pokemonToAlter.addAbility(ability);
+//             }
+//         }
+
+//     }    
+// }
+
+
+
+// //#endregion Foreign Key Data
+
 
 
 // Test User

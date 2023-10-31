@@ -48,7 +48,6 @@ export const db = await connectToDB('postgresql:///pokemonproject')
         {
             speciesId: {
                 type: DataTypes.INTEGER,
-                autoIncrement: true,
                 primaryKey: true,
             },
             sprite: {
@@ -110,7 +109,6 @@ export const db = await connectToDB('postgresql:///pokemonproject')
         {
             typeId: {
                 type: DataTypes.INTEGER,
-                autoIncrement: true,
                 primaryKey: true,
             },
             name: {
@@ -137,7 +135,6 @@ export const db = await connectToDB('postgresql:///pokemonproject')
         {
             moveId: {
                 type: DataTypes.INTEGER,
-                autoIncrement: true,
                 primaryKey: true,
             },
             name: {
@@ -190,7 +187,6 @@ export const db = await connectToDB('postgresql:///pokemonproject')
         {
             abilityId: {
                 type: DataTypes.INTEGER,
-                autoIncrement: true,
                 primaryKey: true,
             },
             name: {
@@ -214,7 +210,9 @@ export const db = await connectToDB('postgresql:///pokemonproject')
 //#endregion abilities
 
 
-
+// // Pokemon - Ability Association Table
+PokemonSpecies.belongsToMany(Ability, { through: 'SpeciesAbilities' });
+Ability.belongsToMany(PokemonSpecies, { through: 'SpeciesAbilities' });
 
 
 // await db.close();

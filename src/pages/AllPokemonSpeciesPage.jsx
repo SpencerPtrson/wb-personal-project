@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom";
-
+import PokemonSpeciesTable from "../components/PokemonSelector/PokemonSpeciesTable";
 
 export default function AllPokemonSpeciesPage() {
   const { pokemonspecies } = useLoaderData();
@@ -13,8 +13,10 @@ export default function AllPokemonSpeciesPage() {
 
   return (
     <>
-      <h1>All Pokemon Species</h1>
-      <ul>{pokemonSpeciesListItems}</ul>
+      {/* <h1>All Pokemon Species</h1>
+      <ul>{pokemonSpeciesListItems}</ul> */}
+      <h1>Pokemon Species Table</h1>
+      <PokemonSpeciesTable speciesList={pokemonspecies}/>
     </>
   );
 }

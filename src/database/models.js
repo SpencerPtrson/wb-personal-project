@@ -164,9 +164,6 @@ export const db = await connectToDB('postgresql:///pokemonproject')
             priority: {
                 type: DataTypes.INTEGER,
             },
-            longDescription: {
-                type: DataTypes.STRING,
-            },
             shortDescription: {
                 type: DataTypes.STRING,
             },
@@ -180,6 +177,43 @@ export const db = await connectToDB('postgresql:///pokemonproject')
         }
     );
 //#endregion moves
+
+
+//#region abilities
+    export class Ability extends Model {
+        [util.inspect.custom]() {
+            return this.toJSON()
+        }
+    }
+
+    Ability.init(
+        {
+            abilityId: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+                primaryKey: true,
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            shortDescription: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            flavorText: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+        },
+        {
+            modelName: 'ability',
+            sequelize: db
+        }
+    );
+//#endregion abilities
+
+
 
 
 

@@ -7,7 +7,7 @@ export default function MainNav() {
     <>
       <Navbar expand='lg' className="bg-dark navbar-dark">
         <Container fluid>
-          <Navbar.Brand href="#home">PokePower</Navbar.Brand>
+          <Navbar.Brand href="/">PokePower</Navbar.Brand>
           <Navbar.Toggle />
 
           <Navbar.Collapse>

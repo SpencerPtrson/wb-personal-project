@@ -1,4 +1,5 @@
 import express from "express";
+import session from "express-session";
 import ViteExpress from "vite-express";
 import morgan from "morgan";
 
@@ -13,6 +14,11 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.static('public'));
+app.use(session({ 
+  secret: 'ssshhhhh', 
+  saveUninitialized: true, 
+  resave: false 
+}));
 
 // Import handler functions
 import handlerFunctions from "./controller.js"
@@ -97,9 +103,11 @@ app.post('/api/auth', async(req, res) => {
       where: { email: email }
   });
 
+
   if (user?.password === password) {
-      req.session.userId = user.userId;
-      res.json({ success: true });
+    // NEED TO IMPORT SESSION    
+    req.session.userId = user.userId;
+    res.json({ success: true });
   }
   else res.json({ success: false });
 });

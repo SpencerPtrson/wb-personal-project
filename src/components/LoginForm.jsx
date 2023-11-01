@@ -1,9 +1,6 @@
-import { useState } from 'react';
-
 export default function LoginForm({ onLogin }) {
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-  
+
+
   return (
     <form action='post'
       onSubmit={(e) => {

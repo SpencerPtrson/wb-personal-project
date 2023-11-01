@@ -1,25 +1,24 @@
 import axios from "axios";
 const initialState = {
-    loading: false,
-    movesList: []
+    email: '',
 };
 
-const REQUEST_MOVES = 'REQUEST_MOVES';
+const REQUEST_EMAIL = 'REQUEST_EMAIL';
 const PENDING = 'PENDING';
 
-export const requestMoves = async(dispatch) => {
+export const requestEmail = async(dispatch) => {
     dispatch({type: PENDING});
-    let movesList = await axios.get('/api/moves');
-    console.log("Move Data:", movesList.data);
-    dispatch({type: REQUEST_MOVES, payload: movesList});
+    let email = await axios.get('/api/moves');
+    console.log("Email Data:", email.data);
+    dispatch({type: REQUEST_EMAIL, payload: email});
 }
 
-export default function movesReducer(state = initialState, action) {
+export default function userReducer(state = initialState, action) {
     switch(action.type) {
         case PENDING:
             return {...state, loading: true};
-        case REQUEST_MOVES:
-            return {loading: false, movesList: action.payload};
+        case REQUEST_EMAIL:
+            return {email: false, movesList: action.payload};
         default:
             return state;
     }

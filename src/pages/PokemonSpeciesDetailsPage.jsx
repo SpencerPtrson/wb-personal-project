@@ -7,10 +7,11 @@ export default function MovieDetailPage() {
   type1 = type1.slice(0,1).toUpperCase() + type1.slice(1);
   if (type2) type2 = type2.slice(0,1).toUpperCase() + type2.slice(1);
  
+  
+
 
   return (
     <>
-      <h1>This is a pokemon species details page!</h1>
       <h1>{name}</h1>
       <img src={sprite} alt={name} style={{ width: '200px' }} />
       <p>Typings: {type1} {type2}</p>

@@ -3,18 +3,23 @@ import { RouterProvider, Routes, Route, createRoutesFromElements, createBrowserR
 
 import axios from 'axios';
 
+import PageContent from './pages/PageContent.jsx';
 import IndexPage from './pages/IndexPage.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import AllPokemonSpeciesPage from './pages/AllPokemonSpeciesPage.jsx';
 import PokemonSpeciesDetailsPage from './pages/PokemonSpeciesDetailsPage.jsx'
 import AllPokemonMovesPage from './pages/AllPokemonMovesPage.jsx';
+
 import LoginPage from './pages/LoginPage.jsx'
+import CreateAccountPage from './pages/CreateAccountPage.jsx';
+
 
 export default function App() {
   
   const router = createBrowserRouter(
     createRoutesFromElements(
-          <Route path='/' element={<IndexPage />} errorElement={<ErrorPage />}>            
+          <Route path='/' element={<PageContent />} errorElement={<ErrorPage />}>            
+            <Route index element={<IndexPage />} />
             // #region species
               {/* All Pokemon Species */}
               <Route 
@@ -52,11 +57,21 @@ export default function App() {
               />
             // #endregion moves
       
+            // #region accountManagement
             {/* Login */}
             <Route 
               path='/login'
               element={<LoginPage/>}
             />
+
+            <Route
+              path='/createAccount'
+              element={<CreateAccountPage />}
+            />
+            // #endregion accountManagement
+
+
+
           </Route>
     )
   )

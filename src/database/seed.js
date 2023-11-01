@@ -98,28 +98,52 @@ await db.sync({force: true}); // Erases all previous data
 
 
 //#region Foreign Key Data
-let dbSpecies = await PokemonSpecies.findAll();
+    let dbSpecies = await PokemonSpecies.findAll();
 
-console.log(apiAbilities);
-for (const species of dbSpecies) {
-    for (let i = 0; i < apiAbilities.length; i++) {
-        const abilityPokemonList = apiAbilities[i].pokemon.filter(abilityListing => abilityListing.pokemon.name === species.name);
-        if (abilityPokemonList.length > 0) {
-            console.log(abilityPokemonList);
-            const abilityToAdd = await Ability.findOne({
-                where: { name: apiAbilities[i].name }
-            })
-            console.log(abilityToAdd);
-            console.log(`Adding ${abilityToAdd.name} to ${species}`);
-            console.log(species);
-            species.addAbility(abilityToAdd);
-            console.log(`Added the ability ${abilityToAdd.name} to ${species.name}`)
-        }
-        else {
-            console.log(`${species.name} does not have the ability ${apiAbilities[i].name}`);
+    // SPECIES - ABILITIES
+    console.log(apiAbilities);
+    for (const species of dbSpecies) {
+        for (let i = 0; i < apiAbilities.length; i++) {
+            const abilityPokemonList = apiAbilities[i].pokemon.filter(abilityListing => abilityListing.pokemon.name === species.name);
+            if (abilityPokemonList.length > 0) {
+                // console.log(abilityPokemonList);
+                const abilityToAdd = await Ability.findOne({
+                    where: { name: apiAbilities[i].name }
+                })
+                // console.log(abilityToAdd);
+                // console.log(`Adding ${abilityToAdd.name} to ${species}`);
+                // console.log(species);
+                species.addAbility(abilityToAdd);
+                console.log(`Added the ability ${abilityToAdd.name} to ${species.name}`)
+            }
+            else {
+                console.log(`${species.name} does not have the ability ${apiAbilities[i].name}`);
+            }
         }
     }
-}
+
+    // SPECIES - MOVES
+    console.log(apiMoves);
+    for (const species of dbSpecies) {
+        for (let i = 0; i < apiMoves.length; i++) {
+            const movePokemonList = apiMoves[i].learned_by_pokemon.filter(moveListing => moveListing.name === species.name);
+            if (movePokemonList.length > 0) {
+                console.log(movePokemonList);
+                const moveToAdd = await PokemonMove.findOne({
+                    where: { name: apiMoves[i].name }
+                })
+                // console.log(moveToAdd);
+                // console.log(`Adding ${moveToAdd.name} to ${species}`);
+                // console.log(species);
+                species.addPokemonMove(moveToAdd);
+                console.log(`Added the move ${moveToAdd.name} to ${species.name}`)
+            }
+            else {
+                console.log(`${species.name} does not have the move ${apiMoves[i].name}`);
+            }
+        }
+    }
+
 
 // //#endregion Foreign Key Data
 

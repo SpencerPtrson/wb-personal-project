@@ -31,12 +31,41 @@ import handlerFunctions from "./controller.js"
       res.json(users);
     });
 
-    // Get 1 Move
+    // Get 1 User
     app.get('/api/users/:userId', async(req, res) => {
       const { userId } = req.params;
       const user = await PokemonMove.findByPk(userId);
       res.json(user);
     });
+
+
+    // Authenticate User
+    function loginRequired(req, res, next) {
+      if (!req.session.userId) res.status(401).json({ error: 'Unauthorized' });
+      else next();
+    }
+
+    // Login
+    app.post('/api/auth', async(req, res) => {
+      const { email, password } = req.body;
+      const user = await User.findOne({
+          where: { email: email }
+      });
+
+      if (user?.password === password) {
+        req.session.userId = user.userId;
+        res.json({ success: true });
+      }
+      else res.json({ success: false });
+    });
+
+    // Logout
+    app.post('/api/logout', loginRequired, async (req, res) => {
+      req.session.destroy();
+      res.json({ success: true });
+    });
+
+
   //#endregion users
 
 
@@ -90,33 +119,7 @@ import handlerFunctions from "./controller.js"
 
 
 
-// Authenticate User
-function loginRequired(req, res, next) {
-  if (!req.session.userId) res.status(401).json({ error: 'Unauthorized' });
-  else next();
-}
 
-// Login
-app.post('/api/auth', async(req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({
-      where: { email: email }
-  });
-
-
-  if (user?.password === password) {
-    // NEED TO IMPORT SESSION    
-    req.session.userId = user.userId;
-    res.json({ success: true });
-  }
-  else res.json({ success: false });
-});
-
-// Logout
-app.post('/api/logout', loginRequired, async (req, res) => {
-  req.session.destroy();
-  res.json({ success: true });
-});
 
 
 

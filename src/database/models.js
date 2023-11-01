@@ -37,6 +37,14 @@ export const db = await connectToDB('postgresql:///pokemonproject')
 //#endregion users
 
 
+//#region pokemon instances
+
+
+
+
+//#endregion pokemon instances
+
+
 //#region species
     export class PokemonSpecies extends Model {
         [util.inspect.custom]() {
@@ -210,9 +218,13 @@ export const db = await connectToDB('postgresql:///pokemonproject')
 //#endregion abilities
 
 
-// // Pokemon - Ability Association Table
+// Pokemon - Ability Association Table
 PokemonSpecies.belongsToMany(Ability, { through: 'SpeciesAbilities' });
 Ability.belongsToMany(PokemonSpecies, { through: 'SpeciesAbilities' });
+
+// Pokemon - Move Association Table
+PokemonSpecies.belongsToMany(PokemonMove, { through: 'SpeciesMoves' });
+PokemonMove.belongsToMany(PokemonSpecies, { through: 'SpeciesMoves' });
 
 
 // await db.close();

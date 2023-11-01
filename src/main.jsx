@@ -22,6 +22,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />} errorElement={<ErrorPage />}>
       <Route index element={<IndexPage />} />
+      
+
 
 //#region species
       {/* All Pokemon Species */}

@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { Container, Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 export default function MainNav() {
   const email = useSelector(state => state.user.email);
@@ -36,9 +35,12 @@ export default function MainNav() {
               </NavLink>
             </Nav>
 
-            <Nav className="me-auto">
+            <Nav className="me-right">
               {email === '' || !email
-                ? <NavLink key={"login"} href="/login">Login</NavLink>
+                ? <>
+                  <NavLink key={"login"} href="/login">Login</NavLink>
+                  <NavLink key={"createAccount"} href="/createAccount">Create Account</NavLink>
+                </> 
                 : <>
                   <p style={{color: 'white'}}>{email}</p>
                   <NavLink key={"logout"} href="/logout">Logout</NavLink>

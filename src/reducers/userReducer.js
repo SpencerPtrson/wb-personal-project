@@ -12,8 +12,6 @@ export default function userReducer(state = initialState, action) {
     switch(action.type) {
         case PENDING:
             return {...state, loading: true};
-        case REQUEST_EMAIL:
-            return {...state};
         case SET_EMAIL:
             return {...state, email: action.payload};
         default:

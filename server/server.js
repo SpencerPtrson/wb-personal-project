@@ -34,8 +34,12 @@ import handlerFunctions from "./controller.js"
 
     // Authenticate User
     function loginRequired(req, res, next) {
+      console.log("Checking if currently logged in");
       if (!req.session.userId) res.status(401).json({ error: 'Unauthorized' });
-      else next();
+      else {
+        console.log("Authorized");
+        next();
+      } 
     }
 
     // Login

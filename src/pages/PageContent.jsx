@@ -26,7 +26,7 @@ export default function PageContent() {
   
   return (
       <>
-        <MainNav />
+        <MainNav email={email}/>
         <Outlet />
       </>
     );

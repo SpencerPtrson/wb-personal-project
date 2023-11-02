@@ -1,10 +1,12 @@
 import { Container, Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-bootstrap";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import LogoutButton from "./AccountManagement/LogoutButton";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 
-export default function MainNav() {
-  const email = useSelector(state => state.user.email);
+export default function MainNav({ email }) {
+  console.log(email);
 
   return (
     <>
@@ -36,14 +38,14 @@ export default function MainNav() {
             </Nav>
 
             <Nav className="me-right">
-              {email === '' || !email
+              {!email || email === ''
                 ? <>
                   <NavLink key={"login"} href="/login">Login</NavLink>
                   <NavLink key={"createAccount"} href="/createAccount">Create Account</NavLink>
                 </> 
                 : <>
                   <p style={{color: 'white'}}>{email}</p>
-                  <NavLink key={"logout"} href="/logout">Logout</NavLink>
+                  <LogoutButton />
                 </>
               }
             </Nav>

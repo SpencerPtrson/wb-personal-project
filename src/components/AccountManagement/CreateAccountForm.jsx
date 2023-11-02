@@ -24,7 +24,7 @@ export default function CreateAccountForm({ onCreateAccount }) {
           type="password"
           required
         />
-        <button type="submit">Log In</button>
+        <button type="submit">Create Account</button>
       </form>
     );
   }

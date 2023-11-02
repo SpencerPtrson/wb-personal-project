@@ -70,6 +70,11 @@ export default function App() {
               path='/createAccount'
               element={<CreateAccountPage />}
             />
+
+            <Route
+              path='/logout'
+              element={<IndexPage />}
+            />
             // #endregion accountManagement
 
           </Route>

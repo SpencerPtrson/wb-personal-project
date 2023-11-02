@@ -1,6 +1,5 @@
 import { User, PokemonSpecies, PokemonType, PokemonMove, Ability } from '../src/database/models.js'
 
-
 const handlerFunctions = {
 
 
@@ -17,8 +16,49 @@ const handlerFunctions = {
             res.json(user);
         },
 
+        createUser: async(req, res) => {
+            const { email, password } = req.body;
+            console.log(`Creating user with email ${email} and password ${password}`);
+            const newUser = await User.create({
+                email: email,
+                password: password
+            });
+            res.json(newUser);
+        },
+
     //#endregion Users
 
+
+    //#region AccountManagement
+    
+        logIn: async(req, res) => {
+            const { email, password } = req.body;
+            console.log(email, password);
+            const user = await User.findOne({
+                where: { email: email }
+            });
+    
+            if (user?.password === password) {
+            req.session.userId = user.userId;
+            res.json({ success: true });
+            }
+            else res.json({ success: false });
+        },
+
+        logOut: async (req, res) => {
+            req.session.destroy();
+            res.json({ success: true });
+        },
+
+        userCheck: async (req, res) => {
+            if (req.session.userId) {
+              const user = await User.findByPk(req.session.userId)
+              res.send({ email: user.email })
+            }
+        },
+
+
+    //#endregion AccountManagement
 
     //#region Species
 
@@ -68,7 +108,7 @@ const handlerFunctions = {
     //#endregion Moves
 
 
-    //#region ABILITIES
+    //#region Abilities
 
         getPokemonAbilities: async(req, res) => {
             const allAbilities = await Ability.findAll();

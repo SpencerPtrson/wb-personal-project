@@ -4,8 +4,8 @@ export default function CreateAccountForm({ onCreateAccount }) {
         onSubmit={(e) => {
           e.preventDefault();
           onCreateAccount(e, {
-            email: emailValue,
-            password: passwordValue,
+            email: email.value,
+            password: password.value,
           });
         }}
       >

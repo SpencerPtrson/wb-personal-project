@@ -25,54 +25,43 @@ import handlerFunctions from "./controller.js"
 
 // ENDPOINTS
 
+  // Authenticate User
+  function loginRequired(req, res, next) {
+    console.log("Checking if currently logged in");
+    if (!req.session.userId) res.status(401).json({ error: 'Unauthorized' });
+    else {
+      console.log("Authorized");
+      next();
+    } 
+  }
+
   //#region users
 
+    // Get all users
     app.get('/api/users', handlerFunctions.getUsers);
 
     // Get 1 User
     app.get('/api/users/:userId', handlerFunctions.getUserById);
 
-    // Authenticate User
-    function loginRequired(req, res, next) {
-      console.log("Checking if currently logged in");
-      if (!req.session.userId) res.status(401).json({ error: 'Unauthorized' });
-      else {
-        console.log("Authorized");
-        next();
-      } 
-    }
-
-    // Login
-    app.post('/api/auth', async(req, res) => {
-      const { email, password } = req.body;
-      console.log(email, password);
-      const user = await User.findOne({
-          where: { email: email }
-      });
-
-      if (user?.password === password) {
-        req.session.userId = user.userId;
-        res.json({ success: true });
-      }
-      else res.json({ success: false });
-    });
-
-    // Logout
-    app.post('/api/logout', loginRequired, async (req, res) => {
-      req.session.destroy();
-      res.json({ success: true });
-    });
-
-    // 
-    app.get('/userCheck', async (req, res) => {
-      if (req.session.userId) {
-        const user = await User.findByPk(req.session.userId)
-        res.send({ email: user.email })
-      }
-    })
+    // Create new User
+    app.post('/api/users/create', handlerFunctions.createUser);
 
 
   //#endregion users
+
+
+  //#region AccountManagement
+
+    // Login
+    app.post('/api/auth', handlerFunctions.logIn);
+
+    // Logout
+    app.post('/api/logout', loginRequired, handlerFunctions.logOut);
+
+    // Check if session id has corresponding user
+    app.get('/userCheck', handlerFunctions.userCheck);
+
+  //#endregion AccountManagement
 
 
   //#region species

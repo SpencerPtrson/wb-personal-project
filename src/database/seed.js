@@ -32,6 +32,7 @@ await db.sync({force: true}); // Erases all previous data
     }
 //#endregion Species
 
+
 //#region Types
     // Get types from the API
     const response = await axios.get(`https://pokeapi.co/api/v2/type`);
@@ -46,6 +47,7 @@ await db.sync({force: true}); // Erases all previous data
         });
     }
 //#endregion Types
+
 
 //#region Moves
     // Get the first 20 moves from the API
@@ -72,6 +74,7 @@ await db.sync({force: true}); // Erases all previous data
         });
     }
 //#endregion Moves
+
 
 //#region Abilities
     // Get the first 20 moves from the API
@@ -101,7 +104,7 @@ await db.sync({force: true}); // Erases all previous data
     let dbSpecies = await PokemonSpecies.findAll();
 
     // SPECIES - ABILITIES
-    console.log(apiAbilities);
+    // console.log(apiAbilities);
     for (const species of dbSpecies) {
         for (let i = 0; i < apiAbilities.length; i++) {
             const abilityPokemonList = apiAbilities[i].pokemon.filter(abilityListing => abilityListing.pokemon.name === species.name);
@@ -114,21 +117,19 @@ await db.sync({force: true}); // Erases all previous data
                 // console.log(`Adding ${abilityToAdd.name} to ${species}`);
                 // console.log(species);
                 species.addAbility(abilityToAdd);
-                console.log(`Added the ability ${abilityToAdd.name} to ${species.name}`)
+                // console.log(`Added the ability ${abilityToAdd.name} to ${species.name}`)
             }
-            else {
-                console.log(`${species.name} does not have the ability ${apiAbilities[i].name}`);
-            }
+            // else console.log(`${species.name} does not have the ability ${apiAbilities[i].name}`);
         }
     }
 
     // SPECIES - MOVES
-    console.log(apiMoves);
+    // console.log(apiMoves);
     for (const species of dbSpecies) {
         for (let i = 0; i < apiMoves.length; i++) {
             const movePokemonList = apiMoves[i].learned_by_pokemon.filter(moveListing => moveListing.name === species.name);
             if (movePokemonList.length > 0) {
-                console.log(movePokemonList);
+                // console.log(movePokemonList);
                 const moveToAdd = await PokemonMove.findOne({
                     where: { name: apiMoves[i].name }
                 })
@@ -136,24 +137,26 @@ await db.sync({force: true}); // Erases all previous data
                 // console.log(`Adding ${moveToAdd.name} to ${species}`);
                 // console.log(species);
                 species.addPokemonMove(moveToAdd);
-                console.log(`Added the move ${moveToAdd.name} to ${species.name}`)
+                // console.log(`Added the move ${moveToAdd.name} to ${species.name}`)
             }
-            else {
-                console.log(`${species.name} does not have the move ${apiMoves[i].name}`);
-            }
+            // else console.log(`${species.name} does not have the move ${apiMoves[i].name}`);
         }
     }
 
 
-// //#endregion Foreign Key Data
+//#endregion Foreign Key Data
 
 
-
-// Test User
-const user = await User.create({
-    email: 'test@test.com',
-    password: 'test'
-});
-
+//#region  Users
+    // Create Test UsersTest User
+    const user1 = await User.create({
+        email: '1@test.com',
+        password: 'test'
+    });
+    const user2 = await User.create({
+        email: '2@test.com',
+        password: 'test'
+    });
+//#endregion Users
 
 await db.close();

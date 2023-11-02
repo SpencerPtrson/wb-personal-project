@@ -19,7 +19,9 @@ export default function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
           <Route path='/' element={<PageContent />} errorElement={<ErrorPage />}>            
+
             <Route index element={<IndexPage />} />
+ 
             // #region species
               {/* All Pokemon Species */}
               <Route 
@@ -69,8 +71,6 @@ export default function App() {
               element={<CreateAccountPage />}
             />
             // #endregion accountManagement
-
-
 
           </Route>
     )

@@ -4,7 +4,6 @@ import PokemonSpeciesTable from "../components/PokemonSpeciesViewer/PokemonSpeci
 export default function AllPokemonSpeciesPage() {
   const { pokemonspecies } = useLoaderData();
 
-  console.log("All Pokemon Species Page");
   return (
     <>
       <h1>Pokemon Species Table</h1>

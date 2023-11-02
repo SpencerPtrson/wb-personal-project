@@ -1,8 +1,12 @@
+import { useEffect } from "react";
 import { Container, Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function MainNav() {
+  const email = useSelector(state => state.user.email);
+
   return (
     <>
       <Navbar expand='lg' className="bg-dark navbar-dark">
@@ -22,17 +26,26 @@ export default function MainNav() {
                 LinkedIn
               </NavLink>
             </Nav>
-            
-            <Nav>
-              <NavLink key={"login"} href="/login">
-                Login
-              </NavLink>
+
+            <Nav className="me-auto">
               <NavLink key={"allpokemonspecies"} href="/pokemonspecies">
                 All Pokemon Species
               </NavLink>
+              <NavLink key={"allpokemonmoves"} href="/moves">
+                All Pokemon Moves
+              </NavLink>
+            </Nav>
+
+            <Nav className="me-auto">
+              {email === '' || !email
+                ? <NavLink key={"login"} href="/login">Login</NavLink>
+                : <>
+                  <p style={{color: 'white'}}>{email}</p>
+                  <NavLink key={"logout"} href="/logout">Logout</NavLink>
+                </>
+              }
             </Nav>
           </Navbar.Collapse>
-
         </Container>
       </Navbar>
     </>

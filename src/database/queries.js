@@ -3,4 +3,3 @@ const {User, db} = await import('./models');
 
 const users = await User.findAll();
 console.log(users);
-

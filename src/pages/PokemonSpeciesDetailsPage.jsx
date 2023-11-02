@@ -7,9 +7,6 @@ export default function MovieDetailPage() {
   type1 = type1.slice(0,1).toUpperCase() + type1.slice(1);
   if (type2) type2 = type2.slice(0,1).toUpperCase() + type2.slice(1);
  
-  
-
-
   return (
     <>
       <h1>{name}</h1>

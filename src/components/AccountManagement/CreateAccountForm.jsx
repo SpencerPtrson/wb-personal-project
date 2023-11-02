@@ -1,10 +1,9 @@
 export default function CreateAccountForm({ onCreateAccount }) {
-
-
     return (
       <form method='post' action="/createAccount"
         onSubmit={(e) => {
-          onLogin(e, {
+          e.preventDefault();
+          onCreateAccount(e, {
             email: emailValue,
             password: passwordValue,
           });

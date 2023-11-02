@@ -59,6 +59,14 @@ import handlerFunctions from "./controller.js"
       res.json({ success: true });
     });
 
+    // 
+    app.get('/userCheck', async (req, res) => {
+      if (req.session.userId) {
+        const user = await User.findByPk(req.session.userId)
+        res.send({ email: user.email })
+      }
+    })
+
 
   //#endregion users
 

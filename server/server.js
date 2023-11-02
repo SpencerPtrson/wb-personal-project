@@ -26,18 +26,11 @@ import handlerFunctions from "./controller.js"
 // ENDPOINTS
 
   //#region users
-    app.get('/api/users', async(req, res) => {
-      const users = await User.findAll();
-      res.json(users);
-    });
+
+    app.get('/api/users', handlerFunctions.getUsers);
 
     // Get 1 User
-    app.get('/api/users/:userId', async(req, res) => {
-      const { userId } = req.params;
-      const user = await PokemonMove.findByPk(userId);
-      res.json(user);
-    });
-
+    app.get('/api/users/:userId', handlerFunctions.getUserById);
 
     // Authenticate User
     function loginRequired(req, res, next) {
@@ -71,62 +64,51 @@ import handlerFunctions from "./controller.js"
 
 
   //#region species
+
     // Get All Pokemon Species
-    app.get('/api/pokemonspecies', async(req, res) => {
-      const allPokemonSpecies = await PokemonSpecies.findAll();
-      res.json(allPokemonSpecies);
-    });
+    app.get('/api/pokemonspecies', handlerFunctions.getAllSpecies);
 
     // Get 1 Pokemon Species
-    app.get('/api/pokemonspecies/:speciesId', async(req, res) => {
-      const { speciesId } = req.params;
-      const species = await PokemonSpecies.findByPk(speciesId);
-      res.json(species);
-    });
+    app.get('/api/pokemonspecies/:speciesId', handlerFunctions.getSpeciesById);
+
   //#endregion species
 
 
   //#region types
-    // Get All Moves
-    app.get('/api/types', async(req, res) => {
-      const allTypes = await PokemonType.findAll();
-      res.json(allTypes);
-    });
 
-    // Get 1 Move
-    app.get('/api/types/:typeId', async(req, res) => {
-      const { typeId } = req.params;
-      const type = await PokemonMove.findByPk(typeId);
-      res.json(type);
-    });
+    // Get All Types
+    app.get('/api/types', handlerFunctions.getPokemonTypes);
+
+    // Get 1 Type
+    app.get('/api/types/:typeId', handlerFunctions.getPokemonTypesById);
   
   //#endregion types
 
 
   //#region moves
+
     // Get All Moves
-    app.get('/api/moves', async(req, res) => {
-      const allMoves = await PokemonMove.findAll();
-      res.json(allMoves);
-    });
+    app.get('/api/moves', handlerFunctions.getPokemonMoves);
 
     // Get 1 Move
-    app.get('/api/moves/:moveId', async(req, res) => {
-      const { moveId } = req.params;
-      const move = await PokemonMove.findByPk(moveId);
-      res.json(move);
-    });
+    app.get('/api/moves/:moveId', handlerFunctions.getPokemonMovesById);
+
   //#endregion moves
 
 
+  //#region abilities
 
+    // Get All Abilities
+    app.get('/api/abilities', handlerFunctions.getPokemonAbilities);
 
+    // Get 1 Ability
+    app.get('/api/abilities/:abilityId', handlerFunctions.getPokemonAbilitiesById);
 
+  //#endregion abilities
 
 
 // POKEMON INSTANCES
 
-// ABILITIES
 
   
 

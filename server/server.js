@@ -48,6 +48,7 @@ import handlerFunctions from "./controller.js"
     // Login
     app.post('/api/auth', async(req, res) => {
       const { email, password } = req.body;
+      console.log(email, password);
       const user = await User.findOne({
           where: { email: email }
       });

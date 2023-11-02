@@ -1,11 +1,14 @@
 export default function LoginForm({ onLogin }) {
-
+  console.log("This is a login form!");
+  console.log(onLogin);
   return (
-    <form method='get' action="/login"
+    <form method='get' 
       onSubmit={(e) => {
+        e.preventDefault();
+        console.log("onSubmit activated");
         onLogin(e, {
-          email: emailValue,
-          password: passwordValue,
+          email: email.value,
+          password: password.value,
         });
       }}
     >

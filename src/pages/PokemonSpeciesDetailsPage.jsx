@@ -1,27 +1,18 @@
 import { useLoaderData, useNavigate } from 'react-router-dom';
+import PokemonSpriteImg from '../components/PokemonDetails/PokemonSpriteImg'
 import axios from 'axios';
+import BaseStatsList from '../components/PokemonDetails/BaseStatsList';
+import SpeciesTypings from '../components/PokemonDetails/SpeciesTypings';
 
 export default function MovieDetailPage() {
   let { pokemonspecies: {name, sprite, type1, type2, baseHP, baseATK, baseDEF, baseSPATK, baseSPDEF, baseSPEED }} = useLoaderData();
-  name = name.slice(0,1).toUpperCase() + name.slice(1);
-  type1 = type1.slice(0,1).toUpperCase() + type1.slice(1);
-  if (type2) type2 = type2.slice(0,1).toUpperCase() + type2.slice(1);
- 
+
   return (
     <>
       <h1>{name}</h1>
-      <img src={sprite} alt={name} style={{ width: '200px' }} />
-      <p>Typings: {type1} {type2}</p>
-      <p>Base Stats</p>
-        <ul>
-            <li>Base HP: {baseHP}</li>
-            <li>Base Attack: {baseATK}</li>
-            <li>Base Defense: {baseDEF}</li>
-            <li>Base Special Attack: {baseSPATK}</li>
-            <li>Base Special Defense: {baseSPDEF}</li>
-            <li>Base Speed: {baseSPEED}</li>
-        </ul>
-      
+      <PokemonSpriteImg name={name} sprite={sprite} width={200}/>
+      <SpeciesTypings type1={type1} type2={type2} />
+      <BaseStatsList baseHP={baseHP} baseATK={baseATK} baseDEF={baseDEF} baseSPATK={baseSPATK} baseSPDEF={baseSPDEF} baseSPEED={baseSPEED}/>
     </>
   );
 }

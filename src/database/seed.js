@@ -8,7 +8,7 @@ await db.sync({force: true}); // Erases all previous data
 //#region Species
     // Get pokemon from the API
     const apiSpeciesList = [];
-    for (let i = 1; i <= 111; i++) {
+    for (let i = 1; i <= 11; i++) {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
         apiSpeciesList.push(response.data);
     }
@@ -102,6 +102,7 @@ await db.sync({force: true}); // Erases all previous data
 
 //#region Foreign Key Data
     let dbSpecies = await PokemonSpecies.findAll();
+    let dbMoves = await PokemonMove.findAll();
 
     // SPECIES - ABILITIES
     // console.log(apiAbilities);
@@ -143,7 +144,32 @@ await db.sync({force: true}); // Erases all previous data
         }
     }
 
+    // SPECIES - TYPES
+    // console.log("API TYPES:", apiTypes);
+    for (const species of dbSpecies) {
+        const typeList = apiTypes.filter(typeListing => species.type1 === typeListing.name || species.type2 === typeListing.name);
+        for (let i = 0; i < typeList.length; i++) {
+            const typeToAdd = await PokemonType.findOne({
+                where: { name: typeList[i].name }
+            });
+            species.addPokemonType(typeToAdd);
+            console.log(`Added the type ${typeToAdd.name} to ${species.name}`)
+        }
+    }
 
+    // MOVES - TYPES
+    console.log("API TYPES:", apiTypes);
+    for (const move of dbMoves) {
+        console.log(move.type)
+        const typeList = apiTypes.filter(typeListing => move.type === typeListing.name);
+        for (let i = 0; i < typeList.length; i++) {
+            const typeToSet = await PokemonType.findOne({
+                where: { name: typeList[i].name }
+            });
+            move.setPokemonType(typeToSet);
+            console.log(`Added the type ${typeToSet.name} to ${move.name}`)
+        }
+    }
 //#endregion Foreign Key Data
 
 

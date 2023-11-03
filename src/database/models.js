@@ -227,4 +227,16 @@ PokemonSpecies.belongsToMany(PokemonMove, { through: 'SpeciesMoves' });
 PokemonMove.belongsToMany(PokemonSpecies, { through: 'SpeciesMoves' });
 
 
+// Pokemon - Type Association Table
+PokemonSpecies.belongsToMany(PokemonType, { through: 'SpeciesTypes' });
+PokemonType.belongsToMany(PokemonSpecies, { through: 'SpeciesTypes' });
+
+
+// Move - Type Association Table
+PokemonType.hasMany(PokemonMove, { foreignKey: 'typeId' });
+PokemonMove.belongsTo(PokemonType, { foreignKey: 'typeId' });
+
+
+
+
 // await db.close();

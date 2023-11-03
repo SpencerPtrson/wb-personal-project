@@ -38,7 +38,122 @@ export const db = await connectToDB('postgresql:///pokemonproject')
 
 
 //#region pokemon instances
+export class PokemonInstance extends Model {
+    [util.inspect.custom]() {
+        return this.toJSON()
+    }
+}
 
+PokemonInstance.init(
+    {
+        pokemonInstanceId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+        },
+        speciesId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        natureId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        level: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        move1Id: {
+            type: DataTypes.INTEGER,
+        },
+        move2Id: {
+            type: DataTypes.INTEGER,
+        },
+        move3Id: {
+            type: DataTypes.INTEGER,
+        },
+        move4Id: {
+            type: DataTypes.INTEGER,
+        },
+        
+        hpIV: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        hpEV: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        atkIV: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        atkEV: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        defIV: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        defEV: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        spATKIV: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        spATKEV: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        spDEFIV: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        spDEFIV: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        speedIV: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        speedEV: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+
+        hp: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        atk: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        def: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        spATK: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        spDef: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        speed: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },     
+    },
+    {
+        modelName: 'PokemonInstances',
+        sequelize: db
+    }
+);
 
 
 
@@ -218,6 +333,39 @@ export const db = await connectToDB('postgresql:///pokemonproject')
 //#endregion abilities
 
 
+//#region teams
+export class PokemonTeam extends Model {
+    [util.inspect.custom]() {
+        return this.toJSON()
+    }
+}
+
+PokemonTeam.init(
+    {
+        teamId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        pokemonInstanceId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+    },
+    {
+        modelName: 'pokemonteam',
+        sequelize: db
+    }
+);
+//#endregion teams
+
+
+
+//#region Foreign Keys
+
 // Pokemon - Ability Association Table
 PokemonSpecies.belongsToMany(Ability, { through: 'SpeciesAbilities' });
 Ability.belongsToMany(PokemonSpecies, { through: 'SpeciesAbilities' });
@@ -237,6 +385,16 @@ PokemonType.hasMany(PokemonMove, { foreignKey: 'typeId' });
 PokemonMove.belongsTo(PokemonType, { foreignKey: 'typeId' });
 
 
+// User - Team Association Table
+User.hasMany(PokemonTeam, { foreignKey: 'userId' });
+PokemonTeam.belongsTo(User, { foreignKey: 'userId' });
+
+
+// Team - Pokemon Instance Association Table
+
+
+
+//#endregion Foreign Keys
 
 
 // await db.close();

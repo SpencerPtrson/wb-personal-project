@@ -7,6 +7,7 @@ import SpeciesMovesList from '../components/IndividualSpeciesViewer/SpeciesMoves
 export default function PokemonSpeciesDetailsPage() {
   let { pokemonspecies: {name, sprite, type1, type2, baseHP, baseATK, baseDEF, baseSPATK, baseSPDEF, baseSPEED, PokemonMoves }} = useLoaderData();
   console.log(PokemonMoves);
+  name = name.slice(0,1).toUpperCase() + name.slice(1);
 
   return (
     <>

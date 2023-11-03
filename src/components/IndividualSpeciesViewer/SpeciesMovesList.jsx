@@ -13,7 +13,7 @@ export default function SpeciesMovesList({ SpeciesMoves }) {
     
     
     return (
-        <table style={{border: '1px solid black', width:"600px"}}>
+        <table style={{border: '1px solid black', width:"900px"}}>
             <tr>
                 <th>Move Name</th>
                 <th>Type</th>

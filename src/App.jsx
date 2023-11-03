@@ -18,66 +18,66 @@ export default function App() {
   
   const router = createBrowserRouter(
     createRoutesFromElements(
-          <Route path='/' element={<PageContent />} errorElement={<ErrorPage />}>            
+      <Route path='/' element={<PageContent />} errorElement={<ErrorPage />}>            
 
-            <Route index element={<IndexPage />} />
- 
-            // #region species
-              {/* All Pokemon Species */}
-              <Route 
-                path='/pokemonspecies'
-                element={<AllPokemonSpeciesPage />}
-                loader={ async () => {
-                  console.log("Loader function for all pokemon species");
-                  const res = await axios.get('/api/pokemonspecies');
-                  return { pokemonspecies: res.data }
-                }}
-              />
+        <Route index element={<IndexPage />} />
 
-              {/* Single Species */}
-              <Route
-                path="/pokemonspecies/:id"
-                element={<PokemonSpeciesDetailsPage />}
-                loader={async({ params }) => {
-                  console.log("Attempting to get pokemon species details for species:", params.id);
-                  const res = await axios.get(`/api/pokemonspecies/${params.id}`)
-                  return { pokemonspecies: res.data };
-                }}
-              />
-            //#endregion species
+        // #region species
+          {/* All Pokemon Species */}
+          <Route 
+            path='/pokemonspecies'
+            element={<AllPokemonSpeciesPage />}
+            loader={ async () => {
+              console.log("Loader function for all pokemon species");
+              const res = await axios.get('/api/pokemonspecies');
+              return { pokemonspecies: res.data }
+            }}
+          />
 
-            // #region moves
-              {/* All Moves */}
-              <Route 
-                path='/moves'
-                element={<AllPokemonMovesPage />}
-                loader={ async () => {
-                  console.log("Loader function for all pokemon species");
-                  const res = await axios.get('/api/moves');
-                  return { moves: res.data }
-                }}
-              />
-            // #endregion moves
-      
-            // #region accountManagement
-            {/* Login */}
-            <Route 
-              path='/login'
-              element={<LoginPage/>}
-            />
+          {/* Single Species */}
+          <Route
+            path="/pokemonspecies/:id"
+            element={<PokemonSpeciesDetailsPage />}
+            loader={async({ params }) => {
+              console.log("Attempting to get pokemon species details for species:", params.id);
+              const res = await axios.get(`/api/pokemonspecies/${params.id}`)
+              return { pokemonspecies: res.data };
+            }}
+          />
+        //#endregion species
 
-            <Route
-              path='/createAccount'
-              element={<CreateAccountPage />}
-            />
+        // #region moves
+          {/* All Moves */}
+          <Route 
+            path='/moves'
+            element={<AllPokemonMovesPage />}
+            loader={ async () => {
+              console.log("Loader function for all pokemon species");
+              const res = await axios.get('/api/moves');
+              return { moves: res.data }
+            }}
+          />
+        // #endregion moves
 
-            <Route
-              path='/logout'
-              element={<IndexPage />}
-            />
-            // #endregion accountManagement
+        // #region accountManagement
+        {/* Login */}
+        <Route 
+          path='/login'
+          element={<LoginPage/>}
+        />
 
-          </Route>
+        <Route
+          path='/createAccount'
+          element={<CreateAccountPage />}
+        />
+
+        <Route
+          path='/logout'
+          element={<IndexPage />}
+        />
+        // #endregion accountManagement
+
+      </Route>
     )
   )
 

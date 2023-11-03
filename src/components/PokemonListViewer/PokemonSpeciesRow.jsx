@@ -1,6 +1,6 @@
 import { NavLink } from "react-bootstrap";
-import PokemonSpriteImg from "../PokemonDetails/PokemonSpriteImg";
-import SpeciesTypings from "../PokemonDetails/SpeciesTypings";
+import PokemonSpriteImg from "../PokemonSpriteImg";
+import SpeciesTypings from "../SpeciesTypings";
 
 export default function PokemonSpeciesRow({ species: {speciesId, name, sprite, type1, type2} }) {
     name = name.slice(0,1).toUpperCase() + name.slice(1);    

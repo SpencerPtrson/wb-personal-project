@@ -67,6 +67,7 @@ const handlerFunctions = {
 
     //#endregion AccountManagement
 
+
     //#region Species
 
         getAllSpecies: async(req, res) => {
@@ -76,7 +77,9 @@ const handlerFunctions = {
 
         getSpeciesById: async(req, res) => {
             const { speciesId } = req.params;
-            const species = await PokemonSpecies.findByPk(speciesId);
+            const species = await PokemonSpecies.findByPk(speciesId, {
+                include: PokemonMove
+            });
             res.json(species);
         },
 

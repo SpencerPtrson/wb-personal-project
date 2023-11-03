@@ -158,9 +158,8 @@ await db.sync({force: true}); // Erases all previous data
     }
 
     // MOVES - TYPES
-    console.log("API TYPES:", apiTypes);
+    // console.log("API TYPES:", apiTypes);
     for (const move of dbMoves) {
-        console.log(move.type)
         const typeList = apiTypes.filter(typeListing => move.type === typeListing.name);
         for (let i = 0; i < typeList.length; i++) {
             const typeToSet = await PokemonType.findOne({

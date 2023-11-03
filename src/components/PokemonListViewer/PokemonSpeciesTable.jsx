@@ -1,6 +1,3 @@
-
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import PokemonSpeciesRow from './PokemonSpeciesRow';
 
 export default function PokemonSpeciesTable({ speciesList }) {

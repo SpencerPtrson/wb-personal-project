@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
+import { useState } from 'react';
 
 import CreateAccountForm from '../components/AccountManagement/CreateAccountForm';
 
 export default function CreateAccountPage({createAccount}) {
+  const [errorMessage, setErrorMessage] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,7 +22,7 @@ export default function CreateAccountPage({createAccount}) {
       navigate('/'); 
     }
     else {
-      console.log(res.error);
+      setErrorMessage("Failed to create account. Please try a different email.");
       console.log("Create Account failed");
     }
   }
@@ -29,6 +31,7 @@ export default function CreateAccountPage({createAccount}) {
     <>
       <h1>Create Account</h1>
       <CreateAccountForm onCreateAccount={handleCreateAccount} />
+      {errorMessage}
     </>
   );
 }

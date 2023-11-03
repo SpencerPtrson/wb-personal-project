@@ -56,7 +56,7 @@ import handlerFunctions from "./controller.js"
     app.post('/api/auth', handlerFunctions.logIn);
 
     // Logout
-    app.post('/api/logout', loginRequired, handlerFunctions.logOut);
+    app.post('/api/logout', handlerFunctions.logOut);
 
     // Check if session id has corresponding user
     app.get('/userCheck', handlerFunctions.userCheck);

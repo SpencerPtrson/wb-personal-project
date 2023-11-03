@@ -17,13 +17,20 @@ const handlerFunctions = {
         },
 
         createUser: async(req, res) => {
-            const { email, password } = req.body;
-            console.log(`Creating user with email ${email} and password ${password}`);
-            const newUser = await User.create({
-                email: email,
-                password: password
-            });
-            res.json(newUser);
+            try {
+                const { email, password } = req.body;
+                console.log(`Creating user with email ${email} and password ${password}`);
+                const newUser = await User.create({
+                    email: email,
+                    password: password
+                });
+                res.json(newUser);
+            } catch (error) {
+                console.log("Unable to create account");
+                console.log("Error:", error);
+                res.json({success: false});
+            }
+
         },
 
     //#endregion Users

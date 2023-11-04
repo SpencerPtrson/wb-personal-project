@@ -24,6 +24,7 @@ export default function CreateAccountPage({createAccount}) {
     else {
       setErrorMessage("Failed to create account. Please try a different email.");
       console.log("Create Account failed");
+      console.error(res.data.error);
     }
   }
 

@@ -28,7 +28,7 @@ const handlerFunctions = {
             } catch (error) {
                 console.log("Unable to create account");
                 console.log("Error:", error);
-                res.json({success: false});
+                res.json({success: false, error: error});
             }
 
         },

@@ -61,6 +61,10 @@ PokemonInstance.init(
         level: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            validate: {
+                min: 1,
+                max: 100
+            }
         },
         move1Id: {
             type: DataTypes.INTEGER,
@@ -74,56 +78,109 @@ PokemonInstance.init(
         move4Id: {
             type: DataTypes.INTEGER,
         },
-        
+
+        // IVS
         hpIV: {
             type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        hpEV: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 31
+            }
         },
         atkIV: {
             type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        atkEV: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 31
+            }
         },
         defIV: {
             type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        defEV: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 31
+            }
         },
         spATKIV: {
             type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        spATKEV: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        spDEFIV: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 31
+            }
         },
         spDEFIV: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 31
+            }
         },
         speedIV: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 31
+            }
+        },
+
+        // EVS
+        hpEV: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 255
+            }
+        },
+        atkEV: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 255
+            }
+        },
+        defEV: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 255
+            }
+        },
+        spATKEV: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 255
+            }
+        },
+        spDEFEV: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 255
+            }
         },
         speedEV: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                min: 0,
+                max: 255
+            }
         },
 
+
+        // CALCULATED STATS
         hp: {
             type: DataTypes.INTEGER,
             allowNull: false
@@ -150,13 +207,10 @@ PokemonInstance.init(
         },     
     },
     {
-        modelName: 'PokemonInstances',
+        modelName: 'pokemoninstances',
         sequelize: db
     }
 );
-
-
-
 //#endregion pokemon instances
 
 

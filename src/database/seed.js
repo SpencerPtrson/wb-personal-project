@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User, PokemonSpecies, PokemonType, PokemonMove, PokemonNature, Ability, db, PokemonInstance } from "./models.js";
+import { User, PokemonTeam, PokemonSpecies, PokemonType, PokemonMove, PokemonNature, Ability, db, PokemonInstance } from "./models.js";
 
 
 await db.sync({force: true}); // Erases all previous data
@@ -110,7 +110,6 @@ for (let i = 1; i <= 25; i++) {
 // create database entries for each move gotten from API
 for(const nature of apiNatures) {
     const { id, name, decreased_stat, increased_stat } = nature;
-    console.log(`Creating Nature: ${name}`);
     await PokemonNature.create({
         natureId: id,
         name: name,
@@ -126,47 +125,32 @@ for(const nature of apiNatures) {
     let dbMoves = await PokemonMove.findAll();
 
     // SPECIES - ABILITIES
-    // console.log(apiAbilities);
     for (const species of dbSpecies) {
         for (let i = 0; i < apiAbilities.length; i++) {
             const abilityPokemonList = apiAbilities[i].pokemon.filter(abilityListing => abilityListing.pokemon.name === species.name);
             if (abilityPokemonList.length > 0) {
-                // console.log(abilityPokemonList);
                 const abilityToAdd = await Ability.findOne({
                     where: { name: apiAbilities[i].name }
-                })
-                // console.log(abilityToAdd);
-                // console.log(`Adding ${abilityToAdd.name} to ${species}`);
-                // console.log(species);
+                });
                 species.addAbility(abilityToAdd);
-                // console.log(`Added the ability ${abilityToAdd.name} to ${species.name}`)
             }
-            // else console.log(`${species.name} does not have the ability ${apiAbilities[i].name}`);
         }
     }
 
     // SPECIES - MOVES
-    // console.log(apiMoves);
     for (const species of dbSpecies) {
         for (let i = 0; i < apiMoves.length; i++) {
             const movePokemonList = apiMoves[i].learned_by_pokemon.filter(moveListing => moveListing.name === species.name);
             if (movePokemonList.length > 0) {
-                // console.log(movePokemonList);
                 const moveToAdd = await PokemonMove.findOne({
                     where: { name: apiMoves[i].name }
-                })
-                // console.log(moveToAdd);
-                // console.log(`Adding ${moveToAdd.name} to ${species}`);
-                // console.log(species);
+                });
                 species.addPokemonMove(moveToAdd);
-                // console.log(`Added the move ${moveToAdd.name} to ${species.name}`)
             }
-            // else console.log(`${species.name} does not have the move ${apiMoves[i].name}`);
         }
     }
 
     // SPECIES - TYPES
-    // console.log("API TYPES:", apiTypes);
     for (const species of dbSpecies) {
         const typeList = apiTypes.filter(typeListing => species.type1 === typeListing.name || species.type2 === typeListing.name);
         for (let i = 0; i < typeList.length; i++) {
@@ -174,7 +158,6 @@ for(const nature of apiNatures) {
                 where: { name: typeList[i].name }
             });
             species.addPokemonType(typeToAdd);
-            console.log(`Added the type ${typeToAdd.name} to ${species.name}`)
         }
     }
 
@@ -187,7 +170,6 @@ for(const nature of apiNatures) {
                 where: { name: typeList[i].name }
             });
             move.setPokemonType(typeToSet);
-            console.log(`Added the type ${typeToSet.name} to ${move.name}`)
         }
     }
 //#endregion Foreign Key Data
@@ -206,14 +188,36 @@ for(const nature of apiNatures) {
 //#endregion Users
 
 
+//#region teams
+    // create a pokemon team for user 1
+    const team1User1 = await PokemonTeam.create({
+        userId: user1.userId,
+        teamName: "User 1 Test 1"
+    });
+    console.log("Team 1:", team1User1);
+
+    const team2User1 = await PokemonTeam.create({
+        userId: user1.userId,
+        teamName: "User 1 Test 2"
+    });
+    console.log("Team 2:", team2User1);
+
+    const team1User2 = await PokemonTeam.create({
+        userId: user2.userId,
+        teamName: "User 2 Test 1"
+    });
+    console.log("Team 2:", team1User2);
+//#endregion teams
+
+
 //#region PokemonInstances
     // Get first pokemon from database
     // Create an instance of it with EVs and IVs set to 0 and level set to 1
     const speciesToInstance = dbSpecies[0];
     const moveToAssign = dbMoves[0];
     const dbNatures = await PokemonNature.findAll();
-    console.log("Species to Instance:", speciesToInstance);
-    await PokemonInstance.create({
+    // console.log("Species to Instance:", speciesToInstance);
+    const instance = await PokemonInstance.create({
         speciesId: speciesToInstance.speciesId,
         natureId: dbNatures[0].natureId,
         level: 100,
@@ -233,11 +237,9 @@ for(const nature of apiNatures) {
         spATKEV: 0,
         spDEFEV: 0,
         speedEV: 0,
+    });
 
-
-    })
-
-
+    await instance.setPokemonTeam(team1User1);
 //#endregion PokemonInstances
 
 

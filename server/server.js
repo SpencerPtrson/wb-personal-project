@@ -35,6 +35,7 @@ import handlerFunctions from "./controller.js"
     } 
   }
 
+
   //#region users
 
     // Get all users
@@ -62,6 +63,19 @@ import handlerFunctions from "./controller.js"
     app.get('/userCheck', handlerFunctions.userCheck);
 
   //#endregion AccountManagement
+
+
+  //#region Teams
+      // Get all teams
+      app.get('/api/teams', handlerFunctions.getTeams);
+
+      // Get 1 team
+      app.get('/api/teams/:teamId', handlerFunctions.getTeamByTeamId);
+
+      // Get all teams for a user id
+      app.get('/api/teams/teamsByUser/:userId', handlerFunctions.getTeamsByUserId);
+
+  //#endregion Teams
 
 
   //#region species
@@ -116,6 +130,7 @@ import handlerFunctions from "./controller.js"
     // Get 1 Pokemon Instance
     app.get('/api/pokemoninstances/:pokemonInstanceId', handlerFunctions.getPokemonInstanceByInstanceId);
 
+    // Get all
 
   //#endregion PokemonInstances
 

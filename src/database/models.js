@@ -14,24 +14,24 @@ export const db = await connectToDB('postgresql:///pokemonproject')
     
     User.init(
         {
-        userId: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
+            userId: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+                primaryKey: true,
+            },
+            email: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true,
+            },
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
         },
         {
-        modelName: 'user',
-        sequelize: db,
+            modelName: 'user',
+            sequelize: db,
         },
     );
 //#endregion users
@@ -54,6 +54,9 @@ PokemonInstance.init(
         speciesId: {
             type: DataTypes.INTEGER,
             allowNull: false
+        },
+        teamId: {
+            type: DataTypes.INTEGER
         },
         natureId: {
             type: DataTypes.INTEGER,
@@ -178,34 +181,7 @@ PokemonInstance.init(
                 min: 0,
                 max: 255
             }
-        },
-
-
-        // // CALCULATED STATS
-        // hp: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false
-        // },
-        // atk: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false
-        // },
-        // def: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false
-        // },
-        // spATK: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false
-        // },
-        // spDef: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false
-        // },
-        // speed: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false
-        // },     
+        },  
     },
     {
         modelName: 'pokemoninstance',
@@ -431,19 +407,19 @@ PokemonTeam.init(
     {
         teamId: {
             type: DataTypes.INTEGER,
+            autoIncrement: true,
             primaryKey: true,
         },
         userId: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        pokemonInstanceId: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
+        teamName: {
+            type: DataTypes.STRING
+        }
     },
     {
-        modelName: 'pokemonteam',
+        modelName: 'PokemonTeam',
         sequelize: db
     }
 );
@@ -482,8 +458,10 @@ PokemonTeam.belongsTo(User, { foreignKey: 'userId' });
 PokemonSpecies.hasMany(PokemonInstance, { foreignKey: 'speciesId' });
 PokemonInstance.belongsTo(PokemonSpecies, { foreignKey: 'speciesId' });
 
-// Team - Pokemon Instance Association Table
 
+// Team - Pokemon Instance Association Table
+PokemonTeam.hasMany(PokemonInstance, { foreignKey: 'teamId' });
+PokemonInstance.belongsTo(PokemonTeam, { foreignKey: 'teamId' });
 
 
 //#endregion Foreign Keys

@@ -1,4 +1,4 @@
-import { User, PokemonSpecies, PokemonType, PokemonMove, Ability, PokemonInstance } from '../src/database/models.js'
+import { User, PokemonSpecies, PokemonType, PokemonMove, Ability, PokemonInstance, PokemonTeam } from '../src/database/models.js'
 
 const handlerFunctions = {
 
@@ -66,6 +66,29 @@ const handlerFunctions = {
 
 
     //#endregion AccountManagement
+
+
+    //#region Teams
+        getTeams: async(req, res) => {
+            const teams = await PokemonTeam.findAll();
+            res.json(teams);
+        },
+
+        getTeamByTeamId: async(req, res) => {
+            const { teamId } = req.params;
+            const team = await PokemonTeam.findByPk(teamId);
+            res.json(team);
+        },
+
+        getTeamsByUserId: async(req, res) => {
+            const { userId } = req.params;
+            const teams = await PokemonTeam.findAll({
+                where: { userId: userId},
+                include: PokemonInstance
+            });
+            res.json(teams);
+        },
+    //#endregion Teams
 
 
     //#region Species

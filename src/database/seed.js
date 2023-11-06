@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User, PokemonSpecies, PokemonType, PokemonMove, Ability, db } from "./models.js";
+import { User, PokemonSpecies, PokemonType, PokemonMove, PokemonNature, Ability, db } from "./models.js";
 
 
 await db.sync({force: true}); // Erases all previous data
@@ -35,8 +35,8 @@ await db.sync({force: true}); // Erases all previous data
 
 //#region Types
     // Get types from the API
-    const response = await axios.get(`https://pokeapi.co/api/v2/type`);
-    const apiTypes = response.data.results;
+    const responseTypes = await axios.get(`https://pokeapi.co/api/v2/type`);
+    const apiTypes = responseTypes.data.results;
 
     // Add types to database
     for (const type of apiTypes) {
@@ -98,6 +98,27 @@ await db.sync({force: true}); // Erases all previous data
         });
     }
 //#endregion Abilities
+
+
+//#region Natures
+const apiNatures = [];
+for (let i = 1; i <= 25; i++) {
+    const response = await axios.get(`https://pokeapi.co/api/v2/nature/${i}`);
+    apiNatures.push(response.data);
+}
+
+// create database entries for each move gotten from API
+for(const nature of apiNatures) {
+    const { id, name, decreased_stat, increased_stat } = nature;
+    console.log(`Creating Nature: ${name}`);
+    const newEntry = await PokemonNature.create({
+        natureId: id,
+        name: name,
+        increasedStat: increased_stat?.name,
+        decreasedStat: decreased_stat?.name
+    });
+}
+//#endregion Natures
 
 
 //#region Foreign Key Data

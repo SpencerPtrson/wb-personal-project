@@ -214,6 +214,39 @@ PokemonInstance.init(
 //#endregion pokemon instances
 
 
+//#region natures
+
+
+//#endregion natures
+export class PokemonNature extends Model {
+    [util.inspect.custom]() {
+        return this.toJSON()
+    }
+}
+
+PokemonNature.init(
+    {
+        natureId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        increasedStat: {
+            type: DataTypes.STRING
+        },
+        decreasedStat: {
+            type: DataTypes.STRING,
+        },
+    },
+    {
+        modelName: 'PokemonNature',
+        sequelize: db
+    }
+);
+
 //#region species
     export class PokemonSpecies extends Model {
         [util.inspect.custom]() {

@@ -48,6 +48,7 @@ PokemonInstance.init(
     {
         pokemonInstanceId: {
             type: DataTypes.INTEGER,
+            autoIncrement: true,
             primaryKey: true,
         },
         speciesId: {
@@ -180,34 +181,34 @@ PokemonInstance.init(
         },
 
 
-        // CALCULATED STATS
-        hp: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        atk: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        def: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        spATK: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        spDef: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        speed: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },     
+        // // CALCULATED STATS
+        // hp: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false
+        // },
+        // atk: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false
+        // },
+        // def: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false
+        // },
+        // spATK: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false
+        // },
+        // spDef: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false
+        // },
+        // speed: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false
+        // },     
     },
     {
-        modelName: 'pokemoninstances',
+        modelName: 'pokemoninstance',
         sequelize: db
     }
 );
@@ -215,9 +216,6 @@ PokemonInstance.init(
 
 
 //#region natures
-
-
-//#endregion natures
 export class PokemonNature extends Model {
     [util.inspect.custom]() {
         return this.toJSON()
@@ -246,6 +244,8 @@ PokemonNature.init(
         sequelize: db
     }
 );
+//#endregion natures
+
 
 //#region species
     export class PokemonSpecies extends Model {
@@ -453,29 +453,34 @@ PokemonTeam.init(
 
 //#region Foreign Keys
 
-// Pokemon - Ability Association Table
+// Species - Ability Association Table
 PokemonSpecies.belongsToMany(Ability, { through: 'SpeciesAbilities' });
 Ability.belongsToMany(PokemonSpecies, { through: 'SpeciesAbilities' });
 
-// Pokemon - Move Association Table
+
+// Species - Move Association Table
 PokemonSpecies.belongsToMany(PokemonMove, { through: 'SpeciesMoves' });
 PokemonMove.belongsToMany(PokemonSpecies, { through: 'SpeciesMoves' });
 
 
-// Pokemon - Type Association Table
+// Species - Type Association Table
 PokemonSpecies.belongsToMany(PokemonType, { through: 'SpeciesTypes' });
 PokemonType.belongsToMany(PokemonSpecies, { through: 'SpeciesTypes' });
 
 
-// Move - Type Association Table
+// Move - Type Forein Key
 PokemonType.hasMany(PokemonMove, { foreignKey: 'typeId' });
 PokemonMove.belongsTo(PokemonType, { foreignKey: 'typeId' });
 
 
-// User - Team Association Table
+// User - Team Foreign Key
 User.hasMany(PokemonTeam, { foreignKey: 'userId' });
 PokemonTeam.belongsTo(User, { foreignKey: 'userId' });
 
+
+// Pokemon Instance - Pokemon Species foreign key
+PokemonSpecies.hasMany(PokemonInstance, { foreignKey: 'speciesId' });
+PokemonInstance.belongsTo(PokemonSpecies, { foreignKey: 'speciesId' });
 
 // Team - Pokemon Instance Association Table
 

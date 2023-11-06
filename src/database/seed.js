@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User, PokemonSpecies, PokemonType, PokemonMove, PokemonNature, Ability, db } from "./models.js";
+import { User, PokemonSpecies, PokemonType, PokemonMove, PokemonNature, Ability, db, PokemonInstance } from "./models.js";
 
 
 await db.sync({force: true}); // Erases all previous data
@@ -16,7 +16,7 @@ await db.sync({force: true}); // Erases all previous data
     // create database entries for each pokemon gotten from API
     for(const pokemon of apiSpeciesList) {
         const { id, sprites, name, types, stats} = pokemon;
-        const newEntry = await PokemonSpecies.create({
+        await PokemonSpecies.create({
             speciesId: id,
             sprite: sprites.front_default,
             name: name,
@@ -41,7 +41,7 @@ await db.sync({force: true}); // Erases all previous data
     // Add types to database
     for (const type of apiTypes) {
         const id = type.url.replace('https://pokeapi.co/api/v2/type/', '').slice(0,-1);
-        const newType = await PokemonType.create({
+        await PokemonType.create({
             typeId: id,
             name: type.name
         });
@@ -60,7 +60,7 @@ await db.sync({force: true}); // Erases all previous data
     // create database entries for each move gotten from API
     for(const move of apiMoves) {
         const { id, name, damage_class, type, power, accuracy, pp, priority, effect_entries, flavor_text_entries} = move;
-        const newEntry = await PokemonMove.create({
+        await PokemonMove.create({
             moveId: id,
             name: name,
             moveClass: damage_class.name,
@@ -90,7 +90,7 @@ await db.sync({force: true}); // Erases all previous data
         const englishEffectDesc = effect_entries.filter(effect_entry => effect_entry.language.name === 'en')[0];
         const englishFlavorDesc = flavor_text_entries.filter(effect_entry => effect_entry.language.name === 'en')[0];
 
-        const newEntry = await Ability.create({
+        await Ability.create({
             abilityId: id,
             name: name,
             shortDescription: englishEffectDesc.short_effect,
@@ -111,7 +111,7 @@ for (let i = 1; i <= 25; i++) {
 for(const nature of apiNatures) {
     const { id, name, decreased_stat, increased_stat } = nature;
     console.log(`Creating Nature: ${name}`);
-    const newEntry = await PokemonNature.create({
+    await PokemonNature.create({
         natureId: id,
         name: name,
         increasedStat: increased_stat?.name,
@@ -205,4 +205,52 @@ for(const nature of apiNatures) {
     });
 //#endregion Users
 
+
+//#region PokemonInstances
+    // Get first pokemon from database
+    // Create an instance of it with EVs and IVs set to 0 and level set to 1
+    const speciesToInstance = dbSpecies[0];
+    const moveToAssign = dbMoves[0];
+    const dbNatures = await PokemonNature.findAll();
+    console.log("Species to Instance:", speciesToInstance);
+    await PokemonInstance.create({
+        speciesId: speciesToInstance.speciesId,
+        natureId: dbNatures[0].natureId,
+        level: 100,
+        move1Id: moveToAssign.moveId,
+
+        hpIV: 0,
+        atkIV: 0,
+        defIV: 0,
+        spATKIV: 0,
+        spDEFIV: 0,
+        speedIV: 0,
+
+
+        hpEV: 0,
+        atkEV: 0,
+        defEV: 0,
+        spATKEV: 0,
+        spDEFEV: 0,
+        speedEV: 0,
+
+
+    })
+
+
+//#endregion PokemonInstances
+
+
 await db.close();
+
+function calculateHPStat(baseHP, hpIV, hpEV, level) {
+    return Math.floor((((2 * baseHP + hpIV + hpEV / 4) * level) / 100) + level + 10);
+}
+
+function calculateNonHPStat(baseStat, statIV, statEV, level, natureModifer) {
+  const numerator = Math.floor(2 * baseStat + statIV + statEV / 4) * level;
+  let result = Math.floor((numerator / 100) + 5)
+  if (natureModifer) result *= natureModifer;
+  console.log(result)
+  return Math.floor(result);
+}

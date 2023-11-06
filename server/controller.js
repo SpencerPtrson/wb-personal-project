@@ -1,4 +1,4 @@
-import { User, PokemonSpecies, PokemonType, PokemonMove, Ability } from '../src/database/models.js'
+import { User, PokemonSpecies, PokemonType, PokemonMove, Ability, PokemonInstance } from '../src/database/models.js'
 
 const handlerFunctions = {
 
@@ -131,10 +131,24 @@ const handlerFunctions = {
             res.json(ability);
         },
 
-
     //#endregion Abilities
 
     
+    //#region PokemonInstances
+        getPokemonInstances: async(req, res) => {
+            const allPokemonInstances = await PokemonInstance.findAll();
+            res.json(allPokemonInstances);
+        },
+
+        getPokemonInstanceByInstanceId: async(req, res) => {
+            const { pokemonInstanceId } =  req.params;
+            const pokemonInstance = await PokemonInstance.findByPk(pokemonInstanceId, {
+                include: PokemonSpecies
+            });
+            res.json(pokemonInstance);
+        }
+
+    //#endregion PokemonInstances
 }
 
 export default handlerFunctions;

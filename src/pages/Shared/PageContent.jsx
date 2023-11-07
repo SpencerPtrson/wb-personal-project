@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import MainNav from "../components/MainNav";
+import MainNav from "../../components/MainNav";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";

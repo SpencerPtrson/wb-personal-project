@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useState } from 'react';
 
-import CreateAccountForm from '../components/AccountManagement/CreateAccountForm';
+import CreateAccountForm from '../../components/AccountManagement/CreateAccountForm';
 
 export default function CreateAccountPage({createAccount}) {
   const [errorMessage, setErrorMessage] = useState();

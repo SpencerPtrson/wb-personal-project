@@ -3,18 +3,18 @@ import { RouterProvider, Routes, Route, createRoutesFromElements, createBrowserR
 
 import axios from 'axios';
 
-import PageContent from './pages/PageContent.jsx';
-import IndexPage from './pages/IndexPage.jsx';
-import ErrorPage from './pages/ErrorPage.jsx';
+import PageContent from './pages/Shared/PageContent.jsx';
+import IndexPage from './pages/Shared/IndexPage.jsx';
+import ErrorPage from './pages/Shared/ErrorPage.jsx';
 
-import LoginPage from './pages/LoginPage.jsx'
-import CreateAccountPage from './pages/CreateAccountPage.jsx';
+import LoginPage from './pages/AccountManagement/LoginPage.jsx'
+import CreateAccountPage from './pages/AccountManagement/CreateAccountPage.jsx';
 
-import AllPokemonSpeciesPage from './pages/AllPokemonSpeciesPage.jsx';
-import AllPokemonMovesPage from './pages/AllPokemonMovesPage.jsx';
-import AllPokemonInstancesPage from './pages/AllPokemonInstancesPage.jsx';
-import PokemonSpeciesDetailsPage from './pages/PokemonSpeciesDetailsPage.jsx'
-import CreatePokemonInstancePage from './pages/CreatePokemonInstancePage.jsx'
+import AllPokemonSpeciesPage from './pages/PokemonSpecies/AllPokemonSpeciesPage.jsx';
+import AllPokemonMovesPage from './pages/PokemonMoves/AllPokemonMovesPage.jsx';
+import AllPokemonInstancesPage from './pages/PokemonInstances/AllPokemonInstancesPage.jsx';
+import PokemonSpeciesDetailsPage from './pages/PokemonSpecies/PokemonSpeciesDetailsPage.jsx'
+import CreatePokemonInstancePage from './pages/PokemonInstances/CreatePokemonInstancePage.jsx'
 
 
 

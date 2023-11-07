@@ -1,6 +1,6 @@
 import { NavLink } from "react-bootstrap";
-import PokemonSpriteImg from "../PokemonSpriteImg";
-import SpeciesTypings from "../SpeciesTypings";
+import PokemonSpriteImg from "../../PokemonSpriteImg";
+import SpeciesTypings from "../../SpeciesTypings";
 
 export default function PokemonInstanceRow({ pokemonInstance }) {
     console.log(pokemonInstance);

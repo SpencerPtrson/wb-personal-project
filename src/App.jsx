@@ -6,14 +6,16 @@ import axios from 'axios';
 import PageContent from './pages/PageContent.jsx';
 import IndexPage from './pages/IndexPage.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
-import AllPokemonSpeciesPage from './pages/AllPokemonSpeciesPage.jsx';
-import PokemonSpeciesDetailsPage from './pages/PokemonSpeciesDetailsPage.jsx'
-import AllPokemonMovesPage from './pages/AllPokemonMovesPage.jsx';
-import AllPokemonInstancesPage from './pages/AllPokemonInstancesPage.jsx';
 
 import LoginPage from './pages/LoginPage.jsx'
 import CreateAccountPage from './pages/CreateAccountPage.jsx';
+
+import AllPokemonSpeciesPage from './pages/AllPokemonSpeciesPage.jsx';
+import AllPokemonMovesPage from './pages/AllPokemonMovesPage.jsx';
+import AllPokemonInstancesPage from './pages/AllPokemonInstancesPage.jsx';
+import PokemonSpeciesDetailsPage from './pages/PokemonSpeciesDetailsPage.jsx'
 import CreatePokemonInstancePage from './pages/CreatePokemonInstancePage.jsx'
+
 
 
 export default function App() {
@@ -96,7 +98,26 @@ export default function App() {
             />
         // #endregion pokemonInstances
 
+        // #region teams
+            <Route 
+              path='/teams'
+              loader={ async({ params }) => {
+                console.log("Attempting to get teams");
+                const res = await axios.get(`/api/teams`)
+                return { userTeams: res.data };
+              }}
+            />
 
+            <Route
+              path='/teams/:userId'
+              loader={ async({ params }) => {
+                console.log("Attempting to get teams for user:", params.id);
+                const res = await axios.get(`/api/teams/teamsByUser/${params.id}`)
+                return { userTeams: res.data };
+              }}
+            />
+
+        // #endregion teams
       </Route>
     )
   )

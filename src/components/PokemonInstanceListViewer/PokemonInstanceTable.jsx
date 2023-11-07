@@ -7,12 +7,14 @@ export default function PokemonInstanceTable({ instanceList }) {
 
     return (
       <table>
-        <tr>
+        <thead>
             <th>Team Name</th>
             <th>Set Creator</th>
             <th>Pokemon Sprite</th>
             <th>Pokemon Name</th>
-        </tr>
+            <th>IVs</th>
+            <th>EVs</th>
+        </thead>
         <tbody>
           {instanceRows}
         </tbody>

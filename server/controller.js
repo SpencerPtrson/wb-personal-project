@@ -30,7 +30,6 @@ const handlerFunctions = {
                 console.log("Error:", error);
                 res.json({success: false, error: error});
             }
-
         },
 
     //#endregion Users
@@ -174,7 +173,43 @@ const handlerFunctions = {
                 include: PokemonSpecies
             });
             res.json(pokemonInstance);
-        }
+        },
+
+        createPokemonInstance: async(req, res) => {
+            try {
+                const { speciesId, teamId, natureId, level,
+                        move1Id, move2Id, move3Id, move4Id,
+                        hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
+                        hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV
+                } = req.body;
+                console.log("Creating new pokemon instance");
+                const newPokemonInstance = await PokemonInstance.create({
+
+                })
+            } catch (error) {
+                console.log("Unable to create pokemon!");
+                console.log(error);
+                res.json({success: false, error: error})
+            }
+        },
+
+
+        
+        createUser: async(req, res) => {
+            try {
+                const { email, password } = req.body;
+                console.log(`Creating user with email ${email} and password ${password}`);
+                const newUser = await User.create({
+                    email: email,
+                    password: password
+                });
+                res.json(newUser);
+            } catch (error) {
+                console.log("Unable to create account");
+                console.log("Error:", error);
+                res.json({success: false, error: error});
+            }
+        },
     //#endregion PokemonInstances
 }
 

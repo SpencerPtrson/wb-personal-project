@@ -130,8 +130,8 @@ import handlerFunctions from "./controller.js"
     // Get 1 Pokemon Instance
     app.get('/api/pokemoninstances/:pokemonInstanceId', handlerFunctions.getPokemonInstanceByInstanceId);
 
-    // Get all
-
+    // Creat a pokemon instance
+    app.post('/api/pokemoninstances/create', handlerFunctions.createPokemonInstance)
   //#endregion PokemonInstances
 
 

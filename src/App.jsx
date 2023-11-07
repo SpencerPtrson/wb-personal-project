@@ -13,6 +13,7 @@ import AllPokemonInstancesPage from './pages/AllPokemonInstancesPage.jsx';
 
 import LoginPage from './pages/LoginPage.jsx'
 import CreateAccountPage from './pages/CreateAccountPage.jsx';
+import CreatePokemonInstancePage from './pages/CreatePokemonInstancePage.jsx'
 
 
 export default function App() {
@@ -87,6 +88,11 @@ export default function App() {
                 const res = await axios.get('/api/pokemoninstances');
                 return { pokemoninstances: res.data }
               }}
+            />
+
+            <Route
+              path='/createPokemonInstance'
+              element={<CreatePokemonInstancePage />} 
             />
         // #endregion pokemonInstances
 

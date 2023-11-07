@@ -223,20 +223,19 @@ for(const nature of apiNatures) {
         level: 100,
         move1Id: moveToAssign.moveId,
 
-        hpIV: 0,
-        atkIV: 0,
-        defIV: 0,
-        spATKIV: 0,
-        spDEFIV: 0,
-        speedIV: 0,
+        hpIV: 31,
+        atkIV: 21,
+        defIV: 5,
+        spATKIV: 9,
+        spDEFIV: 29,
+        speedIV: 15,
 
-
-        hpEV: 0,
-        atkEV: 0,
-        defEV: 0,
-        spATKEV: 0,
-        spDEFEV: 0,
-        speedEV: 0,
+        hpEV: 235,
+        atkEV: 101,
+        defEV: 4,
+        spATKEV: 5,
+        spDEFEV: 88,
+        speedEV: 79,
     });
 
     await instance.setPokemonTeam(team1User1);

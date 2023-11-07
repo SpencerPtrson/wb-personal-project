@@ -16,6 +16,7 @@ export default function MainNav({ email }) {
           <Navbar.Toggle />
 
           <Navbar.Collapse>
+            {/* Personal Links */}
             <Nav className="me-auto">
               <NavLink style={{ color: 'lightblue' }} href={'https://dev.azure.com/spetersonwi/'}>
                 Azure DevOps
@@ -28,6 +29,7 @@ export default function MainNav({ email }) {
               </NavLink>
             </Nav>
 
+            {/* Site Navigation */}
             <Nav className="me-auto">
               <NavLink key={"allpokemonspecies"} href="/pokemonspecies">
                 All Pokemon Species
@@ -35,8 +37,12 @@ export default function MainNav({ email }) {
               <NavLink key={"allpokemonmoves"} href="/moves">
                 All Pokemon Moves
               </NavLink>
+              <NavLink key={"allpokemoninstances"} href="/pokemoninstances">
+                All Pokemon Instances
+              </NavLink>
             </Nav>
 
+            {/* Account Management */}
             <Nav className="me-right">
               {!email || email === ''
                 ? <>
@@ -50,6 +56,7 @@ export default function MainNav({ email }) {
               }
             </Nav>
           </Navbar.Collapse>
+
         </Container>
       </Navbar>
     </>

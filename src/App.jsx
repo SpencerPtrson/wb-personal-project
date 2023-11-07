@@ -9,6 +9,7 @@ import ErrorPage from './pages/ErrorPage.jsx';
 import AllPokemonSpeciesPage from './pages/AllPokemonSpeciesPage.jsx';
 import PokemonSpeciesDetailsPage from './pages/PokemonSpeciesDetailsPage.jsx'
 import AllPokemonMovesPage from './pages/AllPokemonMovesPage.jsx';
+import AllPokemonInstancesPage from './pages/AllPokemonInstancesPage.jsx';
 
 import LoginPage from './pages/LoginPage.jsx'
 import CreateAccountPage from './pages/CreateAccountPage.jsx';
@@ -76,6 +77,19 @@ export default function App() {
           element={<IndexPage />}
         />
         // #endregion accountManagement
+
+        // #region pokemonInstances
+            <Route 
+              path='/pokemoninstances'
+              element={<AllPokemonInstancesPage />}
+              loader={ async () => {
+                console.log("Loader function for all pokemon instances");
+                const res = await axios.get('/api/pokemoninstances');
+                return { pokemoninstances: res.data }
+              }}
+            />
+        // #endregion pokemonInstances
+
 
       </Route>
     )

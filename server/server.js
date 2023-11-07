@@ -122,7 +122,7 @@ import handlerFunctions from "./controller.js"
   //#endregion abilities
 
 
-  //#region  PokemonInstances
+  //#region PokemonInstances
 
     // Get All Pokemon Instances
     app.get('/api/pokemoninstances', handlerFunctions.getPokemonInstances);

@@ -159,7 +159,12 @@ const handlerFunctions = {
     
     //#region PokemonInstances
         getPokemonInstances: async(req, res) => {
-            const allPokemonInstances = await PokemonInstance.findAll();
+            const allPokemonInstances = await PokemonInstance.findAll({
+                include: [
+                    { model: PokemonTeam, include: { model: User } },
+                    { model: PokemonSpecies }
+                ]
+            });
             res.json(allPokemonInstances);
         },
 
@@ -170,7 +175,6 @@ const handlerFunctions = {
             });
             res.json(pokemonInstance);
         }
-
     //#endregion PokemonInstances
 }
 

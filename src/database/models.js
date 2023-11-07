@@ -426,7 +426,6 @@ PokemonTeam.init(
 //#endregion teams
 
 
-
 //#region Foreign Keys
 
 // Species - Ability Association Table

@@ -6,15 +6,18 @@ import axios from "axios";
 
 
 export default function PageContent() {
-  const email = useSelector(state => state.user.email);
-  const dispatch = useDispatch();
+  const email = useSelector(state => state.user.email)
+  console.log("Page Content - Email:", email)
+  const dispatch = useDispatch()
+ 
 
   const userCheck = async () => {
-    const { data } = await axios.get('/userCheck')
+    const { data } = await axios.get('/userCheck');
+    console.log("User Check Data:", data);
     if (data.email) {
       dispatch({
         type: "SET_EMAIL",
-        payload: data.email
+        payload: { email: data.email, userId: data.userId }
       });
     }
   }

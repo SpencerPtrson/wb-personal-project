@@ -2,8 +2,11 @@ import { Container, Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-bootstrap";
 import LogoutButton from "./AccountManagement/LogoutButton";
+import { useSelector, useDispatch } from "react-redux";
 
-export default function MainNav({ email }) {
+export default function MainNav() {
+  const email = useSelector(state => state.user.email)
+  const userId = useSelector(state => state.user.userId);
   return (
     <>
       <Navbar expand='lg' className="bg-dark navbar-dark">
@@ -39,6 +42,14 @@ export default function MainNav({ email }) {
               <NavLink key={"allteams"} href="/teams">
                 All Teams
               </NavLink>
+
+              {!email || email === ''
+                ? <>
+                </> 
+                : <>
+                  <NavLink key={"userTeams"} href={`teams/users/${userId}`}>My Teams</NavLink>
+                </>
+              }
             </Nav>
 
             {/* Account Management */}

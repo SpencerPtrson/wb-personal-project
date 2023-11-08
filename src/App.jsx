@@ -124,10 +124,12 @@ export default function App() {
 
             <Route
               path='/teams/users/:userId'
+              element={<TeamListPage />}
               loader={ async({ params }) => {
-                console.log("Attempting to get teams for user:", params.id);
-                const res = await axios.get(`/api/teams/teamsByUser/${params.id}`)
-                return { userTeams: res.data };
+                console.log("Attempting to get teams for user:", params.userId);
+                const res = await axios.get(`/api/teams/teamsByUser/${params.userId}`);
+                console.log(res.data);
+                return { teams: res.data };
               }}
             />
 

@@ -45,8 +45,9 @@ const handlerFunctions = {
             });
     
             if (user?.password === password) {
-            req.session.userId = user.userId;
-            res.json({ success: true });
+                req.session.userId = user.userId;
+                req.session.email = user.email
+                res.json({ success: true });
             }
             else res.json({ success: false });
         },
@@ -58,8 +59,8 @@ const handlerFunctions = {
 
         userCheck: async (req, res) => {
             if (req.session.userId) {
-              const user = await User.findByPk(req.session.userId)
-              res.send({ email: user.email })
+            //   const user = await User.findByPk(req.session.userId)
+              res.send({ email: req.session.email, userId: req.session.userId })
             }
         },
 
@@ -87,8 +88,7 @@ const handlerFunctions = {
         getTeamsByUserId: async(req, res) => {
             const { userId } = req.params;
             const teams = await PokemonTeam.findAll({
-                where: { userId: userId},
-                include: PokemonInstance
+                where: { userId: userId}
             });
             res.json(teams);
         },

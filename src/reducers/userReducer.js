@@ -2,6 +2,7 @@ import axios from "axios";
 const initialState = {
     loading: false,
     email: '',
+    userId: null
 };
 
 const REQUEST_EMAIL = 'REQUEST_EMAIL';
@@ -13,7 +14,8 @@ export default function userReducer(state = initialState, action) {
         case PENDING:
             return {...state, loading: true};
         case SET_EMAIL:
-            return {...state, email: action.payload};
+            console.log("Reducer setting:", action.payload);
+            return {...state, email: action.payload.email, userId: action.payload.userId};
         default:
             return state;
     }

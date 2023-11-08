@@ -2,7 +2,7 @@ import { NavLink } from "react-bootstrap";
 import PokemonSpriteImg from "../../PokemonSpriteImg";
 import SpeciesTypings from "../../SpeciesTypings";
 
-export default function PokemonInstanceRow({ pokemonInstance }) {
+export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
     console.log(pokemonInstance);
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
@@ -15,8 +15,14 @@ export default function PokemonInstanceRow({ pokemonInstance }) {
     return (
         <>
             <tr style={{ border: '1px solid black'}}>
-                <td>{PokemonTeam.teamName}</td>
-                <td>{PokemonTeam.user.email}</td>
+                {isTeamView ? <>
+                    </>
+                    : <>
+                        <td>{PokemonTeam.teamName}</td>
+                        <td>{PokemonTeam.user.email}</td>
+                    </>
+                }
+
                 <PokemonSpriteImg name={PokemonSpecy.name} sprite={PokemonSpecy.sprite} width={150}/>
                 <td>{name}</td>
                 <td>

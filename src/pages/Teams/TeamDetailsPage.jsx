@@ -1,4 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
+import PokemonInstanceTable from '../../components/General Data Viewing/PokemonInstanceListViewer/PokemonInstanceTable';
+
 
 export default function TeamDetailsPage() {
   let { team } = useLoaderData();
@@ -6,8 +8,9 @@ export default function TeamDetailsPage() {
 
   return (
     <>
-    <h1>This is a team's Detail Page!</h1>
-      <h1>{team.teamName}</h1>
+      <h1>This is a team's Detail Page!</h1>
+      <h1>Team Name: {team.teamName}</h1>
+      <PokemonInstanceTable instanceList={team.pokemoninstances} isTeamView={true}/>
     </>
   );
 }

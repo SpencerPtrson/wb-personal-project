@@ -7,8 +7,7 @@ export default function AllPokemonInstancesPage() {
   return (
     <>
       <h1>All Pokemon Instances Page</h1>
-      <PokemonInstanceTable instanceList={pokemoninstances} />
-      {/* <PokemonSpeciesTable instanceList={pokemoninstances}/> */}
+      <PokemonInstanceTable instanceList={pokemoninstances} isTeamView={false}/>
     </>
   );
 }

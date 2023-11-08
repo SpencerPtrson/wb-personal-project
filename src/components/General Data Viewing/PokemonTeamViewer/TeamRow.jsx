@@ -5,6 +5,7 @@ import SpeciesTypings from "../../SpeciesTypings";
 export default function TeamRow({ team }) {
     console.log(team);
     const { teamId, teamName } = team;
+    console.log(teamId);
     return (
         <>
             <tr>

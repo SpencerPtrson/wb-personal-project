@@ -40,6 +40,9 @@ export default function MainNav({ email }) {
               <NavLink key={"allpokemoninstances"} href="/pokemoninstances">
                 All Pokemon Instances
               </NavLink>
+              <NavLink key={"allteams"} href="/teams">
+                All Teams
+              </NavLink>
             </Nav>
 
             {/* Account Management */}

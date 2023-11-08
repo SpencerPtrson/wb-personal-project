@@ -75,7 +75,11 @@ const handlerFunctions = {
 
         getTeamByTeamId: async(req, res) => {
             const { teamId } = req.params;
-            const team = await PokemonTeam.findByPk(teamId);
+            console.log(teamId);
+            const team = await PokemonTeam.findByPk(teamId, {
+                include: [
+                    { model: PokemonInstance, include: { model: PokemonSpecies } },
+                ]});
             res.json(team);
         },
 

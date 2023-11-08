@@ -3,8 +3,6 @@ import TeamTable from '../../components/General Data Viewing/PokemonTeamViewer/T
 
 export default function TeamListPage() {
   const { teams } = useLoaderData();
-
-  console.log(teams);
   return (
     <>
       <h1>Team List Page</h1>

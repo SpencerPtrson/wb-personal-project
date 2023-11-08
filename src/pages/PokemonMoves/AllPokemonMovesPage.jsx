@@ -5,7 +5,6 @@ export default function AllPokemonMovesPage() {
   const { moves } = useLoaderData();
 
   const moveListItems = moves.map(move => {
-    // console.log("Listing move for All Moves Page:", move.name)
     return <li key={move.moveId}>
         <NavLink href={`/moves/${move.moveId}`} >{move.name}</NavLink>
       </li>;

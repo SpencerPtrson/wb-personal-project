@@ -217,7 +217,7 @@ for(const nature of apiNatures) {
     const moveToAssign = dbMoves[0];
     const dbNatures = await PokemonNature.findAll();
     // console.log("Species to Instance:", speciesToInstance);
-    const instance = await PokemonInstance.create({
+    const instance1 = await PokemonInstance.create({
         speciesId: speciesToInstance.speciesId,
         natureId: dbNatures[0].natureId,
         level: 100,
@@ -238,7 +238,52 @@ for(const nature of apiNatures) {
         speedEV: 79,
     });
 
-    await instance.setPokemonTeam(team1User1);
+    const instance2 = await PokemonInstance.create({
+        speciesId: dbSpecies[1].speciesId,
+        natureId: dbNatures[0].natureId,
+        level: 100,
+        move1Id: moveToAssign.moveId,
+
+        hpIV: 21,
+        atkIV: 19,
+        defIV: 26,
+        spATKIV: 1,
+        spDEFIV: 22,
+        speedIV: 9,
+
+        hpEV: 16,
+        atkEV: 252,
+        defEV: 4,
+        spATKEV: 40,
+        spDEFEV: 153,
+        speedEV: 1,
+    });
+
+    const instance3 = await PokemonInstance.create({
+        speciesId: dbSpecies[6].speciesId,
+        natureId: dbNatures[0].natureId,
+        level: 100,
+        move1Id: moveToAssign.moveId,
+
+        hpIV: 21,
+        atkIV: 19,
+        defIV: 26,
+        spATKIV: 1,
+        spDEFIV: 22,
+        speedIV: 9,
+
+        hpEV: 16,
+        atkEV: 252,
+        defEV: 4,
+        spATKEV: 40,
+        spDEFEV: 153,
+        speedEV: 1,
+    });
+
+
+    await instance1.setPokemonTeam(team1User1);
+    await instance2.setPokemonTeam(team1User1);
+    await instance3.setPokemonTeam(team1User2);
 //#endregion PokemonInstances
 
 

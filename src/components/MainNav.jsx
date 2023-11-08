@@ -4,8 +4,6 @@ import { NavLink } from "react-bootstrap";
 import LogoutButton from "./AccountManagement/LogoutButton";
 
 export default function MainNav({ email }) {
-  console.log(email);
-
   return (
     <>
       <Navbar expand='lg' className="bg-dark navbar-dark">

@@ -6,9 +6,8 @@ import axios from "axios";
 
 
 export default function PageContent() {
-  const email = useSelector(state => state.user.email)
-  console.log(email)
-  const dispatch = useDispatch()
+  const email = useSelector(state => state.user.email);
+  const dispatch = useDispatch();
 
   const userCheck = async () => {
     const { data } = await axios.get('/userCheck')
@@ -16,13 +15,13 @@ export default function PageContent() {
       dispatch({
         type: "SET_EMAIL",
         payload: data.email
-      })
+      });
     }
   }
 
   useEffect(() => {
     userCheck()
-  }, [])
+  }, []);
   
   return (
       <>

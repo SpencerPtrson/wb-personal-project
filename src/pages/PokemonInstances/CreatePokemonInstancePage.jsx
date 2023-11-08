@@ -11,8 +11,6 @@ export default function CreatePokemonInstancePage() {
   const handleCreatePokemon = async(event, formData) => {
     console.log("Handling Create Pokemon");
     const res = await axios.post('/api/pokemoninstances/create', formData);
-    console.log(formData);
-    console.log(res.data);
     if (res.data.userId) { 
     //   console.log("Create Account succeeded");
     //   console.log(formData.email);

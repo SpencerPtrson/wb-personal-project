@@ -2,8 +2,6 @@ import { Container, Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-bootstrap";
 import LogoutButton from "./AccountManagement/LogoutButton";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
 
 export default function MainNav({ email }) {
   console.log(email);

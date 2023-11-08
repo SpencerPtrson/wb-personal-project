@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 import PokemonInstanceTable from '../../components/General Data Viewing/PokemonInstanceListViewer/PokemonInstanceTable';
-
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 export default function TeamDetailsPage() {
   let { team } = useLoaderData();

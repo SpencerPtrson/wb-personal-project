@@ -24,6 +24,8 @@ const handlerFunctions = {
                     email: email,
                     password: password
                 });
+                req.session.userId = newUser.userId;
+                req.session.email = newUser.email;
                 res.json(newUser);
             } catch (error) {
                 console.log("Unable to create account");

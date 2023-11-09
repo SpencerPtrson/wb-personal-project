@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/tableStyles.css'
 import { RouterProvider, Routes, Route, createRoutesFromElements, createBrowserRouter } from 'react-router-dom'
 
 import axios from 'axios';
-
 import PageContent from './pages/Shared/PageContent.jsx';
 import IndexPage from './pages/Shared/IndexPage.jsx';
 import ErrorPage from './pages/Shared/ErrorPage.jsx';

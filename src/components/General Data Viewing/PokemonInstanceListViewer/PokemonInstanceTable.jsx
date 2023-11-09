@@ -6,7 +6,7 @@ export default function PokemonInstanceTable({ instanceList, isTeamView }) {
       });
 
     return (
-      <table>
+      <table class="table">
         <thead>
           <tr>
             {isTeamView ? <>

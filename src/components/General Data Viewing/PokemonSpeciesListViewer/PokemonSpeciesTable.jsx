@@ -6,7 +6,15 @@ export default function PokemonSpeciesTable({ speciesList }) {
       });
 
     return (
-      <table>
+      <table className='table'>
+        <thead>
+          <tr>
+            <th>Sprite</th>
+            <th>Species</th>
+            <th>Typings</th>
+            <th>Base Stats</th>
+          </tr>
+        </thead>
         <tbody>
           {speciesRows}
         </tbody>

@@ -4,10 +4,9 @@ import SpeciesTypings from "../SpeciesTypings";
 
 export default function PokemonSpeciesSelectableRow({ species: {speciesId, name, sprite, type1, type2, baseHP, baseATK, baseDEF, baseSPATK, baseSPDEF, baseSPEED} }) {
     name = name.slice(0,1).toUpperCase() + name.slice(1);
-    const statPad = 80;
     return (
         <>
-            <tr style={{borderTop: '1px solid black', borderBottom: '1px solid black'}}>
+            <tr>
                 <td><PokemonSpriteImg name={name} sprite={sprite}/></td>
                 <td><NavLink key={name} href={`/pokemonspecies/${speciesId}`}>{name}</NavLink></td>
                 <td width={50}></td>
@@ -18,13 +17,13 @@ export default function PokemonSpeciesSelectableRow({ species: {speciesId, name,
                     <table>
                         <thead>
                             <tr>
-                                <th style={{margin: statPad}} width={statPad}>Base Stat Total</th>
-                                <th width={statPad}>HP</th>
-                                <th width={statPad}>ATK</th>
-                                <th width={statPad}>DEF</th>
-                                <th width={statPad}>SPATK</th>
-                                <th width={statPad}>SPDEF</th>
-                                <th width={statPad}>SPEED</th>
+                                <th>Base Stat Total</th>
+                                <th>HP</th>
+                                <th>ATK</th>
+                                <th>DEF</th>
+                                <th>SPATK</th>
+                                <th>SPDEF</th>
+                                <th>SPEED</th>
                             </tr>
                         </thead>
                         <tbody>

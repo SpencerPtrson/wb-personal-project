@@ -13,7 +13,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
     console.log(pokemonInstance);
     return (
         <>
-            <tr style={{ border: '1px solid black'}} >
+            <tr>
                 {isTeamView ? <>
                     </>
                     : <>
@@ -24,7 +24,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                 <td><PokemonSpriteImg name={PokemonSpecy.name} sprite={PokemonSpecy.sprite} width={150}/></td>
                 <td>{name}</td>
                 <td>
-                    <table>
+                    <table class="table-sm">
                         <tbody>
                             <tr><td>HP: {hpIV}</td></tr>
                             <tr><td>Attack: {atkIV}</td></tr>
@@ -36,7 +36,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                     </table>
                 </td>
                 <td>
-                    <table>
+                    <table class="table-sm">
                         <tbody>
                             <tr><td>HP: {hpEV}</td></tr>
                             <tr><td>Attack: {atkEV}</td></tr>

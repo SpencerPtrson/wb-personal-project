@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 export default function CreatePokemonInstanceButton() {
     return (
         <>
-            <Button href={'/createPokemonInstance'}>Add a Pokemon!</Button>
+            <Button href={'/pokemoninstances/create'}>Add a Pokemon!</Button>
         </>
     );
 }

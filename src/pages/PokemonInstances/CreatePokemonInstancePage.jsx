@@ -2,11 +2,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
+import PokemonSpeciesSelectorTable from '../../components/PokemonInstanceManipulation/PokemonSpeciesSelectorTable';
 
 
 export default function CreatePokemonInstancePage() {
   const [errorMessage, setErrorMessage] = useState();
   const navigate = useNavigate();
+  const { speciesList } = useLoaderData();
 
   const handleCreatePokemon = async(event, formData) => {
     console.log("Handling Create Pokemon");
@@ -25,9 +28,9 @@ export default function CreatePokemonInstancePage() {
 
   return (
     <>
-      <h1>Create Pokemon</h1>
-      {/* <CreatePokemonInstanceForm onCreatePokemon={handleCreatePokemon} />
-      {errorMessage} */}
+      <h1>Choose a Pokemon to add to your team!</h1>
+      <PokemonSpeciesSelectorTable speciesList={speciesList}/>
+      {errorMessage}
     </>
   );
 }

@@ -13,7 +13,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
     console.log(pokemonInstance);
     return (
         <>
-            <tr style={{ border: '1px solid black'}}>
+            <tr style={{ border: '1px solid black'}} >
                 {isTeamView ? <>
                     </>
                     : <>
@@ -48,7 +48,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                     </table>
                 </td>
                 {email === pokemonInstance.PokemonTeam.user.email
-                ? <td><PokemonInstanceEditButton /></td> 
+                ? <td><PokemonInstanceEditButton pokemonInstanceId={pokemonInstance.pokemonInstanceId}/></td> 
                 : <></>}
             </tr>
         </>

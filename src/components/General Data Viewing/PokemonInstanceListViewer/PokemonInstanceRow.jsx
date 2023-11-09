@@ -2,7 +2,7 @@ import PokemonSpriteImg from "../../PokemonSpriteImg";
 import PokemonInstanceEditButton from "../../PokemonInstanceManipulation/PokemonInstanceEditButton";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
-export default function PokemonInstanceRow({ pokemonInstance, isTeamView, user }) {
+export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
     const email = useSelector(state => state.user.email);
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
@@ -10,14 +10,15 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView, user }
     
     let name = PokemonSpecy.name.slice(0,1).toUpperCase() + PokemonSpecy.name.slice(1);
 
+    console.log(pokemonInstance);
     return (
         <>
             <tr style={{ border: '1px solid black'}}>
-                {isTeamView ? <td>
-                    </td>
+                {isTeamView ? <>
+                    </>
                     : <>
                         <td>{PokemonTeam.teamName}</td>
-                        <td>{PokemonTeam.user.email}</td>
+                        <td>{pokemonInstance.PokemonTeam.user.email}</td>
                     </>
                 }
                 <td><PokemonSpriteImg name={PokemonSpecy.name} sprite={PokemonSpecy.sprite} width={150}/></td>
@@ -46,8 +47,8 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView, user }
                         </tbody>
                     </table>
                 </td>
-                {email === PokemonTeam.user.email
-                ? <PokemonInstanceEditButton /> 
+                {email === pokemonInstance.PokemonTeam.user.email
+                ? <td><PokemonInstanceEditButton /></td> 
                 : <></>}
             </tr>
         </>

@@ -11,11 +11,12 @@ export default function CreatePokemonInstancePage() {
   const navigate = useNavigate();
   const { speciesList } = useLoaderData();
 
-  const handleCreatePokemon = async(event, formData) => {
+  const handleCreatePokemon = async(pokemonInstanceId, teamId) => {
     console.log("Handling Create Pokemon");
-    const res = await axios.post('/api/pokemoninstances/create', formData);
-    if (res.data.userId) { 
-    //   console.log("Create Account succeeded");
+    console.log(pokemonInstanceId, teamId);
+    const res = await axios.post(`/api/pokemoninstances/create`, {speciesId: pokemonInstanceId, teamId: teamId});
+    if (res.data.success) { 
+      console.log("Create pokemon succeeded");
     //   console.log(formData.email);
     //   navigate('/'); 
     }
@@ -29,7 +30,7 @@ export default function CreatePokemonInstancePage() {
   return (
     <>
       <h1>Choose a Pokemon to add to your team!</h1>
-      <PokemonSpeciesSelectorTable speciesList={speciesList}/>
+      <PokemonSpeciesSelectorTable speciesList={speciesList} handleCreatePokemonFunction={handleCreatePokemon}/>
       {errorMessage}
     </>
   );

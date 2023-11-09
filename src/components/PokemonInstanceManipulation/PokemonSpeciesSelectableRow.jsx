@@ -1,18 +1,17 @@
 import { NavLink } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import PokemonSpriteImg from "../PokemonSpriteImg";
 import SpeciesTypings from "../SpeciesTypings";
 
-export default function PokemonSpeciesSelectableRow({ species: {speciesId, name, sprite, type1, type2, baseHP, baseATK, baseDEF, baseSPATK, baseSPDEF, baseSPEED} }) {
+export default function PokemonSpeciesSelectableRow({ species: {speciesId, name, sprite, type1, type2, baseHP, baseATK, baseDEF, baseSPATK, baseSPDEF, baseSPEED}, handleCreatePokemon }) {
     name = name.slice(0,1).toUpperCase() + name.slice(1);
+    console.log(speciesId);
     return (
         <>
             <tr>
                 <td><PokemonSpriteImg name={name} sprite={sprite}/></td>
-                <td><NavLink key={name} href={`/pokemonspecies/${speciesId}`}>{name}</NavLink></td>
-                <td width={50}></td>
+                <td><Button onClick={() => handleCreatePokemon(speciesId, 0)}>{name}</Button></td>
                 <SpeciesTypings type1={type1} type2={type2}/>
-                
-                <td width={50}></td>
                 <td>
                     <table>
                         <thead>

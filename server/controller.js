@@ -191,12 +191,12 @@ const handlerFunctions = {
         createPokemonInstance: async(req, res) => {
             try {
                 const { speciesId, teamId } = req.body;
-                console.log("Creating new pokemon instance");
+                console.log(`Creating new pokemon instance with speciesId ${speciesId} and teamId ${teamId}`);
                 const newPokemonInstance = await PokemonInstance.create({
                     speciesId: speciesId,
-                    teamId: 0,
+                    teamId: 1,
                     natureId: 0,
-                    level: 0,
+                    level: 100,
                     move1Id: 0,
 
                     hpIV: 31,
@@ -213,7 +213,7 @@ const handlerFunctions = {
                     spDEFEV: 0,
                     speedEV: 0,
                 });
-                res.json(newPokemonInstance);
+                res.json({success: true});
             } catch (error) {
                 console.log("Unable to create pokemon!");
                 console.log(error);

@@ -15,7 +15,7 @@ export default function CreateAccountPage({createAccount}) {
     const res = await axios.post('/api/users/create', formData);
     if (res.data.userId) { 
       console.log("Create Account succeeded");
-      dispatch({ type: 'SET_EMAIL', payload: formData.email});
+      dispatch({ type: 'SET_EMAIL', payload: {email: formData.email, userId: res.data.userId}});
       navigate('/'); 
     }
     else {

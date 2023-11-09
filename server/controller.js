@@ -47,7 +47,7 @@ const handlerFunctions = {
             if (user?.password === password) {
                 req.session.userId = user.userId;
                 req.session.email = user.email
-                res.json({ success: true });
+                res.json({ success: true, userId: user.userId });
             }
             else res.json({ success: false });
         },
@@ -58,9 +58,15 @@ const handlerFunctions = {
         },
 
         userCheck: async (req, res) => {
+            console.log("User Check called!");
             if (req.session.userId) {
-            //   const user = await User.findByPk(req.session.userId)
-              res.send({ email: req.session.email, userId: req.session.userId })
+                const user = await User.findByPk(req.session.userId);
+                console.log("User check found user:", user);
+                res.send({ email: user.email, userId: user.userId })
+            }
+            else {
+                console.log("No session.userId found!")
+                res.send({ email: null, userId: null })
             }
         },
 
@@ -195,24 +201,6 @@ const handlerFunctions = {
                 console.log("Unable to create pokemon!");
                 console.log(error);
                 res.json({success: false, error: error})
-            }
-        },
-
-
-        
-        createUser: async(req, res) => {
-            try {
-                const { email, password } = req.body;
-                console.log(`Creating user with email ${email} and password ${password}`);
-                const newUser = await User.create({
-                    email: email,
-                    password: password
-                });
-                res.json(newUser);
-            } catch (error) {
-                console.log("Unable to create account");
-                console.log("Error:", error);
-                res.json({success: false, error: error});
             }
         },
     //#endregion PokemonInstances

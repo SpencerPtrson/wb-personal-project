@@ -7,6 +7,7 @@ import LoginForm from '../../components/AccountManagement/LoginForm';
 export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
 
   const handleLogin = async (event, formData) => {
     console.log("Handling login");
@@ -14,7 +15,7 @@ export default function LoginPage() {
     
     if (res.data.success) { 
       console.log("Login succeeded");
-      dispatch({ type: 'SET_EMAIL', payload: formData.email});
+      dispatch({ type: 'SET_EMAIL', payload: {email: formData.email, userId: res.data.userId }});
       navigate('/'); 
     }
     else console.log("Login failed");

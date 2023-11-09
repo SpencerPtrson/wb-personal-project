@@ -5,7 +5,7 @@ import LogoutButton from "./AccountManagement/LogoutButton";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function MainNav() {
-  const email = useSelector(state => state.user.email)
+  const email = useSelector(state => state.user.email);
   const userId = useSelector(state => state.user.userId);
   return (
     <>
@@ -47,7 +47,7 @@ export default function MainNav() {
                 ? <>
                 </> 
                 : <>
-                  <NavLink key={"userTeams"} href={`teams/users/${userId}`}>My Teams</NavLink>
+                  <NavLink key={"userTeams"} href={`/teams/users/${userId}`}>My Teams</NavLink>
                 </>
               }
             </Nav>

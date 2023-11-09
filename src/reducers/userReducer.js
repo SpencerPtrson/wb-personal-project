@@ -5,7 +5,6 @@ const initialState = {
     userId: null
 };
 
-const REQUEST_EMAIL = 'REQUEST_EMAIL';
 const SET_EMAIL = 'SET_EMAIL';
 const PENDING = 'PENDING';
 
@@ -16,6 +15,7 @@ export default function userReducer(state = initialState, action) {
         case SET_EMAIL:
             console.log("Reducer setting:", action.payload);
             return {...state, email: action.payload.email, userId: action.payload.userId};
+            // return { ... state, email: action.payload}
         default:
             return state;
     }

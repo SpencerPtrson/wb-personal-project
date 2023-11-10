@@ -2,11 +2,11 @@ import PokemonInstanceRow from "./PokemonInstanceRow";
 
 export default function PokemonInstanceTable({ instanceList, isTeamView }) {
     const instanceRows = instanceList.map((pokemonInstance) => {
-        return <PokemonInstanceRow key={pokemonInstance.instanceId} pokemonInstance={pokemonInstance} isTeamView={isTeamView} />
+        return <PokemonInstanceRow key={pokemonInstance.pokemonInstanceId} pokemonInstance={pokemonInstance} isTeamView={isTeamView} />
       });
 
     return (
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             {isTeamView ? <>
@@ -20,6 +20,7 @@ export default function PokemonInstanceTable({ instanceList, isTeamView }) {
             <th>Pokemon Name</th>
             <th>IVs</th>
             <th>EVs</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

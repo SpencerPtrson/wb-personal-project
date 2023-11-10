@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/tableStyles.css'
+import '../css/styles.css'
 import { RouterProvider, Routes, Route, createRoutesFromElements, createBrowserRouter } from 'react-router-dom'
 
 import axios from 'axios';
@@ -153,7 +153,7 @@ export default function App() {
         // #endregion teams
       </Route>
     )
-  )
+  );
 
   return (
     <>

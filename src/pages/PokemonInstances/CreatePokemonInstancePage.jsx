@@ -17,8 +17,7 @@ export default function CreatePokemonInstancePage() {
     const res = await axios.post(`/api/pokemoninstances/create`, {speciesId: pokemonInstanceId, teamId: teamId});
     if (res.data.success) { 
       console.log("Create pokemon succeeded");
-    //   console.log(formData.email);
-    //   navigate('/'); 
+      navigate('/pokemoninstances'); 
     }
     else {
       setErrorMessage("Failed to create pokemon. Please select a species.");

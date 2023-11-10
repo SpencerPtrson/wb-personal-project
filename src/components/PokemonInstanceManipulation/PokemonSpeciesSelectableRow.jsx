@@ -13,7 +13,7 @@ export default function PokemonSpeciesSelectableRow({ species: {speciesId, name,
                 <td><Button onClick={() => handleCreatePokemon(speciesId, 0)}>{name}</Button></td>
                 <SpeciesTypings type1={type1} type2={type2}/>
                 <td>
-                    <table>
+                    <table className="table">
                         <thead>
                             <tr>
                                 <th>Base Stat Total</th>

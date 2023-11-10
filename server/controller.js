@@ -78,7 +78,26 @@ const handlerFunctions = {
 
     //#region Teams
         getTeams: async(req, res) => {
-            const teams = await PokemonTeam.findAll();
+            const teams = await PokemonTeam.findAll({
+                include: [
+                    { 
+                        model: PokemonInstance, 
+                        attributes: ['pokemonInstanceId'],
+                        include: [{
+                            model: PokemonSpecies,
+                            attributes: ['sprite', 'name']
+                        }],
+                    },
+                    {
+                        model: User,
+                        attributes: ['email']
+                    }
+                ],
+                order: [
+                    ['userId', 'ASC'],
+                    ['teamName', 'ASC']
+                ]
+            });
             res.json(teams);
         },
 

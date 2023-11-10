@@ -157,6 +157,72 @@ for(const nature of apiNatures) {
 //#endregion teams
 
 
+// function calculateHPStat(baseHP, hpIV, hpEV, level) {
+// return Math.floor((((2 * baseHP + hpIV + hpEV / 4) * level) / 100) + level + 10);
+// }
+
+// function calculateNonHPStat(baseStat, statIV, statEV, level, natureModifer) {
+//   const numerator = Math.floor(2 * baseStat + statIV + statEV / 4) * level;
+//   let result = Math.floor((numerator / 100) + 5)
+//   if (natureModifer) result *= natureModifer;
+//   console.log(result)
+//   return Math.floor(result);
+// }
+
+  //#region Foreign Key Data
+      let dbSpecies = await PokemonSpecies.findAll();
+      let dbMoves = await PokemonMove.findAll();
+  
+      // SPECIES - ABILITIES
+      for (const species of dbSpecies) {
+          for (let i = 0; i < apiAbilities.length; i++) {
+              const abilityPokemonList = apiAbilities[i].pokemon.filter(abilityListing => abilityListing.pokemon.name === species.name);
+              if (abilityPokemonList.length > 0) {
+                  const abilityToAdd = await Ability.findOne({
+                      where: { name: apiAbilities[i].name }
+                  });
+                  species.addAbility(abilityToAdd);
+              }
+          }
+      }
+  
+      // SPECIES - MOVES
+      for (const species of dbSpecies) {
+          for (let i = 0; i < apiMoves.length; i++) {
+              const movePokemonList = apiMoves[i].learned_by_pokemon.filter(moveListing => moveListing.name === species.name);
+              if (movePokemonList.length > 0) {
+                  const moveToAdd = await PokemonMove.findOne({
+                      where: { name: apiMoves[i].name }
+                  });
+                  species.addPokemonMove(moveToAdd);
+              }
+          }
+      }
+  
+      // SPECIES - TYPES
+      for (const species of dbSpecies) {
+          const typeList = apiTypes.filter(typeListing => species.type1 === typeListing.name || species.type2 === typeListing.name);
+          for (let i = 0; i < typeList.length; i++) {
+              const typeToAdd = await PokemonType.findOne({
+                  where: { name: typeList[i].name }
+              });
+              species.addPokemonType(typeToAdd);
+          }
+      }
+  
+      // MOVES - TYPES
+      for (const move of dbMoves) {
+          const typeList = apiTypes.filter(typeListing => move.type === typeListing.name);
+          for (let i = 0; i < typeList.length; i++) {
+              const typeToSet = await PokemonType.findOne({
+                  where: { name: typeList[i].name }
+              });
+              move.setPokemonType(typeToSet);
+          }
+      }
+  //#endregion Foreign Key Data
+
+
 //#region PokemonInstances
     // Get first pokemon from database
     // Create an instance of it with EVs and IVs set to 0 and level set to 1
@@ -232,73 +298,6 @@ for(const nature of apiNatures) {
     await instance2.setPokemonTeam(team1User1);
     await instance3.setPokemonTeam(team1User2);
 //#endregion PokemonInstances
-    
-
-    
-// function calculateHPStat(baseHP, hpIV, hpEV, level) {
-// return Math.floor((((2 * baseHP + hpIV + hpEV / 4) * level) / 100) + level + 10);
-// }
-
-// function calculateNonHPStat(baseStat, statIV, statEV, level, natureModifer) {
-//   const numerator = Math.floor(2 * baseStat + statIV + statEV / 4) * level;
-//   let result = Math.floor((numerator / 100) + 5)
-//   if (natureModifer) result *= natureModifer;
-//   console.log(result)
-//   return Math.floor(result);
-// }
-
-  //#region Foreign Key Data
-      let dbSpecies = await PokemonSpecies.findAll();
-      let dbMoves = await PokemonMove.findAll();
-  
-      // SPECIES - ABILITIES
-      for (const species of dbSpecies) {
-          for (let i = 0; i < apiAbilities.length; i++) {
-              const abilityPokemonList = apiAbilities[i].pokemon.filter(abilityListing => abilityListing.pokemon.name === species.name);
-              if (abilityPokemonList.length > 0) {
-                  const abilityToAdd = await Ability.findOne({
-                      where: { name: apiAbilities[i].name }
-                  });
-                  species.addAbility(abilityToAdd);
-              }
-          }
-      }
-  
-      // SPECIES - MOVES
-      for (const species of dbSpecies) {
-          for (let i = 0; i < apiMoves.length; i++) {
-              const movePokemonList = apiMoves[i].learned_by_pokemon.filter(moveListing => moveListing.name === species.name);
-              if (movePokemonList.length > 0) {
-                  const moveToAdd = await PokemonMove.findOne({
-                      where: { name: apiMoves[i].name }
-                  });
-                  species.addPokemonMove(moveToAdd);
-              }
-          }
-      }
-  
-      // SPECIES - TYPES
-      for (const species of dbSpecies) {
-          const typeList = apiTypes.filter(typeListing => species.type1 === typeListing.name || species.type2 === typeListing.name);
-          for (let i = 0; i < typeList.length; i++) {
-              const typeToAdd = await PokemonType.findOne({
-                  where: { name: typeList[i].name }
-              });
-              species.addPokemonType(typeToAdd);
-          }
-      }
-  
-      // MOVES - TYPES
-      for (const move of dbMoves) {
-          const typeList = apiTypes.filter(typeListing => move.type === typeListing.name);
-          for (let i = 0; i < typeList.length; i++) {
-              const typeToSet = await PokemonType.findOne({
-                  where: { name: typeList[i].name }
-              });
-              move.setPokemonType(typeToSet);
-          }
-      }
-  //#endregion Foreign Key Data
 
 
   await db.close();

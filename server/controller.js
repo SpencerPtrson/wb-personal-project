@@ -115,7 +115,25 @@ const handlerFunctions = {
         getTeamsByUserId: async(req, res) => {
             const { userId } = req.params;
             const teams = await PokemonTeam.findAll({
-                where: { userId: userId}
+                where: { userId: userId},
+                include: [
+                    { 
+                        model: PokemonInstance, 
+                        attributes: ['pokemonInstanceId'],
+                        include: [{
+                            model: PokemonSpecies,
+                            attributes: ['sprite', 'name']
+                        }],
+                    },
+                    {
+                        model: User,
+                        attributes: ['email']
+                    }
+                ],
+                order: [
+                    ['userId', 'ASC'],
+                    ['teamName', 'ASC']
+                ]
             });
             res.json(teams);
         },
@@ -239,6 +257,65 @@ const handlerFunctions = {
                 res.json({success: false, error: error})
             }
         },
+
+
+        editPokemonInstance: async(req, res) => {
+            try {
+                const { pokemonInstanceId } = req.params;
+                const { } = req.body;
+
+                console.log(`Editing pokemon instance with pokemonInstanceId ${pokemonInstanceId}`);
+                const pokemonToEdit = await PokemonInstance.findByPk(pokemonInstanceId);
+
+                if (pokemonToEdit) {
+                    pokemonToEdit.speciesId = speciesId ?? pokemonToEdit.speciesId;
+                    pokemonToEdit.natureId = natureId ?? pokemonToEdit.natureId;
+                    pokemonToEdit.level = level ?? pokemonToEdit.level;
+
+                    // Moves
+                    pokemonToEdit.move1Id = move1Id ?? pokemonToEdit.move1Id;
+                    pokemonToEdit.move2Id = move2Id ?? pokemonToEdit.move2Id;
+                    pokemonToEdit.move3Id = move3Id ?? pokemonToEdit.move3Id;
+                    pokemonToEdit.move4Id = move4Id ?? pokemonToEdit.move4Id;
+
+                    // IVs
+                    pokemonToEdit.hpIV = hpIV ?? pokemonToEdit.hpIV;
+                    pokemonToEdit.atkIV = atkIV ?? pokemonToEdit.atkIV;
+                    pokemonToEdit.defIV = defIV ?? pokemonToEdit.defIV;
+                    pokemonToEdit.spATKIV = spATKIV ?? pokemonToEdit.spATKIV;
+                    pokemonToEdit.spDEFIV = spDEFIV ?? pokemonToEdit.spDEFIV;
+                    pokemonToEdit.speedIV = speedIV ?? pokemonToEdit.speedIV;
+
+                    // EVs
+                    pokemonToEdit.hpEV = hpEV ?? pokemonToEdit.hpEV;
+                    pokemonToEdit.atkEV = atkEV ?? pokemonToEdit.atkEV;
+                    pokemonToEdit.defEV = defEV ?? pokemonToEdit.defEV;
+                    pokemonToEdit.spATKEV = spATKEV ?? pokemonToEdit.spATKEV;
+                    pokemonToEdit.spDEFEV = spDEFEV ?? pokemonToEdit.spDEFEV;
+                    pokemonToEdit.speedEV = speedEV ?? pokemonToEdit.speedEV;
+
+                    await pokemonToEdit.save();
+                }
+                else console.log("No pokemon was found with that instance id!");
+
+                res.json({success: true});
+            } catch (error) {
+                console.log("Unable to create pokemon!");
+                console.log(error);
+                res.json({success: false, error: error})
+            }
+        },
+
+        deletePokemonInstance: async(req, res) => {
+            try {
+                console.log('Attempting to delete pokemon');
+                res.json({success: 'AAAAAAAAAAAAAAAAAAAAAAAAAA'})
+            } catch (error) {
+                console.log("Unable to delete pokemon!");
+                console.log(error);
+                res.json({success: false, error: error})
+            }
+        }
     //#endregion PokemonInstances
 }
 

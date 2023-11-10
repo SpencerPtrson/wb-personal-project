@@ -145,6 +145,7 @@ export default function App() {
               loader={ async({ params }) => {
                 console.log("Attempting to get teams for user:", params.userId);
                 const res = await axios.get(`/api/teams/teamsByUser/${params.userId}`);
+                console.log(`Teams for user ${params.userId}:`);
                 console.log(res.data);
                 return { teams: res.data };
               }}

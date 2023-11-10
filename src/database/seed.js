@@ -120,8 +120,6 @@ await db.sync({force: true}); // Erases all previous data
 //#endregion Natures
 
 
-
-
 //#region  Users
 // Create Test UsersTest User
     const user1 = await User.create({
@@ -168,6 +166,7 @@ await db.sync({force: true}); // Erases all previous data
 //   console.log(result)
 //   return Math.floor(result);
 // }
+
 
   //#region Foreign Key Data
       let dbSpecies = await PokemonSpecies.findAll();

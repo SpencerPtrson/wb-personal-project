@@ -188,6 +188,19 @@ PokemonInstance.init(
         sequelize: db
     }
 );
+
+
+PokemonInstance.beforeCreate(async (instance, options) => {
+    try {
+        const result = await PokemonInstance.findAll({
+            where: { teamId: instance.teamId }
+        });
+        console.log(result);
+        if (result.length >=  6) { throw new Error(`Cannot create more instances for ${instance.teamId}`)}
+    } catch (error) {
+        throw error; // you must throw an error inside the hook in order to cancel the real execution statement
+    }
+});
 //#endregion pokemon instances
 
 
@@ -461,6 +474,7 @@ PokemonInstance.belongsTo(PokemonSpecies, { foreignKey: 'speciesId' });
 // Team - Pokemon Instance Association Table
 PokemonTeam.hasMany(PokemonInstance, { foreignKey: 'teamId' });
 PokemonInstance.belongsTo(PokemonTeam, { foreignKey: 'teamId' });
+
 
 
 //#endregion Foreign Keys

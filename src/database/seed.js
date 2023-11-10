@@ -168,7 +168,7 @@ await db.sync({force: true}); // Erases all previous data
 // }
 
 
-  //#region Foreign Key Data
+//#region Foreign Key Data
       let dbSpecies = await PokemonSpecies.findAll();
       let dbMoves = await PokemonMove.findAll();
   
@@ -232,6 +232,7 @@ await db.sync({force: true}); // Erases all previous data
     const instance1 = await PokemonInstance.create({
         speciesId: speciesToInstance.speciesId,
         natureId: dbNatures[0].natureId,
+        teamId: 1,
         level: 100,
         move1Id: moveToAssign.moveId,
 
@@ -253,6 +254,7 @@ await db.sync({force: true}); // Erases all previous data
     const instance2 = await PokemonInstance.create({
         speciesId: dbSpecies[1].speciesId,
         natureId: dbNatures[0].natureId,
+        teamId: 1,
         level: 100,
         move1Id: moveToAssign.moveId,
 
@@ -274,6 +276,7 @@ await db.sync({force: true}); // Erases all previous data
     const instance3 = await PokemonInstance.create({
         speciesId: dbSpecies[6].speciesId,
         natureId: dbNatures[0].natureId,
+        teamId: 2,
         level: 100,
         move1Id: moveToAssign.moveId,
 
@@ -293,9 +296,7 @@ await db.sync({force: true}); // Erases all previous data
     });
 
 
-    await instance1.setPokemonTeam(team1User1);
-    await instance2.setPokemonTeam(team1User1);
-    await instance3.setPokemonTeam(team1User2);
+
 //#endregion PokemonInstances
 
 

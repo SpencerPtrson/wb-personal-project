@@ -58,8 +58,9 @@ export default function App() {
             path='/moves'
             element={<AllPokemonMovesPage />}
             loader={ async () => {
-              console.log("Loader function for all pokemon species");
+              console.log("Loader function for all moves");
               const res = await axios.get('/api/moves');
+              console.log(res.data);
               return { moves: res.data }
             }}
           />

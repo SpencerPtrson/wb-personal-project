@@ -1,19 +1,14 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { NavLink } from "react-bootstrap";
+import MoveTable from "../../components/General Data Viewing/MoveListViewer/MoveTable";
 
 export default function AllPokemonMovesPage() {
   const { moves } = useLoaderData();
 
-  const moveListItems = moves.map(move => {
-    return <li key={move.moveId}>
-        <NavLink href={`/moves/${move.moveId}`} >{move.name}</NavLink>
-      </li>;
-  })
-
   return (
     <>
       <h1>All Moves</h1>
-      <ul>{moveListItems}</ul>
+      <MoveTable moves={moves}/>
     </>
   );
 }

@@ -8,8 +8,13 @@ export default function TeamDetailsPage() {
     <>
       <h1>This is a team's Detail Page!</h1>
       <h1>Team Name: {team.teamName}</h1>
-      <h1>Team was created by: {team.user.email}</h1>
-      <PokemonInstanceTable instanceList={team.pokemoninstances} isTeamView={true} user={team.user}/>
+      { team.user
+        ? <>
+            <h1>Team was created by: {team.user.email}</h1>
+        </>
+        : <></>
+      }
+      {/* <PokemonInstanceTable instanceList={team.pokemoninstances} isTeamView={true} user={team.user}/> */}
     </>
   );
 }

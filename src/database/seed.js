@@ -139,19 +139,16 @@ await db.sync({force: true}); // Erases all previous data
         userId: user1.userId,
         teamName: "User 1 Test 1"
     });
-    console.log("Team 1:", team1User1);
 
     const team2User1 = await PokemonTeam.create({
         userId: user1.userId,
         teamName: "User 1 Test 2"
     });
-    console.log("Team 2:", team2User1);
 
     const team1User2 = await PokemonTeam.create({
         userId: user2.userId,
         teamName: "User 2 Test 1"
     });
-    console.log("Team 2:", team1User2);
 //#endregion teams
 
 
@@ -209,7 +206,6 @@ await db.sync({force: true}); // Erases all previous data
           }
       }
 
-  
       // MOVES - TYPES
       for (const move of dbMoves) {
           const typeList = apiTypes.filter(typeListing => move.type === typeListing.name);
@@ -313,13 +309,8 @@ let dbInstances = await PokemonInstance.findAll({
 });
 for (const instance of dbInstances) {
     // get the pokemon species of the instance
-    // console.log(instance);
-    // console.log(instance.PokemonSpecy);
-    
     // get the moves of the species
     const speciesMoveList = instance.PokemonSpecy.PokemonMoves;
-    // console.log(speciesMoveList);
-
     // set the first four moves of the species to the first four moves of the instance
     for (let i = 0; i < 4; i++) {
         if (speciesMoveList[i]) {

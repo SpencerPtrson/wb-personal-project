@@ -47,8 +47,8 @@ import handlerFunctions from "./controller.js"
     // Create new User
     app.post('/api/users/create', handlerFunctions.createUser);
 
-
-
+    // Delete user
+    app.delete('/api/users/delete', handlerFunctions.deleteUser);
 
   //#endregion users
 

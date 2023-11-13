@@ -37,7 +37,9 @@ const handlerFunctions = {
         // NEED TO LEARN HOW DELETING THIS IMPACTS FOREIGN KEY TABLES, LIKE USER
         deleteUser: async(req, res) => {
             try {
-                const { userId } = req.params;
+                console.log("Req Body:", req.body);
+                const { userId } = req.body;
+                console.log(userId);
                 const userToDelete = await User.destroy({
                     where: {
                         userId: userId
@@ -79,9 +81,10 @@ const handlerFunctions = {
         userCheck: async (req, res) => {
             console.log("User Check called!");
             if (req.session.userId) {
+                console.log("Session UserId is:", req.session.userId);
                 const user = await User.findByPk(req.session.userId);
                 console.log("User check found user:", user);
-                res.send({ email: user.email, userId: user.userId })
+                res.send({ email: user?.email ?? null, userId: user?.userId ?? null })
             }
             else {
                 console.log("No session.userId found!")

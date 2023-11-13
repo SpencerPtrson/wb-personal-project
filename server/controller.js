@@ -106,9 +106,15 @@ const handlerFunctions = {
             console.log(teamId);
             const team = await PokemonTeam.findByPk(teamId, {
                 include: [
-                    { model: PokemonInstance, include: { model: PokemonSpecies } },
-                    { model: User }
-                ]});
+                    {
+                        model: PokemonInstance, include: [
+                            { model: PokemonSpecies },
+                            { model: PokemonMove }
+                        ]},
+                        { model: User }
+                    ]
+                }
+            );
             res.json(team);
         },
 
@@ -220,7 +226,10 @@ const handlerFunctions = {
         getPokemonInstanceByInstanceId: async(req, res) => {
             const { pokemonInstanceId } =  req.params;
             const pokemonInstance = await PokemonInstance.findByPk(pokemonInstanceId, {
-                include: PokemonSpecies
+                include: [
+                    { model: PokemonSpecies },
+                    { model: PokemonMove }
+                ]
             });
             res.json(pokemonInstance);
         },

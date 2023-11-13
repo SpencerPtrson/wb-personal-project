@@ -70,18 +70,6 @@ PokemonInstance.init(
                 max: 100
             }
         },
-        move1Id: {
-            type: DataTypes.INTEGER,
-        },
-        move2Id: {
-            type: DataTypes.INTEGER,
-        },
-        move3Id: {
-            type: DataTypes.INTEGER,
-        },
-        move4Id: {
-            type: DataTypes.INTEGER,
-        },
 
         // IVS
         hpIV: {
@@ -201,6 +189,9 @@ PokemonInstance.beforeCreate(async (instance, options) => {
         throw error; // you must throw an error inside the hook in order to cancel the real execution statement
     }
 });
+
+
+
 //#endregion pokemon instances
 
 
@@ -456,7 +447,7 @@ PokemonSpecies.belongsToMany(PokemonType, { through: 'SpeciesTypes' });
 PokemonType.belongsToMany(PokemonSpecies, { through: 'SpeciesTypes' });
 
 
-// Move - Type Forein Key
+// Move - Type Foreign Key
 PokemonType.hasMany(PokemonMove, { foreignKey: 'typeId' });
 PokemonMove.belongsTo(PokemonType, { foreignKey: 'typeId' });
 
@@ -469,6 +460,11 @@ PokemonTeam.belongsTo(User, { foreignKey: 'userId' });
 // Pokemon Instance - Pokemon Species foreign key
 PokemonSpecies.hasMany(PokemonInstance, { foreignKey: 'speciesId' });
 PokemonInstance.belongsTo(PokemonSpecies, { foreignKey: 'speciesId' });
+
+
+// Pokemon Instance - Pokemon Moves Foreign Keys
+PokemonMove.belongsToMany(PokemonInstance, { through: 'InstancesMoves' });
+PokemonInstance.belongsToMany(PokemonMove, { through: 'InstancesMoves' });
 
 
 // Team - Pokemon Instance Association Table

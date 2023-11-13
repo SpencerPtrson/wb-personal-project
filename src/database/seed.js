@@ -50,9 +50,9 @@ await db.sync({force: true}); // Erases all previous data
 
 
 //#region Moves
-    // Get the first 20 moves from the API
+    // Get the first x moves from the API
     const apiMoves = [];
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 30; i++) {
         const response = await axios.get(`https://pokeapi.co/api/v2/move/${i}`);
         apiMoves.push(response.data);
     }
@@ -208,6 +208,7 @@ await db.sync({force: true}); // Erases all previous data
               species.addPokemonType(typeToAdd);
           }
       }
+
   
       // MOVES - TYPES
       for (const move of dbMoves) {
@@ -228,6 +229,7 @@ await db.sync({force: true}); // Erases all previous data
     const speciesToInstance = dbSpecies[0];
     const moveToAssign = dbMoves[0];
     const dbNatures = await PokemonNature.findAll();
+    console.log(moveToAssign);
     // console.log("Species to Instance:", speciesToInstance);
     const instance1 = await PokemonInstance.create({
         speciesId: speciesToInstance.speciesId,
@@ -300,4 +302,34 @@ await db.sync({force: true}); // Erases all previous data
 //#endregion PokemonInstances
 
 
-  await db.close();
+
+
+// POKEMON INSTANCES - MOVES
+let dbInstances = await PokemonInstance.findAll({
+    include: {
+        model: PokemonSpecies,
+        include: {model: PokemonMove }
+    }
+});
+for (const instance of dbInstances) {
+    // get the pokemon species of the instance
+    // console.log(instance);
+    // console.log(instance.PokemonSpecy);
+    
+    // get the moves of the species
+    const speciesMoveList = instance.PokemonSpecy.PokemonMoves;
+    // console.log(speciesMoveList);
+
+    // set the first four moves of the species to the first four moves of the instance
+    for (let i = 0; i < 4; i++) {
+        if (speciesMoveList[i]) {
+            console.log(`Setting Pokemon Instance ${instance.pokemonInstanceId} to have a moveId of ${speciesMoveList[i].moveId} (${speciesMoveList[i].name})`)
+            await instance.addPokemonMove(speciesMoveList[i]);
+        }
+    }
+    await instance.save();
+}
+
+
+
+await db.close();

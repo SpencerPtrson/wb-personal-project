@@ -217,7 +217,8 @@ const handlerFunctions = {
             const allPokemonInstances = await PokemonInstance.findAll({
                 include: [
                     { model: PokemonTeam, include: { model: User } },
-                    { model: PokemonSpecies }
+                    { model: PokemonSpecies },
+                    { model: PokemonMove }
                 ]
             });
             res.json(allPokemonInstances);

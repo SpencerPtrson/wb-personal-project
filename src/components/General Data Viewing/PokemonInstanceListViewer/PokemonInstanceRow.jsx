@@ -1,12 +1,13 @@
 import PokemonSpriteImg from "../../PokemonSpriteImg";
 import PokemonInstanceEditButton from "../../PokemonInstanceManipulation/PokemonInstanceEditButton";
+import PokemonInstanceMoveTable from "../PokemonTeamViewer/PokemonInstanceMoveTable";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
     const email = useSelector(state => state.user.email);
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
-            PokemonTeam, PokemonSpecy } = pokemonInstance;
+            PokemonTeam, PokemonSpecy, PokemonMoves } = pokemonInstance;
     
     let name = PokemonSpecy.name.slice(0,1).toUpperCase() + PokemonSpecy.name.slice(1);
 
@@ -46,6 +47,9 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                             <tr><td>Speed: {speedEV}</td></tr>
                         </tbody>
                     </table>
+                </td>
+                <td>
+                    <PokemonInstanceMoveTable moveList={PokemonMoves}/>
                 </td>
                 {email === pokemonInstance.PokemonTeam.user.email
                 ? <td><PokemonInstanceEditButton pokemonInstanceId={pokemonInstance.pokemonInstanceId}/></td> 

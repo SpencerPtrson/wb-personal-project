@@ -6,10 +6,9 @@ export default function TeamDetailsPage() {
   console.log("Team Details Page - team object:", team);
   return (
     <>
-      <h1>This is a team's Detail Page!</h1>
       <h1>Team Name: {team.teamName}</h1>
       { team.user
-        ? <h1>Team was created by: {team.user.email}</h1>
+        ? <p>Team was created by: {team.user.email}</p>
         : <></>
       }
       <TeamPokemonInstanceTable instanceList={team.pokemoninstances} isTeamView={true} creatorEmail={team.user.email}/>

@@ -190,6 +190,17 @@ PokemonInstance.beforeCreate(async (instance, options) => {
     }
 });
 
+PokemonInstance.beforeUpdate(async (instance, options) => {
+    try {
+        const result = await PokemonInstance.findByPk(instance.pokemonInstanceId, {
+            include: PokemonMove
+        });
+        console.log("Editing a Pokemon Instance:", instance);
+        if (result.PokemonMoves.length >=  4) { throw new Error(`Cannot create more moves for ${instance.teamId}`)}
+    } catch (error) {
+        throw error; // you must throw an error inside the hook in order to cancel the real execution statement
+    }
+});
 
 
 //#endregion pokemon instances
@@ -465,6 +476,7 @@ PokemonInstance.belongsTo(PokemonSpecies, { foreignKey: 'speciesId' });
 // Pokemon Instance - Pokemon Moves Foreign Keys
 PokemonMove.belongsToMany(PokemonInstance, { through: 'InstancesMoves' });
 PokemonInstance.belongsToMany(PokemonMove, { through: 'InstancesMoves' });
+
 
 
 // Team - Pokemon Instance Association Table

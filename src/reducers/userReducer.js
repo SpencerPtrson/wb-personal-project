@@ -3,11 +3,11 @@ const initialState = {
     userId: null
 };
 
-const SET_EMAIL = 'SET_EMAIL';
+const SET_USERINFO = 'SET_USERINFO';
 
 export default function userReducer(state = initialState, action) {
     switch(action.type) {
-        case SET_EMAIL:
+        case SET_USERINFO:
             return {...state, email: action.payload.email, userId: action.payload.userId};
         default:
             return state;

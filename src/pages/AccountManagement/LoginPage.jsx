@@ -15,7 +15,7 @@ export default function LoginPage() {
     
     if (res.data.success) { 
       console.log("Login succeeded");
-      dispatch({ type: 'SET_EMAIL', payload: {email: formData.email, userId: res.data.userId }});
+      dispatch({ type: 'SET_USERINFO', payload: {email: formData.email, userId: res.data.userId }});
       navigate('/'); 
     }
     else console.log("Login failed");

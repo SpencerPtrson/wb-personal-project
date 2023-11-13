@@ -48,6 +48,8 @@ import handlerFunctions from "./controller.js"
     app.post('/api/users/create', handlerFunctions.createUser);
 
 
+
+
   //#endregion users
 
 
@@ -62,18 +64,31 @@ import handlerFunctions from "./controller.js"
     // Check if session id has corresponding user
     app.get('/userCheck', handlerFunctions.userCheck);
 
+    // Delete Account
+    app.delete('/api/users/delete/:userId', handlerFunctions.deleteUser)
+
   //#endregion AccountManagement
 
 
   //#region Teams
-      // Get all teams
+
+      // Get all Teams
       app.get('/api/teams', handlerFunctions.getTeams);
 
-      // Get 1 team
+      // Get 1 Team
       app.get('/api/teams/:teamId', handlerFunctions.getTeamByTeamId);
 
-      // Get all teams for a user id
+      // Get all Teams for a user id
       app.get('/api/teams/teamsByUser/:userId', handlerFunctions.getTeamsByUserId);
+
+      // Create a Team
+      app.post('/api/teams/create/:userId', handlerFunctions.createTeam);
+
+      // Edit a Team
+      app.put('/api/teams/edit/:teamId', handlerFunctions.editTeam);
+
+      // Delete a Team
+      app.delete('/api/teams/delete/:teamId', handlerFunctions.deleteTeam);
 
   //#endregion Teams
 

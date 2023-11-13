@@ -12,7 +12,7 @@ export default function LogoutButton() {
         const res = await axios.post('/api/logout')
         if (res.data.success) {
             console.log("Succeeded Logout");
-            dispatch({ type: 'SET_EMAIL', payload: ''});
+            dispatch({ type: 'SET_USERINFO', payload: {email: null, userId: null}});
             navigate('/');
         }
         else {

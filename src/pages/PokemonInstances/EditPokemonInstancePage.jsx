@@ -16,7 +16,7 @@ export default function EditPokemonInstancePage() {
     console.log("Editing pokemon instance: ", pokemonInstanceId);
     const res = await axios.post(`/api/pokemoninstances/create`, {speciesId: pokemonInstanceId, teamId: teamId});
     if (res.data.success) { 
-      console.log("Ed8t pokemon succeeded");
+      console.log("Edit pokemon succeeded");
       navigate('/pokemoninstances'); 
     }
     else {

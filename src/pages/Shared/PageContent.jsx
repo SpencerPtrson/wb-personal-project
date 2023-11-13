@@ -13,7 +13,7 @@ export default function PageContent() {
     const { data } = await axios.get('/userCheck');
     if (data.email) {
       dispatch({
-        type: "SET_EMAIL",
+        type: "SET_USERINFO",
         payload: { email: data.email, userId: data.userId }
       });
     }

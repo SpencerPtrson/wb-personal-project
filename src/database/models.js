@@ -196,7 +196,7 @@ PokemonInstance.beforeUpdate(async (instance, options) => {
             include: PokemonMove
         });
         console.log("Editing a Pokemon Instance:", instance);
-        if (result.PokemonMoves.length >=  4) { throw new Error(`Cannot create more moves for ${instance.teamId}`)}
+        if (result.PokemonMoves.length >  4) { throw new Error(`Cannot create more moves for ${instance.teamId}`)}
     } catch (error) {
         throw error; // you must throw an error inside the hook in order to cancel the real execution statement
     }

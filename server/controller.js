@@ -34,6 +34,23 @@ const handlerFunctions = {
             }
         },
 
+        // NEED TO LEARN HOW DELETING THIS IMPACTS FOREIGN KEY TABLES, LIKE USER
+        deleteUser: async(req, res) => {
+            try {
+                const { userId } = req.params;
+                const userToDelete = await User.destroy({
+                    where: {
+                        userId: userId
+                    }
+                });
+                res.json({success: true, deletedUser: userToDelete});
+            } catch (error) {
+                console.log("Delete User Failed! Here's the error:", error);
+                res.json({success: false, error: error});
+            }
+
+        },
+
     //#endregion Users
 
 
@@ -103,7 +120,6 @@ const handlerFunctions = {
 
         getTeamByTeamId: async(req, res) => {
             const { teamId } = req.params;
-            console.log(teamId);
             const team = await PokemonTeam.findByPk(teamId, {
                 include: [
                     {
@@ -143,6 +159,52 @@ const handlerFunctions = {
             });
             res.json(teams);
         },
+
+        createTeam: async (req, res) => {
+            try {
+                const { userId } = req.params;
+                const { teamName } = req.body;
+                const newTeam = await PokemonTeam.create({
+                    userId: userId,
+                    teamName: teamName
+                });
+                res.json(newTeam);
+            } catch (error) {
+                console.log("Create Team Failed! Here's the error:", error);
+                res.json({success: false, error: error});
+            }
+
+        },
+
+        editTeam: async (req, res) => {
+            try {
+                const { teamId } = req.params;
+                const { teamName } = req.body;
+                const teamToEdit = await PokemonTeam.findByPk(teamId);
+                teamToEdit.teamName = teamName;
+                teamToEdit.save();
+                res.json({success: true, editedTeam: teamToEdit});
+            } catch (error) {
+                console.log("Edit Team Failed! Here's the error:", error);
+                res.json({success: false, error: error});
+            }
+        },
+
+
+        // NEED TO LEARN HOW DELETING THIS IMPACTS FOREIGN KEYS
+        deleteTeam: async (req, res) => {
+            try {
+                const { teamId } = req.params;
+                const teamToDelete = await PokemonTeam.destroy({
+                    where: { teamId: teamId }
+                });
+                res.json({success: true, deletedTeam: teamToDelete})
+            } catch (error) {
+                console.log("Delete Team Failed! Here's the error:", error);
+                res.json({success: false, error: error});
+            }
+        },
+
     //#endregion Teams
 
 
@@ -235,6 +297,8 @@ const handlerFunctions = {
             res.json(pokemonInstance);
         },
 
+
+
         createPokemonInstance: async(req, res) => {
             try {
                 const { speciesId, teamId } = req.body;
@@ -267,7 +331,6 @@ const handlerFunctions = {
                 res.json({success: false, error: error})
             }
         },
-
 
         editPokemonInstance: async(req, res) => {
             try {

@@ -37,20 +37,16 @@ const handlerFunctions = {
         // NEED TO LEARN HOW DELETING THIS IMPACTS FOREIGN KEY TABLES, LIKE USER
         deleteUser: async(req, res) => {
             try {
-                console.log("Req Body:", req.body);
                 const { userId } = req.body;
                 console.log(userId);
                 const userToDelete = await User.destroy({
-                    where: {
-                        userId: userId
-                    }
+                    where: { userId: userId }
                 });
                 res.json({success: true, deletedUser: userToDelete});
             } catch (error) {
                 console.log("Delete User Failed! Here's the error:", error);
                 res.json({success: false, error: error});
             }
-
         },
 
     //#endregion Users
@@ -79,16 +75,21 @@ const handlerFunctions = {
         },
 
         userCheck: async (req, res) => {
-            console.log("User Check called!");
-            if (req.session.userId) {
-                console.log("Session UserId is:", req.session.userId);
-                const user = await User.findByPk(req.session.userId);
-                console.log("User check found user:", user);
-                res.send({ email: user?.email ?? null, userId: user?.userId ?? null })
-            }
-            else {
-                console.log("No session.userId found!")
-                res.send({ email: null, userId: null })
+            try {
+                console.log("User Check called!");
+                if (req.session.userId) {
+                    console.log("Session UserId is:", req.session.userId);
+                    const user = await User.findByPk(req.session.userId);
+                    console.log("User check found user:", user);
+                    res.send({ email: user?.email ?? null, userId: user?.userId ?? null })
+                }
+                else {
+                    console.log("No session.userId found!")
+                    res.send({ email: null, userId: null })
+                }
+            } catch (error) {
+                console.log("User check failed!");
+                console.log("Error:", error);
             }
         },
 
@@ -197,7 +198,7 @@ const handlerFunctions = {
         // NEED TO LEARN HOW DELETING THIS IMPACTS FOREIGN KEYS
         deleteTeam: async (req, res) => {
             try {
-                const { teamId } = req.params;
+                const { teamId } = req.body;
                 const teamToDelete = await PokemonTeam.destroy({
                     where: { teamId: teamId }
                 });
@@ -384,8 +385,11 @@ const handlerFunctions = {
 
         deletePokemonInstance: async(req, res) => {
             try {
-                console.log('Attempting to delete pokemon');
-                res.json({success: 'AAAAAAAAAAAAAAAAAAAAAAAAAA'})
+                const { pokemonInstanceId } = req.body;
+                const pokemonInstanceToDelete = await PokemonInstance.destroy({
+                    where: { pokemonInstanceId: pokemonInstanceId }
+                });
+                res.json({success: 'true', deletedPokemonInstance: pokemonInstanceToDelete});
             } catch (error) {
                 console.log("Unable to delete pokemon!");
                 console.log(error);

@@ -88,7 +88,7 @@ import handlerFunctions from "./controller.js"
       app.put('/api/teams/edit/:teamId', handlerFunctions.editTeam);
 
       // Delete a Team
-      app.delete('/api/teams/delete/:teamId', handlerFunctions.deleteTeam);
+      app.delete('/api/teams/delete', handlerFunctions.deleteTeam);
 
   //#endregion Teams
 

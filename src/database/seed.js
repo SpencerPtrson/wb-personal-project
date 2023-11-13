@@ -232,7 +232,6 @@ await db.sync({force: true}); // Erases all previous data
         natureId: dbNatures[0].natureId,
         teamId: 1,
         level: 100,
-        move1Id: moveToAssign.moveId,
 
         hpIV: 31,
         atkIV: 21,
@@ -254,7 +253,6 @@ await db.sync({force: true}); // Erases all previous data
         natureId: dbNatures[0].natureId,
         teamId: 1,
         level: 100,
-        move1Id: moveToAssign.moveId,
 
         hpIV: 21,
         atkIV: 19,
@@ -293,7 +291,26 @@ await db.sync({force: true}); // Erases all previous data
         speedEV: 1,
     });
 
+    const instance4 = await PokemonInstance.create({
+        speciesId: dbSpecies[10].speciesId,
+        natureId: dbNatures[0].natureId,
+        teamId: 3,
+        level: 100,
 
+        hpIV: 21,
+        atkIV: 19,
+        defIV: 26,
+        spATKIV: 1,
+        spDEFIV: 22,
+        speedIV: 9,
+        
+        hpEV: 16,
+        atkEV: 252,
+        defEV: 4,
+        spATKEV: 40,
+        spDEFEV: 153,
+        speedEV: 1,
+    });
 
 //#endregion PokemonInstances
 

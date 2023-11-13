@@ -1,12 +1,12 @@
 import { NavLink } from "react-bootstrap";
-import PokemonSpriteImg from "../../PokemonSpriteImg";
-import SpeciesTypings from "../../SpeciesTypings";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import DeleteTeamButton from "../../TeamManagement/DeleteTeamButton";
 
 export default function TeamRow({ team }) {
     const { teamId, teamName, user, pokemoninstances } = team;
+    const email = useSelector(state => state.user.email);
 
     const spriteImgs = pokemoninstances?.map(pokemonInstance => {
-        console.log(pokemonInstance);
         return <td><img src={pokemonInstance.PokemonSpecy.sprite} alt={pokemonInstance.PokemonSpecy.name}/></td>
     });
 
@@ -33,6 +33,9 @@ export default function TeamRow({ team }) {
                         : "This Team Has No Pokemon Yet!"
                     }
                 </td>
+                {email === team.user.email
+                ? <td><DeleteTeamButton teamId={teamId} /></td> 
+                : <></>}
             </tr>
         </>
     )

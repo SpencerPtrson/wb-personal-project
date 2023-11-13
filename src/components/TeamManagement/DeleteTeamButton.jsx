@@ -8,14 +8,18 @@ export default function DeleteTeamButton({ teamId }) {
 
     const handleDeleteTeam = async () => {
         console.log("Attempting to Delete Team")
-        const res = await axios.delete('/api/teams/delete', { data: { teamId: teamId }});
-        if (res.data.success) {
-            console.log("Succeeded in Deleting Team");
-            navigate('/teams');
-        }
-        else {
-            console.log(res.data);
-            console.log("Failed Delete Team");
+
+        const verified = confirm("Are you sure you want to delete this team? It can't be recovered if you do!");
+        if (verified) {
+            const res = await axios.delete('/api/teams/delete', { data: { teamId: teamId }});
+            if (res.data.success) {
+                console.log("Succeeded in Deleting Team");
+                navigate('/teams');
+            }
+            else {
+                console.log(res.data);
+                console.log("Failed Delete Team");
+            }
         }
     }
     

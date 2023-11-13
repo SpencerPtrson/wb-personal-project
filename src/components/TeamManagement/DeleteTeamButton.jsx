@@ -1,6 +1,7 @@
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
 
 export default function DeleteTeamButton({ teamId }) {
@@ -14,7 +15,7 @@ export default function DeleteTeamButton({ teamId }) {
             const res = await axios.delete('/api/teams/delete', { data: { teamId: teamId }});
             if (res.data.success) {
                 console.log("Succeeded in Deleting Team");
-                navigate('/teams');
+                navigate(0);
             }
             else {
                 console.log(res.data);

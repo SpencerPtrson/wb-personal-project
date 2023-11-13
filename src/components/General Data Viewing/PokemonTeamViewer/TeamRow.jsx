@@ -1,5 +1,6 @@
 import { NavLink } from "react-bootstrap";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useState } from "react";
 import DeleteTeamButton from "../../TeamManagement/DeleteTeamButton";
 
 export default function TeamRow({ team }) {
@@ -34,7 +35,7 @@ export default function TeamRow({ team }) {
                     }
                 </td>
                 {email === team.user.email
-                ? <td><DeleteTeamButton teamId={teamId} /></td> 
+                ? <td><DeleteTeamButton teamId={teamId}/></td> 
                 : <></>}
             </tr>
         </>

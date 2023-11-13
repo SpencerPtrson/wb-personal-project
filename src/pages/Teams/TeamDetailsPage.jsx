@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router-dom';
-import PokemonInstanceTable from '../../components/General Data Viewing/PokemonInstanceListViewer/PokemonInstanceTable';
+import TeamPokemonInstanceTable from '../../components/General Data Viewing/PokemonTeamViewer/TeamPokemonInstanceTable';
 
 export default function TeamDetailsPage() {
   let { team } = useLoaderData();
@@ -9,12 +9,10 @@ export default function TeamDetailsPage() {
       <h1>This is a team's Detail Page!</h1>
       <h1>Team Name: {team.teamName}</h1>
       { team.user
-        ? <>
-            <h1>Team was created by: {team.user.email}</h1>
-        </>
+        ? <h1>Team was created by: {team.user.email}</h1>
         : <></>
       }
-      {/* <PokemonInstanceTable instanceList={team.pokemoninstances} isTeamView={true} user={team.user}/> */}
+      <TeamPokemonInstanceTable instanceList={team.pokemoninstances} isTeamView={true} creatorEmail={team.user.email}/>
     </>
   );
 }

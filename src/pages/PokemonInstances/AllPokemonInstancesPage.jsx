@@ -6,7 +6,7 @@ export default function AllPokemonInstancesPage() {
   console.log("All Pokemon Instances Page - pokemoninstances data:", pokemoninstances);
   return (
     <>
-      <h1>All Pokemon Instances Page</h1>
+      <h1>Community Sets:</h1>
       <PokemonInstanceTable instanceList={pokemoninstances} isTeamView={false}/>
     </>
   );

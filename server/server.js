@@ -151,6 +151,9 @@ import handlerFunctions from "./controller.js"
     // Edit a pokemon instance
     app.put('/api/pokemoninstances/edit/:pokemonInstanceId', handlerFunctions.editPokemonInstance);
 
+    // Delete a pokemon instance
+    app.delete('/api/pokemoninstances/delete', handlerFunctions.deletePokemonInstance);
+    
   //#endregion PokemonInstances
 
 

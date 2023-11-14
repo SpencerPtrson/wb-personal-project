@@ -5,7 +5,7 @@ export default function TeamListPage() {
   const { teams } = useLoaderData();
   return (
     <>
-      <h1>Team List Page</h1>
+      <h1>All Teams</h1>
       <TeamTable teamList={teams}/>
     </>
   );

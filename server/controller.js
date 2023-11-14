@@ -306,10 +306,11 @@ const handlerFunctions = {
         createPokemonInstance: async(req, res) => {
             try {
                 const { speciesId, teamId } = req.body;
+                console.log("Create Pokemon Instance - teamId: ", teamId)
                 console.log(`Creating new pokemon instance with speciesId ${speciesId} and teamId ${teamId}`);
                 const newPokemonInstance = await PokemonInstance.create({
                     speciesId: speciesId,
-                    teamId: 1,
+                    teamId: teamId,
                     natureId: 0,
                     level: 100,
                     move1Id: 0,

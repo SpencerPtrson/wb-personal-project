@@ -9,7 +9,7 @@ export default function PokemonSpeciesSelectableRow({ species: {speciesId, name,
     return (
         <>
             <tr>
-                <td><PokemonSpriteImg name={name} sprite={sprite}/></td>
+                <td><PokemonSpriteImg name={name} sprite={sprite} width={100}/></td>
                 <td><Button onClick={() => handleCreatePokemon(speciesId, 0)}>{name}</Button></td>
                 <SpeciesTypings type1={type1} type2={type2}/>
                 <td>

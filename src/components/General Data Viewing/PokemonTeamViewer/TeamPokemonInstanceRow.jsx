@@ -54,9 +54,6 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
                 </>
                  
                 : <></>}
-                {/* <td>
-                    <DeletePokemonInstance pokemonInstanceId={pokemonInstance.pokemonInstanceId} />
-                </td> */}
             </tr>
         </>
     )

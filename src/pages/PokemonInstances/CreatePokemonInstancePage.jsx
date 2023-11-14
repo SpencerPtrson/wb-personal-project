@@ -9,12 +9,12 @@ import PokemonSpeciesSelectorTable from '../../components/PokemonInstanceManipul
 export default function CreatePokemonInstancePage() {
   const [errorMessage, setErrorMessage] = useState();
   const navigate = useNavigate();
-  const { speciesList } = useLoaderData();
+  const { speciesList, teamId } = useLoaderData();
 
-  const handleCreatePokemon = async(pokemonInstanceId, teamId) => {
+  const handleCreatePokemon = async(pokemonInstanceId) => {
     console.log("Handling Create Pokemon");
-    console.log(pokemonInstanceId, teamId);
-    const res = await axios.post(`/api/pokemoninstances/create`, {speciesId: pokemonInstanceId, teamId: teamId});
+    console.log(pokemonInstanceId, +teamId);
+    const res = await axios.post(`/api/pokemoninstances/create`, {speciesId: pokemonInstanceId, teamId: +teamId});
     if (res.data.success) { 
       console.log("Create pokemon succeeded");
       navigate('/pokemoninstances'); 

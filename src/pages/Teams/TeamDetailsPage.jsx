@@ -4,6 +4,7 @@ import TeamPokemonInstanceTable from '../../components/General Data Viewing/Poke
 export default function TeamDetailsPage() {
   let { team } = useLoaderData();
   console.log("Team Details Page - team object:", team);
+  console.log("Team Pokemon Instances:", team.pokemonInstances);
   return (
     <>
       <h1>Team Name: {team.teamName}</h1>

@@ -97,12 +97,14 @@ export default function App() {
             />
 
             <Route
-              path='/pokemoninstances/create'
+              path='/pokemoninstances/create/:teamId'
               element={<CreatePokemonInstancePage />}
-              loader={ async() => {
+              loader={ async({params}) => {
+                console.log("CREATE POKEMON INSTANCE PAGE CALLED")
+                console.log(params);
                 console.log("Loading all pokemon species as options for creating a new pokemon instance");
                 const res = await axios.get('/api/pokemonspecies');
-                return { speciesList: res.data }
+                return { speciesList: res.data, teamId: params.teamId}
               }}
             />
 
@@ -112,9 +114,10 @@ export default function App() {
               loader={ async({ params }) => {
                 console.log(params);
                 console.log("Loading pokemon instance in preparation for editing:", params.pokemonInstanceId);
-                const res = await axios.get(`/api/pokemoninstances/${params.pokemonInstanceId}`)
-                console.log(res.data);
-                return { pokemonInstance: res.data };
+                const instanceRes = await axios.get(`/api/pokemoninstances/${params.pokemonInstanceId}`)
+                const speciesListRes = await axios.get('/api/pokemonspecies');
+                console.log(instanceRes.data);
+                return { pokemonInstance: instanceRes.data, speciesList: speciesListRes.data };
               }}
             />
         // #endregion pokemonInstances

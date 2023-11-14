@@ -8,7 +8,7 @@ export default function TeamDetailsPage() {
 
   let { team } = useLoaderData();
   console.log("Team Details Page - team object:", team);
-  console.log("Team Pokemon Instances:", team.pokemonInstances);
+  console.log("Team Pokemon Instances:", team.pokemoninstances);
   return (
     <>
       <h1>Team Name: {team.teamName}</h1>
@@ -16,11 +16,11 @@ export default function TeamDetailsPage() {
         ? <p>Team was created by: {team.user.email}</p>
         : <></>
       }
-      <TeamPokemonInstanceTable instanceList={team.pokemoninstances} isTeamView={true} creatorEmail={team.user.email}/>
-      { team.user.email === email
+      { team.user.email === email && team.pokemoninstances.length <= 6
         ? <CreatePokemonInstanceButton teamId={team.teamId}/>
         : <></>
       }
+      <TeamPokemonInstanceTable instanceList={team.pokemoninstances} isTeamView={true} creatorEmail={team.user.email}/>
     </>
   );
 }

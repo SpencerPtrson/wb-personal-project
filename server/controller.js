@@ -166,18 +166,17 @@ const handlerFunctions = {
 
         createTeam: async (req, res) => {
             try {
-                const { userId } = req.params;
-                const { teamName } = req.body;
+                const { userId, teamName } = req.body;
+                console.log(`Creating a team for user: ${userId} with teamName ${teamName}`)
                 const newTeam = await PokemonTeam.create({
                     userId: userId,
                     teamName: teamName
                 });
-                res.json(newTeam);
+                res.json({success: true, newTeam: newTeam});
             } catch (error) {
                 console.log("Create Team Failed! Here's the error:", error);
                 res.json({success: false, error: error});
             }
-
         },
 
         editTeam: async (req, res) => {
@@ -194,8 +193,6 @@ const handlerFunctions = {
             }
         },
 
-
-        // NEED TO LEARN HOW DELETING THIS IMPACTS FOREIGN KEYS
         deleteTeam: async (req, res) => {
             try {
                 const { teamId } = req.body;

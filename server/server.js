@@ -82,7 +82,7 @@ import handlerFunctions from "./controller.js"
       app.get('/api/teams/teamsByUser/:userId', handlerFunctions.getTeamsByUserId);
 
       // Create a Team
-      app.post('/api/teams/create/:userId', handlerFunctions.createTeam);
+      app.post('/api/teams/create', handlerFunctions.createTeam);
 
       // Edit a Team
       app.put('/api/teams/edit/:teamId', handlerFunctions.editTeam);

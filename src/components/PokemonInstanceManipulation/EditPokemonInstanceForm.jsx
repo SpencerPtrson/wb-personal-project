@@ -1,10 +1,8 @@
-import PokemonSpriteImg from "../../PokemonSpriteImg";
-import EditPokemonInstanceButton from "../../PokemonInstanceManipulation/EditPokemonInstanceButton";
-import DeletePokemonInstanceButton from '../../PokemonInstanceManipulation/DeletePokemonInstanceButton';
-import PokemonInstanceMoveTable from "../PokemonTeamViewer/PokemonInstanceMoveTable";
+import PokemonSpriteImg from "../PokemonSpriteImg";
+import PokemonInstanceMoveTable from "../General Data Viewing/PokemonTeamViewer/PokemonInstanceMoveTable";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
-export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
+export default function EditPokemonInstanceForm({ pokemonInstance }) {
     const email = useSelector(state => state.user.email);
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
@@ -14,15 +12,8 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
 
     console.log(pokemonInstance);
     return (
-        <>
+        <form>
             <tr>
-                {isTeamView ? <>
-                    </>
-                    : <>
-                        <td>{PokemonTeam.teamName}</td>
-                        <td>{pokemonInstance.PokemonTeam.user.email}</td>
-                    </>
-                }
                 <td><PokemonSpriteImg name={PokemonSpecy.name} sprite={PokemonSpecy.sprite} width={150}/></td>
                 <td>{name}</td>
                 <td>
@@ -52,13 +43,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                 <td>
                     <PokemonInstanceMoveTable moveList={PokemonMoves}/>
                 </td>
-                {email === pokemonInstance.PokemonTeam.user.email
-                ? <>
-                    <td><EditPokemonInstanceButton pokemonInstanceId={pokemonInstance.pokemonInstanceId}/></td>
-                    <td><DeletePokemonInstanceButton pokemonInstance={pokemonInstance.pokemonInstanceId}/></td>
-                </>
-                : <></>}
             </tr>
-        </>
+        </form>
     )
 }

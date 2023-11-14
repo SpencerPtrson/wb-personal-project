@@ -13,8 +13,9 @@ import CreateAccountPage from './pages/AccountManagement/CreateAccountPage.jsx';
 import AllPokemonSpeciesPage from './pages/PokemonSpecies/AllPokemonSpeciesPage.jsx';
 import AllPokemonMovesPage from './pages/PokemonMoves/AllPokemonMovesPage.jsx';
 import AllPokemonInstancesPage from './pages/PokemonInstances/AllPokemonInstancesPage.jsx';
-import PokemonSpeciesDetailsPage from './pages/PokemonSpecies/PokemonSpeciesDetailsPage.jsx'
-import CreatePokemonInstancePage from './pages/PokemonInstances/CreatePokemonInstancePage.jsx'
+import PokemonSpeciesDetailsPage from './pages/PokemonSpecies/PokemonSpeciesDetailsPage.jsx';
+import CreatePokemonInstancePage from './pages/PokemonInstances/CreatePokemonInstancePage.jsx';
+import EditPokemonInstancePage from './pages/PokemonInstances/EditPokemonInstancePage.jsx';
 import TeamListPage from './pages/Teams/TeamListPage.jsx';
 import TeamDetailsPage from './pages/Teams/TeamDetailsPage.jsx';
 
@@ -106,12 +107,13 @@ export default function App() {
             />
 
             <Route
-              path='/pokemoninstances/edit/:instanceId'
-              // element={<EditPokemonInstancePage />}
-              loader={ async() => {
+              path='/pokemoninstances/edit/:pokemonInstanceId'
+              element={<EditPokemonInstancePage />}
+              loader={ async({ params }) => {
                 console.log(params);
                 console.log("Loading pokemon instance in preparation for editing:", params.pokemonInstanceId);
                 const res = await axios.get(`/api/pokemoninstances/${params.pokemonInstanceId}`)
+                console.log(res.data);
                 return { pokemonInstance: res.data };
               }}
             />

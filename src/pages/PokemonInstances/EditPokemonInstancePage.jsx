@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import PokemonSpeciesSelectorTable from '../../components/PokemonInstanceManipulation/PokemonSpeciesSelectorTable';
+import EditPokemonInstanceForm from '../../components/PokemonInstanceManipulation/EditPokemonInstanceForm';
 
 
 export default function EditPokemonInstancePage() {
@@ -29,7 +29,7 @@ export default function EditPokemonInstancePage() {
   return (
     <>
       <h1>Edit Pokemon Page!</h1>
-      {errorMessage}
+      <EditPokemonInstanceForm pokemonInstance={pokemonInstance}/>
     </>
   );
 }

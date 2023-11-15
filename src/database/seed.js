@@ -79,7 +79,7 @@ await db.sync({force: true}); // Erases all previous data
 //#region Abilities
     // Get the first 20 moves from the API
     const apiAbilities = [];
-    for (let i = 1; i <= 1; i++) {
+    for (let i = 1; i <= 20; i++) {
         const response = await axios.get(`https://pokeapi.co/api/v2/ability/${i}`);
         apiAbilities.push(response.data);
     }
@@ -270,7 +270,7 @@ await db.sync({force: true}); // Erases all previous data
     });
 
     const instance3 = await PokemonInstance.create({
-        speciesId: dbSpecies[6].speciesId,
+        speciesId: dbSpecies[9].speciesId,
         natureId: dbNatures[0].natureId,
         teamId: 2,
         level: 100,
@@ -321,7 +321,10 @@ await db.sync({force: true}); // Erases all previous data
 let dbInstances = await PokemonInstance.findAll({
     include: {
         model: PokemonSpecies,
-        include: {model: PokemonMove }
+        include: [
+            {model: PokemonMove},
+            {model: Ability}
+        ]
     }
 });
 for (const instance of dbInstances) {
@@ -331,13 +334,29 @@ for (const instance of dbInstances) {
     // set the first four moves of the species to the first four moves of the instance
     for (let i = 0; i < 4; i++) {
         if (speciesMoveList[i]) {
-            console.log(`Setting Pokemon Instance ${instance.pokemonInstanceId} to have a moveId of ${speciesMoveList[i].moveId} (${speciesMoveList[i].name})`)
+            // console.log(`Setting Pokemon Instance ${instance.pokemonInstanceId} to have a moveId of ${speciesMoveList[i].moveId} (${speciesMoveList[i].name})`)
             await instance.addPokemonMove(speciesMoveList[i]);
         }
     }
     await instance.save();
 }
 
-
+// Pokemon Instances - Abilities
+for (const instance of dbInstances) {
+    // get the pokemon species of the instance
+    // get the abilities of the species
+    const abilities = instance.PokemonSpecy.abilities;
+    //  set the ability to be the first available ability of the pokemon species
+    if (abilities?.length > 0) {
+        instance.abilityId = abilities[0].abilityId;
+        console.log(`Set instance ${instance.pokemonInstanceId}'s abilityId to match ${abilities[0].name}`);
+    }
+    else {
+        console.log(`Instance ${instance.pokemonInstanceId}'s species (${instance.PokemonSpecy.name}) has no abilities in the database`)
+    }
+    await instance.save();
+    // console.log(instance);
+    
+}
 
 await db.close();

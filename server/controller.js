@@ -129,7 +129,8 @@ const handlerFunctions = {
                     {
                         model: PokemonInstance, include: [
                             { model: PokemonSpecies },
-                            { model: PokemonMove }
+                            { model: PokemonMove },
+                            { model: Ability }
                         ]},
                         { model: User }
                     ]

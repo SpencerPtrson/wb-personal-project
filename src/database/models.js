@@ -478,6 +478,10 @@ PokemonMove.belongsToMany(PokemonInstance, { through: 'InstancesMoves' });
 PokemonInstance.belongsToMany(PokemonMove, { through: 'InstancesMoves' });
 
 
+// Pokemon Instance - Abilities Foreign Keys
+Ability.hasMany(PokemonInstance, { foreignKey: 'abilityId' });
+PokemonInstance.belongsTo(Ability, { foreignKey: 'abilityId' })
+
 
 // Team - Pokemon Instance Association Table
 PokemonTeam.hasMany(PokemonInstance, { foreignKey: 'teamId' });

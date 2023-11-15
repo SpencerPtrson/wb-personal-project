@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import PokemonSpeciesTable from "../../components/General Data Viewing/PokemonSpeciesListViewer/PokemonSpeciesTable";
+import PokemonSpeciesTable from "../../components/PokemonSpecies/PokemonSpeciesTable";
 
 export default function AllPokemonSpeciesPage() {
   const { pokemonspecies } = useLoaderData();

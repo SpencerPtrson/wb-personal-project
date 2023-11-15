@@ -1,7 +1,7 @@
 import PokemonSpriteImg from "../PokemonSpriteImg";
 import PokemonInstanceMoveTable from "../General Data Viewing/PokemonTeamViewer/PokemonInstanceMoveTable";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import PokemonSpeciesSelectorTable from "./PokemonSpeciesSelectorTable";
+import ScrollableSpeciesTable from "./ScrollableSpeciesTable";
 
 export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, editPokemonFunction }) {
     const email = useSelector(state => state.user.email);
@@ -40,6 +40,9 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
         <form>
             <h1><PokemonSpriteImg name={PokemonSpecy.name} sprite={PokemonSpecy.sprite} width={200}/></h1>
             <h1>{name}</h1>
+
+            <ScrollableSpeciesTable speciesList={speciesList} />
+
 
             <select>
                 {selectOptions}

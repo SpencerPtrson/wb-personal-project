@@ -2,8 +2,8 @@ import { useLoaderData } from 'react-router-dom';
 import PokemonSpriteImg from '../../components/PokemonSpriteImg'
 import SpeciesTypings from '../../components/SpeciesTypings';
 import BaseStatsList from '../../components/General Data Viewing/IndividualSpeciesViewer/BaseStatsList';
-import MoveTable from '../../components/General Data Viewing/MoveListViewer/MoveTable';
-import AbilityTable from '../../components/General Data Viewing/AbilityViewer/AbilityTable';
+import MoveTable from '../../components/PokemonMoves/MoveTable';
+import AbilityTable from '../../components/PokemonAbilities/AbilityTable';
 
 export default function PokemonSpeciesDetailsPage() {
   let { pokemonspecies: {name, sprite, type1, type2, baseHP, baseATK, baseDEF, baseSPATK, baseSPDEF, baseSPEED, PokemonMoves, abilities } } = useLoaderData();

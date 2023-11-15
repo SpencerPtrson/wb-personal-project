@@ -1,4 +1,3 @@
-import { NavLink } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import PokemonSpriteImg from "../PokemonSpriteImg";
 import SpeciesTypings from "../SpeciesTypings";

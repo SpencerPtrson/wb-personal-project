@@ -28,11 +28,12 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                 }
                 <td><PokemonSpriteImg name={PokemonSpecy.name} sprite={PokemonSpecy.sprite} width={150}/></td>
                 <td>
+                    <h6>Name:</h6>
                     {name}
+                    <br />
+                    <br />
                     { abilityName
                         ? <>
-                            <br />
-                            <br />
                             <h6>Ability</h6>
                             <p>{abilityName}</p>
                           </>
@@ -69,7 +70,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                 {email === pokemonInstance.PokemonTeam.user.email
                 ? <>
                     <td><EditPokemonInstanceButton pokemonInstanceId={pokemonInstance.pokemonInstanceId}/></td>
-                    <td><DeletePokemonInstanceButton pokemonInstance={pokemonInstance.pokemonInstanceId}/></td>
+                    <td><DeletePokemonInstanceButton pokemonInstanceId={pokemonInstance.pokemonInstanceId}/></td>
                 </>
                 : <></>}
             </tr>

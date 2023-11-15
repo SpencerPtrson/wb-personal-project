@@ -1,6 +1,5 @@
 import { NavLink } from "react-bootstrap";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useState } from "react";
 import CreatePokemonInstanceButton from '../../PokemonInstanceManipulation/CreatePokemonInstanceButton'
 import DeleteTeamButton from "../../TeamManagement/DeleteTeamButton";
 

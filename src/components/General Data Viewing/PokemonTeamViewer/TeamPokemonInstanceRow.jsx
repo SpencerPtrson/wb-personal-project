@@ -1,7 +1,6 @@
 import PokemonSpriteImg from "../../PokemonSpriteImg";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import PokemonInstanceMoveTable from "./PokemonInstanceMoveTable";
-import DeleteTeamButton from "../../TeamManagement/DeleteTeamButton";
 import EditPokemonInstanceButton from "../../PokemonInstanceManipulation/EditPokemonInstanceButton";
 import DeletePokemonInstanceButton from "../../PokemonInstanceManipulation/DeletePokemonInstanceButton";
 
@@ -12,9 +11,8 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
             PokemonSpecy, PokemonMoves, ability } = pokemonInstance;
     
     let name = PokemonSpecy.name.slice(0,1).toUpperCase() + PokemonSpecy.name.slice(1);
-    // let abilityName = ability?.name.replace(ability?.name[0], ability?.name[0].toUpperCase());
     console.log("TeamPokemonInstanceRow: instance Data:", pokemonInstance);
-    console.log(`Ability for ${PokemonSpecy.name}: ${ability.name}`)
+    console.log(`Ability for ${PokemonSpecy?.name}: ${ability?.name}`)
     
     let abilityName = null;
     if (ability) abilityName = ability.name.replace(ability.name[0], ability.name[0].toUpperCase()); 
@@ -25,10 +23,10 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
                 <td><PokemonSpriteImg name={PokemonSpecy.name} sprite={PokemonSpecy.sprite} width={150}/></td>
                 <td>
                     {name}
+                    <br />
+                    <br />
                     { abilityName
                         ? <>
-                            <br />
-                            <br />
                             <h5>Ability</h5>
                             <p>{abilityName}</p>
                           </>
@@ -64,13 +62,18 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
                 <td>
                     <PokemonInstanceMoveTable moveList={PokemonMoves}/>
                 </td>
-                {email === creatorEmail
-                ? <>
-                    <td><EditPokemonInstanceButton pokemonInstanceId={pokemonInstance.pokemonInstanceId}/></td> 
-                    <td><DeletePokemonInstanceButton pokemonInstanceId={pokemonInstance.pokemonInstanceId}/></td>
-                </>
-                 
-                : <></>}
+                <td>
+                    {email === creatorEmail
+                        ? <>
+                            <br />
+                            <EditPokemonInstanceButton pokemonInstanceId={pokemonInstance.pokemonInstanceId}/>
+                            <br />
+                            <br />
+                            <DeletePokemonInstanceButton pokemonInstanceId={pokemonInstance.pokemonInstanceId}/>
+                          </>
+                        : <></>
+                    }
+                </td>
             </tr>
         </>
     )

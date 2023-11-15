@@ -1,7 +1,7 @@
 import { NavLink } from "react-bootstrap";
-import PokemonSpriteImg from "../../PokemonSpriteImg";
-import SpeciesTypings from "../../SpeciesTypings";
-import BaseStatsList from '../IndividualSpeciesViewer/BaseStatsList'
+import PokemonSpriteImg from "../PokemonSpriteImg";
+import SpeciesTypings from "../SpeciesTypings";
+import BaseStatsList from '../General Data Viewing/IndividualSpeciesViewer/BaseStatsList'
 
 export default function MoveRow({ move }) {
     const {name, type, power, moveClass, shortDescription} = move;

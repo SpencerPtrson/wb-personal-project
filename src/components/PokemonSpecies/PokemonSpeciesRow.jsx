@@ -1,7 +1,7 @@
 import { NavLink } from "react-bootstrap";
-import PokemonSpriteImg from "../../PokemonSpriteImg";
-import SpeciesTypings from "../../SpeciesTypings";
-import BaseStatsList from '../IndividualSpeciesViewer/BaseStatsList'
+import PokemonSpriteImg from "../PokemonSpriteImg";
+import SpeciesTypings from "../SpeciesTypings";
+import BaseStatsList from '../General Data Viewing/IndividualSpeciesViewer/BaseStatsList'
 
 export default function PokemonSpeciesRow({ species: {speciesId, name, sprite, type1, type2, baseHP, baseATK, baseDEF, baseSPATK, baseSPDEF, baseSPEED} }) {
     name = name.slice(0,1).toUpperCase() + name.slice(1);

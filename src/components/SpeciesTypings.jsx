@@ -3,6 +3,6 @@ export default function SpeciesTypings({ type1, type2 }) {
     if (type2) type2 = type2.slice(0,1).toUpperCase() + type2.slice(1);  
     
     return (
-        <td>{type1} {type2}</td>
+        <td>Type(s): {type1} {type2}</td>
     )
 }

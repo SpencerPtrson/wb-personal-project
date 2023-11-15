@@ -9,17 +9,34 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
     const email = useSelector(state => state.user.email);
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
-            PokemonSpecy, PokemonMoves } = pokemonInstance;
+            PokemonSpecy, PokemonMoves, ability } = pokemonInstance;
     
     let name = PokemonSpecy.name.slice(0,1).toUpperCase() + PokemonSpecy.name.slice(1);
-
+    // let abilityName = ability?.name.replace(ability?.name[0], ability?.name[0].toUpperCase());
     console.log("TeamPokemonInstanceRow: instance Data:", pokemonInstance);
-
+    console.log(`Ability for ${PokemonSpecy.name}: ${ability.name}`)
+    
+    let abilityName = null;
+    if (ability) abilityName = ability.name.replace(ability.name[0], ability.name[0].toUpperCase()); 
+    
     return (
         <>
             <tr>
                 <td><PokemonSpriteImg name={PokemonSpecy.name} sprite={PokemonSpecy.sprite} width={150}/></td>
-                <td>{name}</td>
+                <td>
+                    {name}
+                    { abilityName
+                        ? <>
+                            <br />
+                            <br />
+                            <h5>Ability</h5>
+                            <p>{abilityName}</p>
+                          </>
+                        : <></>
+                    }
+
+
+                </td>
                 <td>
                     <table className="table-sm">
                         <tbody>

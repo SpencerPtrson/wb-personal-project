@@ -282,6 +282,7 @@ const handlerFunctions = {
                 include: [
                     { model: PokemonTeam, include: { model: User } },
                     { model: PokemonSpecies },
+                    { model: Ability },
                     { model: PokemonMove }
                 ]
             });
@@ -293,6 +294,7 @@ const handlerFunctions = {
             const pokemonInstance = await PokemonInstance.findByPk(pokemonInstanceId, {
                 include: [
                     { model: PokemonSpecies },
+                    { model: Ability },
                     { model: PokemonMove }
                 ]
             });
@@ -341,7 +343,12 @@ const handlerFunctions = {
                 const { } = req.body;
 
                 console.log(`Editing pokemon instance with pokemonInstanceId ${pokemonInstanceId}`);
-                const pokemonToEdit = await PokemonInstance.findByPk(pokemonInstanceId);
+                const pokemonToEdit = await PokemonInstance.findByPk(pokemonInstanceId, {
+                    include: [
+                        { model: Ability },
+                        { model: PokemonMove }
+                    ]
+                });
 
                 if (pokemonToEdit) {
                     pokemonToEdit.speciesId = speciesId ?? pokemonToEdit.speciesId;

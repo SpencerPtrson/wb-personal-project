@@ -8,9 +8,12 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
     const email = useSelector(state => state.user.email);
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
-            PokemonTeam, PokemonSpecy, PokemonMoves } = pokemonInstance;
+            PokemonTeam, PokemonSpecy, PokemonMoves, ability } = pokemonInstance;
     
-    let name = PokemonSpecy.name.slice(0,1).toUpperCase() + PokemonSpecy.name.slice(1);
+    let name = PokemonSpecy.name.replace(PokemonSpecy.name[0], PokemonSpecy.name[0].toUpperCase());
+
+    let abilityName = null;
+    if (ability) abilityName = ability.name.replace(ability.name[0], ability.name[0].toUpperCase());
 
     console.log(pokemonInstance);
     return (
@@ -24,7 +27,18 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                     </>
                 }
                 <td><PokemonSpriteImg name={PokemonSpecy.name} sprite={PokemonSpecy.sprite} width={150}/></td>
-                <td>{name}</td>
+                <td>
+                    {name}
+                    { abilityName
+                        ? <>
+                            <br />
+                            <br />
+                            <h6>Ability</h6>
+                            <p>{abilityName}</p>
+                          </>
+                        : <></>
+                    }    
+                </td>
                 <td>
                     <table className="table-sm">
                         <tbody>

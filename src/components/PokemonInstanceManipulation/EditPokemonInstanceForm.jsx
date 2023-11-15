@@ -31,8 +31,10 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
 
 
     const selectOptions = speciesList.map(species => {
-        <option value={species.speciesId} style={{backgroundImage: (species.sprite)}}>{species.name}</option>
+        return <option value={species.speciesId}>{species.name}</option>
     })
+
+    console.log(selectOptions);
 
     return (
         <form>

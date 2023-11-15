@@ -1,8 +1,8 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import TeamTable from '../../components/General Data Viewing/PokemonTeamViewer/TeamTable';  
-import CreateTeamForm from "../../components/TeamManagement/CreateTeamForm";
+import TeamTable from '../../components/Team/TeamTable';  
+import CreateTeamForm from "../../components/Team/CreateTeamForm";
 
 export default function TeamListPage() {
   const email = useSelector(state => state.user.email)

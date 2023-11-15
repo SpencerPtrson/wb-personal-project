@@ -1,5 +1,5 @@
 import PokemonSpriteImg from "../PokemonSpriteImg";
-import PokemonInstanceMoveTable from "../General Data Viewing/PokemonTeamViewer/PokemonInstanceMoveTable";
+import PokemonInstanceMoveTable from "../PokemonInstances/PokemonInstanceMoveTable";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import ScrollableSpeciesTable from "./ScrollableSpeciesTable";
 

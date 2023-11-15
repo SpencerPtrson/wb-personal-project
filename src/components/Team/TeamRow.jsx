@@ -1,7 +1,7 @@
 import { NavLink } from "react-bootstrap";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import CreatePokemonInstanceButton from '../../PokemonInstanceManipulation/CreatePokemonInstanceButton'
-import DeleteTeamButton from "../../TeamManagement/DeleteTeamButton";
+import CreatePokemonInstanceButton from '../PokemonInstanceManipulation/CreatePokemonInstanceButton'
+import DeleteTeamButton from "./DeleteTeamButton";
 
 export default function TeamRow({ team }) {
     const { teamId, teamName, user, pokemoninstances } = team;
@@ -14,10 +14,9 @@ export default function TeamRow({ team }) {
     const pokemonNames = pokemoninstances?.map(pokemonInstance => {
         let name = pokemonInstance.PokemonSpecy.name;
         return <td>{name.slice(0,1).toUpperCase() + name.slice(1)}</td>
-    })
+    });
 
-    console.log(team);
-    console.log("Team - Pokemon Count:", team.pokemoninstances.length);
+    
     return (
         <>
             <tr>

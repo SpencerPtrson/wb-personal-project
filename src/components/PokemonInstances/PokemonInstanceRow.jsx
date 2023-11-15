@@ -1,7 +1,7 @@
 import PokemonSpriteImg from "../PokemonSpriteImg";
 import EditPokemonInstanceButton from "../PokemonInstanceManipulation/EditPokemonInstanceButton";
 import DeletePokemonInstanceButton from '../PokemonInstanceManipulation/DeletePokemonInstanceButton';
-import PokemonInstanceMoveTable from "../General Data Viewing/PokemonTeamViewer/PokemonInstanceMoveTable";
+import PokemonInstanceMoveTable from "./PokemonInstanceMoveTable";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
@@ -11,6 +11,9 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
             PokemonTeam, PokemonSpecy, PokemonMoves, ability } = pokemonInstance;
     
     let name = PokemonSpecy.name.replace(PokemonSpecy.name[0], PokemonSpecy.name[0].toUpperCase());
+
+    console.log(`Pokemon Moves for pokemon instance: ${pokemonInstance.pokemonInstanceId}`);
+    console.log(PokemonMoves);
 
     let abilityName = null;
     if (ability) abilityName = ability.name.replace(ability.name[0], ability.name[0].toUpperCase());
@@ -27,6 +30,8 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                     </>
                 }
                 <td><PokemonSpriteImg name={PokemonSpecy.name} sprite={PokemonSpecy.sprite} width={150}/></td>
+                
+                {/* Name / Ability */}
                 <td>
                     <h6>Name:</h6>
                     {name}
@@ -40,6 +45,8 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                         : <h6>No Specified Ability</h6>
                     }    
                 </td>
+
+                {/* IVs */}
                 <td>
                     <table className="table-sm">
                         <tbody>
@@ -52,6 +59,8 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                         </tbody>
                     </table>
                 </td>
+
+                {/* EVs */}
                 <td>
                     <table className="table-sm">
                         <tbody>
@@ -64,9 +73,13 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                         </tbody>
                     </table>
                 </td>
+
+                {/* Moves */}
                 <td>
                     <PokemonInstanceMoveTable moveList={PokemonMoves}/>
                 </td>
+
+
                 {email === pokemonInstance.PokemonTeam.user.email
                 ? <>
                     <td><EditPokemonInstanceButton pokemonInstanceId={pokemonInstance.pokemonInstanceId}/></td>

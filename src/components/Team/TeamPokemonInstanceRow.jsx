@@ -1,8 +1,8 @@
-import PokemonSpriteImg from "../../PokemonSpriteImg";
+import PokemonSpriteImg from "../PokemonSpriteImg";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import PokemonInstanceMoveTable from "./PokemonInstanceMoveTable";
-import EditPokemonInstanceButton from "../../PokemonInstanceManipulation/EditPokemonInstanceButton";
-import DeletePokemonInstanceButton from "../../PokemonInstanceManipulation/DeletePokemonInstanceButton";
+import PokemonInstanceMoveTable from "../PokemonInstances/PokemonInstanceMoveTable";
+import EditPokemonInstanceButton from "../PokemonInstanceManipulation/EditPokemonInstanceButton";
+import DeletePokemonInstanceButton from "../PokemonInstanceManipulation/DeletePokemonInstanceButton";
 
 export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }) {
     const email = useSelector(state => state.user.email);

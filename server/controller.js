@@ -220,7 +220,10 @@ const handlerFunctions = {
         getSpeciesById: async(req, res) => {
             const { speciesId } = req.params;
             const species = await PokemonSpecies.findByPk(speciesId, {
-                include: PokemonMove
+                include: [
+                    {model: PokemonMove},
+                    {model: Ability}
+                ]
             });
             res.json(species);
         },

@@ -32,7 +32,7 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
                             <h5>Ability</h5>
                             <p>{abilityName}</p>
                           </>
-                        : <></>
+                        : <h6>No Specified Ability</h6>
                     }
 
 

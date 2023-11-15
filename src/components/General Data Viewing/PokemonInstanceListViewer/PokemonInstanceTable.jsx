@@ -20,7 +20,7 @@ export default function PokemonInstanceTable({ instanceList, isTeamView }) {
             <th>Pokemon Name</th>
             <th>IVs</th>
             <th>EVs</th>
-            <th></th>
+            <th>Moves</th>
           </tr>
         </thead>
         <tbody>

@@ -36,7 +36,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                             <h6>Ability</h6>
                             <p>{abilityName}</p>
                           </>
-                        : <></>
+                        : <h6>No Specified Ability</h6>
                     }    
                 </td>
                 <td>

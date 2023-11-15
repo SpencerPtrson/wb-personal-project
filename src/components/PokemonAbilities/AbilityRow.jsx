@@ -1,7 +1,7 @@
 import { NavLink } from "react-bootstrap";
 import PokemonSpriteImg from "../PokemonSpriteImg";
 import SpeciesTypings from "../SpeciesTypings";
-import BaseStatsList from '../General Data Viewing/IndividualSpeciesViewer/BaseStatsList'
+import BaseStatsList from '../BaseStatsList'
 
 export default function AbilityRow({ ability }) {
     console.log(ability);

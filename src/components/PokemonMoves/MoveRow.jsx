@@ -1,8 +1,3 @@
-import { NavLink } from "react-bootstrap";
-import PokemonSpriteImg from "../PokemonSpriteImg";
-import SpeciesTypings from "../SpeciesTypings";
-import BaseStatsList from '../General Data Viewing/IndividualSpeciesViewer/BaseStatsList'
-
 export default function MoveRow({ move }) {
     const {name, type, power, moveClass, shortDescription} = move;
     let fixedName = name.slice(0,1).toUpperCase() + name.slice(1);

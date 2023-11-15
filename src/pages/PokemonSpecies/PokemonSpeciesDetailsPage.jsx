@@ -1,7 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 import PokemonSpriteImg from '../../components/PokemonSpriteImg'
 import SpeciesTypings from '../../components/SpeciesTypings';
-import BaseStatsList from '../../components/General Data Viewing/IndividualSpeciesViewer/BaseStatsList';
+import BaseStatsList from '../../components/BaseStatsList';
 import MoveTable from '../../components/PokemonMoves/MoveTable';
 import AbilityTable from '../../components/PokemonAbilities/AbilityTable';
 

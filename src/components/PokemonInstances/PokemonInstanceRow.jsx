@@ -1,7 +1,7 @@
-import PokemonSpriteImg from "../../PokemonSpriteImg";
-import EditPokemonInstanceButton from "../../PokemonInstanceManipulation/EditPokemonInstanceButton";
-import DeletePokemonInstanceButton from '../../PokemonInstanceManipulation/DeletePokemonInstanceButton';
-import PokemonInstanceMoveTable from "../PokemonTeamViewer/PokemonInstanceMoveTable";
+import PokemonSpriteImg from "../PokemonSpriteImg";
+import EditPokemonInstanceButton from "../PokemonInstanceManipulation/EditPokemonInstanceButton";
+import DeletePokemonInstanceButton from '../PokemonInstanceManipulation/DeletePokemonInstanceButton';
+import PokemonInstanceMoveTable from "../General Data Viewing/PokemonTeamViewer/PokemonInstanceMoveTable";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {

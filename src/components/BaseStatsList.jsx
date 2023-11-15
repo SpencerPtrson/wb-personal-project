@@ -1,7 +1,7 @@
 export default function BaseStatsList({ baseHP, baseATK, baseDEF, baseSPATK, baseSPDEF, baseSPEED }) {
     return (
         <>
-            <table class="table">
+            <table className="table">
                 <thead>
                     <tr>
                         <th>Base Stat Total</th>

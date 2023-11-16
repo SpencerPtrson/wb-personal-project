@@ -10,7 +10,7 @@ import ScrollableNatureTable from "./ScrollableTables/ScrollableNatureTable";
 export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, movesList, abilityList, natureList, editPokemonFunction }) {
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
-            PokemonSpecy} = pokemonInstance;
+            PokemonSpecy, level} = pokemonInstance;
 
     const speciesId = PokemonSpecy.speciesId;
     const imgUrl = PokemonSpecy.sprite;
@@ -20,7 +20,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     // // STATE VARIABLES
     const [state, setState] = useState({ hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
                                          hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV, 
-                                         speciesId, name, imgUrl
+                                         speciesId, name, imgUrl, level
                                         });
 
 
@@ -110,6 +110,10 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                 <p>Click a row to change Species!</p>
                 <ScrollableSpeciesTable speciesList={speciesList} state={state} setStateVals={setState} />
             </>
+
+            <br />
+            <label htmlFor="levelEditor">Level:</label>
+            <input type="number" min={1} max={100} defaultValue={state.level} placeholder="Anywhere from 0-100" onChange={(e) => setState({...state, level: e.target.value})}/>
 
 
             {/* IV Editors */}

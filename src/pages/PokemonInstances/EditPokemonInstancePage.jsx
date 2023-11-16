@@ -13,11 +13,8 @@ export default function EditPokemonInstancePage() {
   const handleEditPokemon = async (pokemonInstanceId, formData) => {
     console.log("Handling Edit Pokemon");
     console.log("Editing pokemon instance: ", pokemonInstanceId);
-    console.log(formData);
-    const res = await axios.post(
-      `/api/pokemoninstances/edit/${pokemonInstanceId}`,
-      formData
-    );
+    console.log("Form Data:", formData);
+    const res = await axios.put(`/api/pokemoninstances/edit/${pokemonInstanceId}`, formData);
     if (res.data.success) {
       console.log("Edit pokemon succeeded");
       navigate("/pokemoninstances");

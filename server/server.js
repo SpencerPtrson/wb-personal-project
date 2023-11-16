@@ -139,13 +139,14 @@ import handlerFunctions from "./controller.js"
 
   //#region Natures
 
+      // Get All Abilities
+      app.get('/api/natures', handlerFunctions.getNatures);
+
+      // Get 1 Ability
+      app.get('/api/natures/:natureId', handlerFunctions.getNatureById);
 
   //#endregion Natures
-    // Get All Abilities
-    app.get('/api/natures', handlerFunctions.getNatures);
 
-    // Get 1 Ability
-    app.get('/api/natures/:natureId', handlerFunctions.getNatureById);
 
   //#region PokemonInstances
 

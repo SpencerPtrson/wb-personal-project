@@ -371,7 +371,10 @@ const handlerFunctions = {
         editPokemonInstance: async(req, res) => {
             try {
                 const { pokemonInstanceId } = req.params;
-                const { } = req.body;
+                const { speciesId, natureId, level, moves, 
+                        hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
+                        hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
+                    } = req.body;
 
                 console.log(`Editing pokemon instance with pokemonInstanceId ${pokemonInstanceId}`);
                 const pokemonToEdit = await PokemonInstance.findByPk(pokemonInstanceId, {
@@ -387,10 +390,8 @@ const handlerFunctions = {
                     pokemonToEdit.level = level ?? pokemonToEdit.level;
 
                     // Moves
-                    pokemonToEdit.move1Id = move1Id ?? pokemonToEdit.move1Id;
-                    pokemonToEdit.move2Id = move2Id ?? pokemonToEdit.move2Id;
-                    pokemonToEdit.move3Id = move3Id ?? pokemonToEdit.move3Id;
-                    pokemonToEdit.move4Id = move4Id ?? pokemonToEdit.move4Id;
+                    // Delete all moves currently existing on the pokemon instance, then add new ones from the req.body moves object
+  
 
                     // IVs
                     pokemonToEdit.hpIV = hpIV ?? pokemonToEdit.hpIV;

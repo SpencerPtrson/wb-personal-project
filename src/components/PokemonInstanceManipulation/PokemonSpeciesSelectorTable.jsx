@@ -4,7 +4,7 @@ export default function PokemonSpeciesSelectorTable({ speciesList, handleCreateP
 
 
     const speciesRows = speciesList.map((species) => {
-        return <PokemonSpeciesSelectableRow key={species.speciesId} species={species} />
+        return <PokemonSpeciesSelectableRow key={species.speciesId} species={species} handleCreatePokemon={handleCreatePokemonFunction}/>
     });
 
     return (

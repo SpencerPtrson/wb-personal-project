@@ -1,13 +1,6 @@
 import EditPokemonInstanceSelectMoveRow from './EditPokemonInstanceSelectMoveRow';
 
-export default function ScrollableMoveTable({ currentSpeciesId, moveList, state, setStateVals }) {
-    console.log("Scrollable Move Table - moveList data:", moveList);
-    console.log("Current Species Id:", currentSpeciesId);
-
-    moveList.forEach(move => {
-        console.log(move);
-        console.log("Pokemon Species associated with move:", move.PokemonSpecies);
-    })
+export default function ScrollableMoveTable({ currentSpeciesId, moveList, selectedMoves, selectedMoveNum, setSelectedMove }) {
 
     moveList = moveList.filter(move => {
         const associatedSpecies = move.PokemonSpecies;
@@ -16,9 +9,10 @@ export default function ScrollableMoveTable({ currentSpeciesId, moveList, state,
         }
         return false;
     })
+    console.log("ScrollableMoveTable - currentlySelectedMoveNum:", selectedMoveNum);
 
     const moveRows = moveList.map((move) => {
-        return <EditPokemonInstanceSelectMoveRow key={move.moveId} move={move} state={state} setStateVals={setStateVals} />
+        return <EditPokemonInstanceSelectMoveRow key={move.moveId} move={move} selectedMoves={selectedMoves} selectedMoveNum={selectedMoveNum} setSelectedMove={setSelectedMove} />
     });
 
     return (
@@ -26,7 +20,11 @@ export default function ScrollableMoveTable({ currentSpeciesId, moveList, state,
             <table className='table'>
                 <thead>
                 <tr>
-                    <th>AAAAAAA</th>
+                    <th>Move</th>
+                    <th>Type</th>
+                    <th>Power</th>
+                    <th>Move Class</th>
+                    <th>Description</th>
                 </tr>
                 </thead>
                 <tbody>

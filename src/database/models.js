@@ -476,6 +476,7 @@ PokemonInstance.belongsTo(PokemonSpecies, { foreignKey: 'speciesId' });
 // Pokemon Instance - Pokemon Moves Foreign Keys
 PokemonMove.belongsToMany(PokemonInstance, { through: 'InstancesMoves' });
 PokemonInstance.belongsToMany(PokemonMove, { through: 'InstancesMoves' });
+// export const InstanceMoves = db.model("InstanceMoves");
 
 
 // Pokemon Instance - Abilities Foreign Keys

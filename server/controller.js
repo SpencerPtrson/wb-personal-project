@@ -309,6 +309,7 @@ const handlerFunctions = {
 
     
     //#region PokemonInstances
+
         getPokemonInstances: async(req, res) => {
             const allPokemonInstances = await PokemonInstance.findAll({
                 include: [
@@ -391,7 +392,8 @@ const handlerFunctions = {
 
                     // Moves
                     // Delete all moves currently existing on the pokemon instance, then add new ones from the req.body moves object
-  
+                    await pokemonToEdit.setPokemonMoves([]);
+
 
                     // IVs
                     pokemonToEdit.hpIV = hpIV ?? pokemonToEdit.hpIV;
@@ -434,6 +436,7 @@ const handlerFunctions = {
                 res.json({success: false, error: error})
             }
         }
+
     //#endregion PokemonInstances
 }
 

@@ -12,6 +12,9 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
             PokemonSpecy, level} = pokemonInstance;
 
+    console.log(pokemonInstance);
+
+
     const speciesId = PokemonSpecy.speciesId;
     const imgUrl = PokemonSpecy.sprite;
     let name = PokemonSpecy.name.replace(PokemonSpecy.name[0], PokemonSpecy.name[0].toUpperCase());

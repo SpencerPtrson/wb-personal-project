@@ -47,4 +47,5 @@ const pokemonInstance = await PokemonInstance.findOne({
 });
 console.log(pokemonInstance);
 
-const { User, PokemonTeam, PokemonInstance, PokemonSpecies, Ability } = await import('./src/database/models.js')
+const { User, PokemonTeam, PokemonInstance, PokemonSpecies, Ability, } = await import('./src/database/models.js')
+

@@ -11,8 +11,8 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
             PokemonSpecy, PokemonMoves, ability } = pokemonInstance;
     
     let name = PokemonSpecy.name.slice(0,1).toUpperCase() + PokemonSpecy.name.slice(1);
-    console.log("TeamPokemonInstanceRow: instance Data:", pokemonInstance);
-    console.log(`Ability for ${PokemonSpecy?.name}: ${ability?.name}`)
+    // console.log("TeamPokemonInstanceRow: instance Data:", pokemonInstance);
+    // console.log(`Ability for ${PokemonSpecy?.name}: ${ability?.name}`)
     
     let abilityName = null;
     if (ability) abilityName = ability.name.replace(ability.name[0], ability.name[0].toUpperCase()); 
@@ -32,8 +32,6 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
                           </>
                         : <h6>No Specified Ability</h6>
                     }
-
-
                 </td>
                 <td>
                     <table className="table-sm">

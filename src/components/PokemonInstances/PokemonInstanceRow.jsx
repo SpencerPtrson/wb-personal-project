@@ -11,9 +11,10 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
             PokemonTeam, PokemonSpecy, PokemonMoves, ability } = pokemonInstance;
     
     let name = PokemonSpecy.name.replace(PokemonSpecy.name[0], PokemonSpecy.name[0].toUpperCase());
-
-    console.log(`Pokemon Moves for pokemon instance: ${pokemonInstance.pokemonInstanceId}`);
-    console.log(PokemonMoves);
+    
+    console.log("PokemonInstanceRow - PokemonTeam:", PokemonTeam);
+    // console.log(`Pokemon Moves for pokemon instance: ${pokemonInstance.pokemonInstanceId}`);
+    // console.log(PokemonMoves);
 
     let abilityName = null;
     if (ability) abilityName = ability.name.replace(ability.name[0], ability.name[0].toUpperCase());

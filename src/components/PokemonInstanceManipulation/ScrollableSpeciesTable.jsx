@@ -1,8 +1,8 @@
 import PokemonSpeciesRow from '../PokemonSpecies/PokemonSpeciesRow'
 
-export default function ScrollableSpeciesTable({ speciesList }) {
+export default function ScrollableSpeciesTable({ speciesList, setStateVals }) {
     const speciesRows = speciesList.map((species) => {
-        return <PokemonSpeciesRow key={species.speciesId} species={species} />
+        return <PokemonSpeciesRow key={species.speciesId} species={species} onClickEvent={setStateVals}/>
       });
 
     return (

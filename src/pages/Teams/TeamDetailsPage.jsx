@@ -5,8 +5,8 @@ import CreatePokemonInstanceButton from '../../components/PokemonInstanceManipul
 
 export default function TeamDetailsPage() {
   const email = useSelector(state => state.user.email);
-
   let { team } = useLoaderData();
+  
   return (
     <>
       <h1>Team Name: {team.teamName}</h1>

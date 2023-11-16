@@ -1,53 +1,70 @@
 import PokemonSpriteImg from "../PokemonSpriteImg";
 import PokemonInstanceMoveTable from "../PokemonInstances/PokemonInstanceMoveTable";
-import { useSelector } from "react-redux/es/hooks/useSelector";
 import ScrollableSpeciesTable from "./ScrollableSpeciesTable";
+import { useState } from "react";
+import { Button } from "react-bootstrap";
+
 
 export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, editPokemonFunction }) {
-    const email = useSelector(state => state.user.email);
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
-            PokemonTeam, PokemonSpecy, PokemonMoves } = pokemonInstance;
+            PokemonSpecy, PokemonMoves, abilityId, natureId,
+            imgUrl } = pokemonInstance;
+    const speciesId = PokemonSpecy.speciesId;
+    console.log(pokemonInstance);
+
+    // // STATE VARIABLES
+    const [state, setState] = useState({ hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
+                                         hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV, 
+                                         speciesId, abilityId, natureId});
+
+
     
-    let name = PokemonSpecy.name.slice(0,1).toUpperCase() + PokemonSpecy.name.slice(1);
+    let name = PokemonSpecy.name.replace(PokemonSpecy.name[0], PokemonSpecy.name[0].toUpperCase());
 
     console.log(pokemonInstance);
     console.log(speciesList);
+    console.log("State:", state);
 
     const maxIVValue = 31;
     const minIVValue = 0;
     const maxEVValue = 255;
     const minEVValue = 0;
 
-    const IVs = [hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV];
-    const IVCells = IVs.map(ivValue => {
-        return <td><input type="number" min={minIVValue} max={maxIVValue} defaultValue={ivValue} placeholder="Anywhere from 0-31"/></td>
+    const ivArr = [["hpIV", hpIV], ["atkIV", atkIV], ["defIV", defIV], ["spATKIV", spATKIV], ["spDEFIV", spDEFIV], ["speedIV", speedIV]];
+    const IVCells = ivArr.map(ivValue => {
+        const key = ivValue[0];
+        return <td>
+            <input type="number" min={minIVValue} max={maxIVValue} defaultValue={ivValue[1]} placeholder="Anywhere from 0-31" onChange={(e) => setState({...state, [key]: e.target.value})}/>
+        </td>
     });
 
-    const EVs = [hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV];
-    const EVCells = EVs.map(evValue => {
-        return <td><input type="number" min={minEVValue} max={maxEVValue} defaultValue={evValue} placeholder="Anywhere from 0-31"/></td>
+    const evArr = [["hpEV", hpEV], ["atkEV", atkEV], ["defEV", defIV], ["spATKEV", spATKEV], ["spDEFEV", spDEFEV], ["speedEV", speedEV]];
+    const EVCells = evArr.map(evValue => {
+        const key = evValue[0];
+        return <td>
+            <input type="number" min={minEVValue} max={maxEVValue} defaultValue={evValue[1]} placeholder="Anywhere from 0-31" onChange={(e) => setState({...state, [key]: e.target.value})}/>
+        </td>
     });
 
-
-    const selectOptions = speciesList.map(species => {
-        return <option value={species.speciesId}>{species.name}</option>
-    })
-
-    console.log(selectOptions);
 
     return (
         <form>
+            <Button onClick={e => {
+                e.preventDefault();
+                editPokemonFunction(pokemonInstance.pokemonInstanceId, {
+
+                });
+            }}>
+                Save Changes
+            </Button>
+
             <h1><PokemonSpriteImg name={PokemonSpecy.name} sprite={PokemonSpecy.sprite} width={200}/></h1>
             <h1>{name}</h1>
 
-            <ScrollableSpeciesTable speciesList={speciesList} />
+            <ScrollableSpeciesTable speciesList={speciesList} setStateVals={setState} />
 
-
-            <select>
-                {selectOptions}
-            </select>
-
+            {/* IV Editors */}
             <table className="table">
                 <thead>
                     <tr>
@@ -66,6 +83,8 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                 </tbody>
             </table>
             <hr />
+
+            {/* EV Editors */}
             <table className="table">
                 <thead>
                     <tr>
@@ -83,6 +102,16 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                     </tr>
                 </tbody>
             </table>
+
+            <br />
+            <br />
+
+            <h5>Available Abilities</h5>
+
+
+            <h5>Nature</h5>
+
+
             <PokemonInstanceMoveTable moveList={PokemonMoves}/>
         </form>
     )

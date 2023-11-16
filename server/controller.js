@@ -296,15 +296,14 @@ const handlerFunctions = {
             const { pokemonInstanceId } =  req.params;
             const pokemonInstance = await PokemonInstance.findByPk(pokemonInstanceId, {
                 include: [
-                    { model: PokemonSpecies },
-                    { model: Ability },
+                    { model: PokemonSpecies,
+                        include: Ability
+                    },
                     { model: PokemonMove }
                 ]
             });
             res.json(pokemonInstance);
         },
-
-
 
         createPokemonInstance: async(req, res) => {
             try {

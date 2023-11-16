@@ -10,10 +10,11 @@ export default function EditPokemonInstancePage() {
   const navigate = useNavigate();
   const { pokemonInstance, speciesList } = useLoaderData();
 
-  const handleEditPokemon = async(pokemonInstanceId) => {
+  const handleEditPokemon = async(pokemonInstanceId, formData) => {
     console.log("Handling Edit Pokemon");
     console.log("Editing pokemon instance: ", pokemonInstanceId);
-    const res = await axios.post(`/api/pokemoninstances/create`, {speciesId: pokemonInstanceId, teamId: teamId});
+    console.log(formData)
+    const res = await axios.post(`/api/pokemoninstances/edit/${pokemonInstanceId}`, formData);
     if (res.data.success) { 
       console.log("Edit pokemon succeeded");
       navigate('/pokemoninstances'); 

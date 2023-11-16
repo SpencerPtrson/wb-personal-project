@@ -1,4 +1,4 @@
-import { User, PokemonSpecies, PokemonType, PokemonMove, Ability, PokemonInstance, PokemonTeam } from '../src/database/models.js'
+import { User, PokemonSpecies, PokemonType, PokemonMove, Ability, PokemonInstance, PokemonTeam, PokemonNature } from '../src/database/models.js'
 
 const handlerFunctions = {
 
@@ -97,6 +97,7 @@ const handlerFunctions = {
 
 
     //#region Teams
+
         getTeams: async(req, res) => {
             const teams = await PokemonTeam.findAll({
                 include: [
@@ -212,7 +213,9 @@ const handlerFunctions = {
     //#region Species
 
         getAllSpecies: async(req, res) => {
-            const allPokemonSpecies = await PokemonSpecies.findAll();
+            const allPokemonSpecies = await PokemonSpecies.findAll({
+                // order: ['speciesId', 'ASC']
+            });
             res.json(allPokemonSpecies);
         },
 
@@ -250,7 +253,8 @@ const handlerFunctions = {
 
         getPokemonMoves: async(req, res) => {
             const allMoves = await PokemonMove.findAll({
-                include: PokemonSpecies
+                include: PokemonSpecies,
+                order: [['name', 'ASC']]
             });
             res.json(allMoves);
         },
@@ -268,7 +272,8 @@ const handlerFunctions = {
 
         getPokemonAbilities: async(req, res) => {
             const allAbilities = await Ability.findAll({
-                include: PokemonSpecies
+                include: PokemonSpecies,
+                order: [['name', 'ASC']]
             });
             res.json(allAbilities);
         },
@@ -280,6 +285,27 @@ const handlerFunctions = {
         },
 
     //#endregion Abilities
+
+
+    //#region Natures
+
+        getNatures: async(req, res) => {
+            const allNatures = await PokemonNature.findAll({
+                order: [
+                    ['increasedStat', 'ASC'],
+                    ['decreasedStat', 'ASC']
+                ]
+            });
+            res.json(allNatures);
+        },
+
+        getNatureById: async(req, res) => {
+            const { natureId } = req.params;
+            const nature = await PokemonNature.findByPk(natureId);
+            res.json(natureId);
+        },
+
+    //#endregion Natures
 
     
     //#region PokemonInstances

@@ -118,10 +118,12 @@ export default function App() {
                 const speciesListRes = await axios.get('/api/pokemonspecies');
                 const moveList = await axios.get('/api/moves');
                 const abilityList = await axios.get('/api/abilities');
+                const natureList = await axios.get('/api/natures');
                 return { pokemonInstance: instanceRes.data, 
                          speciesList: speciesListRes.data, 
                          movesList: moveList.data,
-                         abilityList: abilityList.data 
+                         abilityList: abilityList.data,
+                         natureList: natureList.data
                 };
               }}
             />

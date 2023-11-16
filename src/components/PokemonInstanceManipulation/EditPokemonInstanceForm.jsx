@@ -4,12 +4,13 @@ import ScrollableMoveTable from "./ScrollableTables/ScrollableMoveTable";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import ScrollableAbilityTable from "./ScrollableTables/ScrollableAbilityTable";
+import ScrollableNatureTable from "./ScrollableTables/ScrollableNatureTable";
 
 
-export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, movesList, abilityList, editPokemonFunction }) {
+export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, movesList, abilityList, natureList, editPokemonFunction }) {
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
-            PokemonSpecy, abilityId, natureId} = pokemonInstance;
+            PokemonSpecy} = pokemonInstance;
 
     const speciesId = PokemonSpecy.speciesId;
     const imgUrl = PokemonSpecy.sprite;
@@ -19,8 +20,8 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     // // STATE VARIABLES
     const [state, setState] = useState({ hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
                                          hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV, 
-                                         speciesId, name, imgUrl,
-                                         abilityId, natureId});
+                                         speciesId, name, imgUrl
+                                        });
 
 
     useEffect(() => {
@@ -62,7 +63,6 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     });
     //#endregion IVS / EVS
     
-    
     //#region Moves
         const [selectedMoves, setSelectedMoves] = useState({
             move1Id: -1, move1Name: "",
@@ -79,6 +79,16 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             abilityName: null
         });
     //#endregion Abilities
+
+    //#region Natures
+        const [stateNature, setStateNature] = useState({
+            natureId: 1,
+            natureName: "Lonely",
+            increasedStat: "Attack",
+            decreasedStat: "Defense"
+        });
+    //#endregion Natures
+
 
     return (
         <form>
@@ -152,7 +162,9 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                 <br />
 
             {/* NATURES */}
-            <h5>Nature</h5>
+            <h5>Selected Nature: {stateNature.natureName ?? "None"}</h5>
+            <h5>Natures</h5>
+                <ScrollableNatureTable natureList={natureList} stateNature={stateNature} setStateNature={setStateNature}/>
                 <br />
                 <br />
 

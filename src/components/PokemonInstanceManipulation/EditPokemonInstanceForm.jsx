@@ -1,9 +1,8 @@
 import PokemonSpriteImg from "../PokemonSpriteImg";
-import PokemonInstanceMoveTable from "../PokemonInstances/PokemonInstanceMoveTable";
-import ScrollableSpeciesTable from "./ScrollableSpeciesTable";
-import { useState } from "react";
+import ScrollableSpeciesTable from "./ScrollableTables/ScrollableSpeciesTable";
+import ScrollableMoveTable from "./ScrollableTables/ScrollableMoveTable";
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import ScrollableMoveTable from "./ScrollableMoveTable";
 
 
 export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, allMovesList, editPokemonFunction }) {
@@ -21,6 +20,17 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                                          hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV, 
                                          speciesId, name, imgUrl,
                                          abilityId, natureId});
+
+
+    useEffect(() => {
+        setSelectedMoves({
+            move1Id: -1, move1Name: "",
+            move2Id: -1, move2Name: "",
+            move3Id: -1, move3Name: "",
+            move4Id: -1, move4Name: "",
+        })
+    }, [state.speciesId])
+
 
     //#region IVS / EVS
     const maxIVValue = 31;
@@ -44,6 +54,9 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
         </td>
     });
     //#endregion IVS / EVS
+    
+    
+    //#region Moves
     const [selectedMoves, setSelectedMoves] = useState({
         move1Id: -1, move1Name: "",
         move2Id: -1, move2Name: "",
@@ -53,23 +66,30 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     const [currentSelectedMoveNum, setCurrentSelectedMoveNum] = useState(1);
     console.log("Current Selected Move Id:", currentSelectedMoveNum);
     console.log("Selected Move Values:", selectedMoves)
+    //#endregion Moves
+
 
     return (
         <form>
             <Button onClick={e => {
                 e.preventDefault();
+
                 editPokemonFunction(pokemonInstance.pokemonInstanceId, {
 
                 });
             }}>Save Changes</Button>
 
-            <h1><PokemonSpriteImg name={state.name} sprite={state.imgUrl} width={200}/></h1>
-            <h1>{state.name}</h1>
-            <br />
+            {/* Species */}
+            <>
+                <h1><PokemonSpriteImg name={state.name} sprite={state.imgUrl} width={200}/></h1>
+                <h1>{state.name}</h1>
+                <br />
 
-            {/* SPECIES EDITOR */}
-            <p>Click a row to change Species!</p>
-            <ScrollableSpeciesTable speciesList={speciesList} state={state} setStateVals={setState} />
+                {/* SPECIES EDITOR */}
+                <p>Click a row to change Species!</p>
+                <ScrollableSpeciesTable speciesList={speciesList} state={state} setStateVals={setState} />
+            </>
+
 
             {/* IV Editors */}
             <table className="table">
@@ -113,26 +133,37 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             <br />
             <br />
 
+            {/* ABILITIES */}
             <h5>Available Abilities</h5>
+                <br />
+                <br />
 
-
+            {/* NATURES */}
             <h5>Nature</h5>
-
-            <h5>Moves</h5>
-                <label htmlFor="move1">Move 1: </label>
-                <input readOnly={true} value={selectedMoves.move1Name} type="text" id="move1" onSelect={(e) => setCurrentSelectedMoveNum(1)}/>
                 <br />
-                <label htmlFor="move2">Move 2: </label>
-                <input readOnly={true} value={selectedMoves.move2Name} type="text" id="move2" onSelect={(e) => setCurrentSelectedMoveNum(2)}/>
-                <br />
-                <label htmlFor="move3">Move 3: </label>
-                <input readOnly={true} value={selectedMoves.move3Name} type="text" id="move3" onSelect={(e) => setCurrentSelectedMoveNum(3)}/>
-                <br />
-                <label htmlFor="move4">Move 4: </label>
-                <input readOnly={true} value={selectedMoves.move4Name} type="text" id="move4" onSelect={(e) => setCurrentSelectedMoveNum(4)}/>
                 <br />
 
-                <ScrollableMoveTable currentSpeciesId={state.speciesId} moveList={allMovesList} selectedMoves={selectedMoves} selectedMoveNum={currentSelectedMoveNum} setSelectedMove={setSelectedMoves}/>
+
+            {/* Moves */}
+            <>
+                <h5>Selected Moves</h5>
+                    <label htmlFor="move1">Move 1: </label>
+                    <input readOnly={true} value={selectedMoves.move1Name} type="text" id="move1" onSelect={(e) => setCurrentSelectedMoveNum(1)}/>
+                    <br />
+                    <label htmlFor="move2">Move 2: </label>
+                    <input readOnly={true} value={selectedMoves.move2Name} type="text" id="move2" onSelect={(e) => setCurrentSelectedMoveNum(2)}/>
+                    <br />
+                    <label htmlFor="move3">Move 3: </label>
+                    <input readOnly={true} value={selectedMoves.move3Name} type="text" id="move3" onSelect={(e) => setCurrentSelectedMoveNum(3)}/>
+                    <br />
+                    <label htmlFor="move4">Move 4: </label>
+                    <input readOnly={true} value={selectedMoves.move4Name} type="text" id="move4" onSelect={(e) => setCurrentSelectedMoveNum(4)}/>
+                    <br />
+                    <br />
+                    <h5>Available Moves</h5>
+                    <ScrollableMoveTable currentSpeciesId={state.speciesId} moveList={allMovesList} selectedMoves={selectedMoves} selectedMoveNum={currentSelectedMoveNum} setSelectedMove={setSelectedMoves}/>
+            </>
+
         </form>
     )
 }

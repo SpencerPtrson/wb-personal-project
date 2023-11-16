@@ -9,18 +9,20 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
             PokemonSpecy, PokemonMoves, abilityId, natureId,
-            imgUrl } = pokemonInstance;
+            sprite } = pokemonInstance;
     const speciesId = PokemonSpecy.speciesId;
     console.log(pokemonInstance);
+    const imgUrl = PokemonSpecy.sprite;
+    let name = PokemonSpecy.name.replace(PokemonSpecy.name[0], PokemonSpecy.name[0].toUpperCase());
 
     // // STATE VARIABLES
     const [state, setState] = useState({ hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
                                          hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV, 
-                                         speciesId, abilityId, natureId});
+                                         speciesId, name, imgUrl,
+                                         abilityId, natureId});
 
-
+    console.log("Image URL:", state.imgUrl);
     
-    let name = PokemonSpecy.name.replace(PokemonSpecy.name[0], PokemonSpecy.name[0].toUpperCase());
 
     console.log(pokemonInstance);
     console.log(speciesList);
@@ -59,10 +61,10 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                 Save Changes
             </Button>
 
-            <h1><PokemonSpriteImg name={PokemonSpecy.name} sprite={PokemonSpecy.sprite} width={200}/></h1>
-            <h1>{name}</h1>
+            <h1><PokemonSpriteImg name={state.name} sprite={state.imgUrl} width={200}/></h1>
+            <h1>{state.name}</h1>
 
-            <ScrollableSpeciesTable speciesList={speciesList} setStateVals={setState} />
+            <ScrollableSpeciesTable speciesList={speciesList} state={state} setStateVals={setState} />
 
             {/* IV Editors */}
             <table className="table">

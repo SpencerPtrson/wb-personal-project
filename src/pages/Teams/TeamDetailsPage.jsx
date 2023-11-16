@@ -14,7 +14,7 @@ export default function TeamDetailsPage() {
         ? <p>Team was created by: {team.user.email}</p>
         : <></>
       }
-      { team.user.email === email && team.pokemoninstances.length <= 6
+      { team.user.email === email && team.pokemoninstances.length < 6
         ? <CreatePokemonInstanceButton teamId={team.teamId}/>
         : <></>
       }

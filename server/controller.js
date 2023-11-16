@@ -34,7 +34,6 @@ const handlerFunctions = {
             }
         },
 
-        // NEED TO LEARN HOW DELETING THIS IMPACTS FOREIGN KEY TABLES, LIKE USER
         deleteUser: async(req, res) => {
             try {
                 const { userId } = req.body;
@@ -250,7 +249,9 @@ const handlerFunctions = {
     //#region Moves
 
         getPokemonMoves: async(req, res) => {
-            const allMoves = await PokemonMove.findAll();
+            const allMoves = await PokemonMove.findAll({
+                include: PokemonSpecies
+            });
             res.json(allMoves);
         },
 

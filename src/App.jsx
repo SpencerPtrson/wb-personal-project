@@ -112,12 +112,14 @@ export default function App() {
               path='/pokemoninstances/edit/:pokemonInstanceId'
               element={<EditPokemonInstancePage />}
               loader={ async({ params }) => {
-                console.log(params);
+                console.log("Params for rendering the EditPokemonInstancePage:", params);
                 console.log("Loading pokemon instance in preparation for editing:", params.pokemonInstanceId);
                 const instanceRes = await axios.get(`/api/pokemoninstances/${params.pokemonInstanceId}`)
                 const speciesListRes = await axios.get('/api/pokemonspecies');
+                const moveList = await axios.get('/api/moves');
                 console.log(instanceRes.data);
-                return { pokemonInstance: instanceRes.data, speciesList: speciesListRes.data };
+                console.log("Loaded Moves - App.jsx", moveList.data);
+                return { pokemonInstance: instanceRes.data, speciesList: speciesListRes.data, allMovesList: moveList.data };
               }}
             />
         // #endregion pokemonInstances

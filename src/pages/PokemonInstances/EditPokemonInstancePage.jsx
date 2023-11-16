@@ -8,7 +8,7 @@ import EditPokemonInstanceForm from '../../components/PokemonInstanceManipulatio
 export default function EditPokemonInstancePage() {
   const [errorMessage, setErrorMessage] = useState();
   const navigate = useNavigate();
-  const { pokemonInstance, speciesList } = useLoaderData();
+  const { pokemonInstance, speciesList, allMovesList } = useLoaderData();
 
   const handleEditPokemon = async(pokemonInstanceId, formData) => {
     console.log("Handling Edit Pokemon");
@@ -29,7 +29,7 @@ export default function EditPokemonInstancePage() {
   return (
     <>
       <h1>Edit Pokemon Page!</h1>
-      <EditPokemonInstanceForm pokemonInstance={pokemonInstance} speciesList={speciesList} editPokemonFunction={handleEditPokemon}/>
+      <EditPokemonInstanceForm pokemonInstance={pokemonInstance} speciesList={speciesList} allMovesList={allMovesList} editPokemonFunction={handleEditPokemon}/>
     </>
   );
 }

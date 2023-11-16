@@ -3,12 +3,13 @@ import ScrollableSpeciesTable from "./ScrollableTables/ScrollableSpeciesTable";
 import ScrollableMoveTable from "./ScrollableTables/ScrollableMoveTable";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
+import ScrollableAbilityTable from "./ScrollableTables/ScrollableAbilityTable";
 
 
-export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, allMovesList, editPokemonFunction }) {
+export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, movesList, abilityList, editPokemonFunction }) {
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
-            PokemonSpecy, PokemonMoves, abilityId, natureId} = pokemonInstance;
+            PokemonSpecy, abilityId, natureId} = pokemonInstance;
 
     const speciesId = PokemonSpecy.speciesId;
     const imgUrl = PokemonSpecy.sprite;
@@ -28,7 +29,13 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             move2Id: -1, move2Name: "",
             move3Id: -1, move3Name: "",
             move4Id: -1, move4Name: "",
-        })
+        });
+        setStateAbility({
+            abilityId: -1,
+            abilityName: null
+        });
+        // Set Selected Ability
+
     }, [state.speciesId])
 
 
@@ -57,17 +64,21 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     
     
     //#region Moves
-    const [selectedMoves, setSelectedMoves] = useState({
-        move1Id: -1, move1Name: "",
-        move2Id: -1, move2Name: "",
-        move3Id: -1, move3Name: "",
-        move4Id: -1, move4Name: "",
-    });
-    const [currentSelectedMoveNum, setCurrentSelectedMoveNum] = useState(1);
-    console.log("Current Selected Move Id:", currentSelectedMoveNum);
-    console.log("Selected Move Values:", selectedMoves)
+        const [selectedMoves, setSelectedMoves] = useState({
+            move1Id: -1, move1Name: "",
+            move2Id: -1, move2Name: "",
+            move3Id: -1, move3Name: "",
+            move4Id: -1, move4Name: "",
+        });
+        const [currentSelectedMoveNum, setCurrentSelectedMoveNum] = useState(1);
     //#endregion Moves
 
+    //#region Abilities
+        const [stateAbility, setStateAbility] = useState({
+            abilityId: -1,
+            abilityName: null
+        });
+    //#endregion Abilities
 
     return (
         <form>
@@ -134,7 +145,9 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             <br />
 
             {/* ABILITIES */}
+            <h5>Selected Ability: {stateAbility.abilityName ?? "None"}</h5>
             <h5>Available Abilities</h5>
+                <ScrollableAbilityTable currentSpeciesId={state.speciesId} abilityList={abilityList} stateAbility={stateAbility} setStateAbility={setStateAbility}/>
                 <br />
                 <br />
 
@@ -160,8 +173,8 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                     <input readOnly={true} value={selectedMoves.move4Name} type="text" id="move4" onSelect={(e) => setCurrentSelectedMoveNum(4)}/>
                     <br />
                     <br />
-                    <h5>Available Moves</h5>
-                    <ScrollableMoveTable currentSpeciesId={state.speciesId} moveList={allMovesList} selectedMoves={selectedMoves} selectedMoveNum={currentSelectedMoveNum} setSelectedMove={setSelectedMoves}/>
+                <h5>Available Moves</h5>
+                <ScrollableMoveTable currentSpeciesId={state.speciesId} moveList={movesList} selectedMoves={selectedMoves} selectedMoveNum={currentSelectedMoveNum} setSelectedMove={setSelectedMoves}/>
             </>
 
         </form>

@@ -1,25 +1,41 @@
-import EditPokemonInstanceSelectSpeciesRow from './EditPokemonInstanceSelectSpeciesRow';
+import EditPokemonInstanceSelectAbilityRow from './EditPokemonInstanceSelectAbilityRow';
 
-export default function ScrollableAbilityTable({ abilityList, state, setStateVals }) {
-    const speciesRows = speciesList.map((species) => {
-        return <EditPokemonInstanceSelectSpeciesRow key={species.speciesId} species={species} state={state} setStateVals={setStateVals} />
+export default function ScrollableAbilityTable({ currentSpeciesId, abilityList, stateAbility, setStateAbility }) {
+    abilityList = abilityList.filter(ability => {
+        const associatedSpecies = ability.PokemonSpecies;
+        for (const species of associatedSpecies) {
+            if (species.speciesId === currentSpeciesId) return true;
+        }
+        return false;
+    });
+
+    const abilityRows = abilityList.map((ability) => {
+        return <EditPokemonInstanceSelectAbilityRow key={ability.abilityId} ability={ability} stateAbility={stateAbility} setStateAbility={setStateAbility}/>
     });
 
     return (
         <div className='table-responsive scrollable' style={{border: '1px solid black'}}>
-            <table className='table'>
-                <thead>
-                <tr>
-                    <th>Sprite</th>
-                    <th>Species</th>
-                    <th>Typings</th>
-                    <th>Base Stats</th>
-                </tr>
-                </thead>
-                <tbody>
-                {speciesRows}
-                </tbody>
-            </table>
+            {
+                abilityList?.length > 0
+                ?<table className="table">
+                    <thead>
+                        <tr>
+                            <th>Ability</th>
+                            <th>Flavor Text</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            abilityRows
+                            ? abilityRows
+                            : <></>
+                        }
+                    </tbody>
+                </table>
+                : <h6>No Legal Abilities</h6>
+            }
+            
         </div>
     );
   }

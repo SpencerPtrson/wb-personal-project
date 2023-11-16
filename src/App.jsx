@@ -117,9 +117,12 @@ export default function App() {
                 const instanceRes = await axios.get(`/api/pokemoninstances/${params.pokemonInstanceId}`)
                 const speciesListRes = await axios.get('/api/pokemonspecies');
                 const moveList = await axios.get('/api/moves');
-                console.log(instanceRes.data);
-                console.log("Loaded Moves - App.jsx", moveList.data);
-                return { pokemonInstance: instanceRes.data, speciesList: speciesListRes.data, allMovesList: moveList.data };
+                const abilityList = await axios.get('/api/abilities');
+                return { pokemonInstance: instanceRes.data, 
+                         speciesList: speciesListRes.data, 
+                         movesList: moveList.data,
+                         abilityList: abilityList.data 
+                };
               }}
             />
         // #endregion pokemonInstances

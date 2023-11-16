@@ -267,7 +267,9 @@ const handlerFunctions = {
     //#region Abilities
 
         getPokemonAbilities: async(req, res) => {
-            const allAbilities = await Ability.findAll();
+            const allAbilities = await Ability.findAll({
+                include: PokemonSpecies
+            });
             res.json(allAbilities);
         },
 

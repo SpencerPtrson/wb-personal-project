@@ -152,17 +152,7 @@ await db.sync({force: true}); // Erases all previous data
 //#endregion teams
 
 
-// function calculateHPStat(baseHP, hpIV, hpEV, level) {
-// return Math.floor((((2 * baseHP + hpIV + hpEV / 4) * level) / 100) + level + 10);
-// }
 
-// function calculateNonHPStat(baseStat, statIV, statEV, level, natureModifer) {
-//   const numerator = Math.floor(2 * baseStat + statIV + statEV / 4) * level;
-//   let result = Math.floor((numerator / 100) + 5)
-//   if (natureModifer) result *= natureModifer;
-//   console.log(result)
-//   return Math.floor(result);
-// }
 
 
 //#region Foreign Key Data

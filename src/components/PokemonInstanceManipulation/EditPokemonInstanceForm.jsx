@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import ScrollableAbilityTable from "./ScrollableTables/ScrollableAbilityTable";
 import ScrollableNatureTable from "./ScrollableTables/ScrollableNatureTable";
-
+import CalculatedStatsTable from "../CalculatedStatsTable";
 
 export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, movesList, abilityList, natureList, editPokemonFunction }) {
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
@@ -21,7 +21,9 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     // // STATE VARIABLES
     const [state, setState] = useState({ hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
                                          hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV, 
-                                         speciesId, name, imgUrl, level
+                                         speciesId, baseHP: PokemonSpecy.baseHP, baseATK: PokemonSpecy.baseATK, baseDEF:PokemonSpecy.baseDEF, 
+                                                    baseSPATK: PokemonSpecy.baseSPATK, baseSPDEF: PokemonSpecy.baseSPDEF, baseSPEED: PokemonSpecy.baseSPEED,
+                                         name, imgUrl, level
                                         });
 
 
@@ -120,6 +122,17 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             <label htmlFor="levelEditor">Level:</label>
             <input type="number" min={1} max={100} defaultValue={state.level} placeholder="Anywhere from 0-100" onChange={(e) => setState({...state, level: e.target.value})}/>
 
+
+            <CalculatedStatsTable 
+                baseStats = {{baseHP: state.baseHP, baseATK: state.baseATK, baseDEF:state.baseDEF, 
+                            baseSPATK: state.baseSPATK, baseSPDEF: state.baseSPDEF, baseSPEED: state.baseSPEED}}
+                IVs = {{hpIV: state.hpIV, atkIV: state.atkIV, defIV: state.defIV, 
+                        spATKIV: state.spATKIV, spDEFIV: state.spDEFIV, speedIV: state.speedIV,}}
+                EVs = {{hpEV: state.hpEV, atkEV: state.atkEV, defEV: state.defEV, 
+                        spATKEV: state.spATKEV, spDEFEV: state.spDEFEV, speedEV: state.speedEV}}
+                level = {state.level}
+                nature = {{ increasedStat: stateNature.increasedStat, decreasedStat: stateNature.decreasedStat}}        
+            />
 
             {/* IV Editors */}
             <table className="table">

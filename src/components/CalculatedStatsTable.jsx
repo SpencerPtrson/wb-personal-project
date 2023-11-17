@@ -20,19 +20,19 @@ export default function CalculatedStatsTable({ baseStats, IVs, EVs, level, natur
 
   switch (nature.increasedStat) {
     case "attack":
-      atk = atk * natureModifer;
+      atk = Math.floor(atk * natureModifer);
       break;
     case "defense":
-      def = def * natureModifer;
+      def = Math.floor(def * natureModifer);
       break;
     case "special-attack":
-      spatk = spatk * natureModifer;
+      spatk = Math.floor(spatk * natureModifer);
       break;
     case "special-defense":
-      spdef = spdef * natureModifer;
+      spdef = Math.floor(spdef * natureModifer);
       break;
     case "speed":
-      speed = speed * natureModifer;
+      speed = Math.floor(speed * natureModifer);
       break;
     default:
       break;
@@ -41,19 +41,19 @@ export default function CalculatedStatsTable({ baseStats, IVs, EVs, level, natur
 
   switch (nature.decreasedStat) {
     case "attack":
-      atk = atk / natureModifer;
+      atk = Math.floor(atk / natureModifer);
       break;
     case "defense":
-      def = def / natureModifer;
+      def = Math.floor(def / natureModifer);
       break;
     case "special-attack":
-      spatk = spatk / natureModifer;
+      spatk = Math.floor(spatk / natureModifer);
       break;
     case "special-defense":
-      spdef = spdef / natureModifer;
+      spdef = Math.floor(spdef / natureModifer);
       break;
     case "speed":
-      speed = speed / natureModifer;
+      speed = Math.floor(speed / natureModifer);
       break;
     default:
       break;

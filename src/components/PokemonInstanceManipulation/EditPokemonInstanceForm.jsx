@@ -12,8 +12,6 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
             PokemonSpecy, level} = pokemonInstance;
 
-    console.log(pokemonInstance);
-
 
     const speciesId = PokemonSpecy.speciesId;
     const imgUrl = PokemonSpecy.sprite;
@@ -42,6 +40,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
 
     }, [state.speciesId])
 
+    console.log(state);
 
     //#region IVS / EVS
     const maxIVValue = 31;
@@ -53,7 +52,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     const IVCells = ivArr.map(ivValue => {
         const key = ivValue[0];
         return <td key={key}>
-            <input type="number" min={minIVValue} max={maxIVValue} defaultValue={ivValue[1]} placeholder="Anywhere from 0-31" onChange={(e) => setState({...state, [key]: e.target.value})}/>
+            <input type="number" min={minIVValue} max={maxIVValue} defaultValue={ivValue[1]} placeholder="Anywhere from 0-31" onChange={(e) => setState({...state, [key]: +(e.target.value)})}/>
         </td>
     });
 
@@ -61,7 +60,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     const EVCells = evArr.map(evValue => {
         const key = evValue[0];
         return <td key={key}>
-            <input type="number" min={minEVValue} max={maxEVValue} defaultValue={evValue[1]} placeholder="Anywhere from 0-31" onChange={(e) => setState({...state, [key]: e.target.value})}/>
+            <input type="number" min={minEVValue} max={maxEVValue} defaultValue={evValue[1]} placeholder="Anywhere from 0-31" onChange={(e) => setState({...state, [key]: +(e.target.value)})}/>
         </td>
     });
     //#endregion IVS / EVS
@@ -97,9 +96,10 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
         <form>
             <Button onClick={e => {
                 e.preventDefault();
-
                 editPokemonFunction(pokemonInstance.pokemonInstanceId, {
-
+                    speciesId: state.speciesId, abilityId: stateAbility.abilityId, natureId: stateNature.natureId, level: state.level,
+                    hpIV: state.hpIV, atkIV: state.atkIV, defIV: state.defIV, spATKIV: state.spATKIV, spDEFIV: state.spDEFIV, speedIV: state.speedIV,
+                    hpEV: state.hpEV, atkEV: state.atkEV, defEV: state.defEV, spATKEV: state.spATKEV, spDEFEV: state.spDEFEV, speedEV: state.speedEV,
                 });
             }}>Save Changes</Button>
 

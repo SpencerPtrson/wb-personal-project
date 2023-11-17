@@ -372,11 +372,13 @@ const handlerFunctions = {
         editPokemonInstance: async(req, res) => {
             try {
                 const { pokemonInstanceId } = req.params;
-                const { speciesId, natureId, level, moves, 
+                const { speciesId, abilityId, natureId, level, moves, 
                         hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
                         hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
-                    } = req.body;
+                      } = req.body;
 
+                console.log("REQ BODY")
+                console.log(req.body);
                 console.log(`Editing pokemon instance with pokemonInstanceId ${pokemonInstanceId}`);
                 const pokemonToEdit = await PokemonInstance.findByPk(pokemonInstanceId, {
                     include: [
@@ -387,6 +389,7 @@ const handlerFunctions = {
 
                 if (pokemonToEdit) {
                     pokemonToEdit.speciesId = speciesId ?? pokemonToEdit.speciesId;
+                    pokemonToEdit.abilityId = abilityId ?? pokemonToEdit.abilityId;
                     pokemonToEdit.natureId = natureId ?? pokemonToEdit.natureId;
                     pokemonToEdit.level = level ?? pokemonToEdit.level;
 

@@ -134,7 +134,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
 
             <br />
             <label htmlFor="levelEditor">Level:</label>
-            <input type="number" min={1} max={100} defaultValue={state.level} placeholder="Anywhere from 0-100" onChange={(e) => setState({...state, level: e.target.value})}/>
+            <input type="number" min={1} max={100} defaultValue={state.level} placeholder="Anywhere from 0-100" onChange={(e) => setState({...state, level: +(e.target.value)})}/>
             <h5>Ability: {stateAbility.abilityName ?? "None"}</h5>
             <h5>Nature: {stateNature.natureName ?? "None"}</h5>
 

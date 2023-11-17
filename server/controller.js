@@ -6,7 +6,9 @@ const handlerFunctions = {
     //#region Users
 
         getUsers: async (req, res) => {
-            const users = await User.findAll();
+            const users = await User.findAll({
+                order: [['email', 'ASC']]
+            });
             res.json(users);
         },
 
@@ -108,6 +110,7 @@ const handlerFunctions = {
                             model: PokemonSpecies,
                             attributes: ['sprite', 'name']
                         }],
+                        order: ['pokemonInstanceId', 'ASC']
                     },
                     {
                         model: User,
@@ -116,7 +119,7 @@ const handlerFunctions = {
                 ],
                 order: [
                     ['userId', 'ASC'],
-                    ['teamName', 'ASC']
+                    ['teamName', 'ASC'],
                 ]
             });
             res.json(teams);
@@ -126,12 +129,14 @@ const handlerFunctions = {
             const { teamId } = req.params;
             const team = await PokemonTeam.findByPk(teamId, {
                 include: [
-                    {
-                        model: PokemonInstance, include: [
-                            { model: PokemonSpecies },
-                            { model: PokemonMove },
-                            { model: Ability }
-                        ]},
+                        {
+                            model: PokemonInstance, include: [
+                                { model: PokemonSpecies },
+                                { model: PokemonMove },
+                                { model: Ability }
+                            ],
+                            order: [['pokemonInstanceId', 'ASC']]
+                        },
                         { model: User }
                     ]
                 }
@@ -151,6 +156,7 @@ const handlerFunctions = {
                             model: PokemonSpecies,
                             attributes: ['sprite', 'name']
                         }],
+                        order: [['pokemonInstanceId', 'ASC']]
                     },
                     {
                         model: User,
@@ -214,7 +220,7 @@ const handlerFunctions = {
 
         getAllSpecies: async(req, res) => {
             const allPokemonSpecies = await PokemonSpecies.findAll({
-                // order: ['speciesId', 'ASC']
+                order: [['speciesId', 'ASC']]
             });
             res.json(allPokemonSpecies);
         },
@@ -223,9 +229,12 @@ const handlerFunctions = {
             const { speciesId } = req.params;
             const species = await PokemonSpecies.findByPk(speciesId, {
                 include: [
-                    {model: PokemonMove},
+                    {
+                        model: PokemonMove,
+                    },
                     {model: Ability}
-                ]
+                ],
+                order: [[PokemonMove, 'name', 'ASC']]
             });
             res.json(species);
         },
@@ -236,7 +245,9 @@ const handlerFunctions = {
     //#region Types
 
         getPokemonTypes: async(req, res) => {
-            const allTypes = await PokemonType.findAll();
+            const allTypes = await PokemonType.findAll({
+                order: [['name', 'ASC']]
+            });
             res.json(allTypes);
         },
 
@@ -302,7 +313,7 @@ const handlerFunctions = {
         getNatureById: async(req, res) => {
             const { natureId } = req.params;
             const nature = await PokemonNature.findByPk(natureId);
-            res.json(natureId);
+            res.json(nature);
         },
 
     //#endregion Natures
@@ -317,6 +328,9 @@ const handlerFunctions = {
                     { model: PokemonSpecies },
                     { model: Ability },
                     { model: PokemonMove }
+                ],
+                order: [
+                    [PokemonTeam, User, 'email', 'ASC']
                 ]
             });
             res.json(allPokemonInstances);

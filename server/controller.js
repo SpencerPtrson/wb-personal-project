@@ -389,7 +389,7 @@ const handlerFunctions = {
 
                 if (pokemonToEdit) {
                     pokemonToEdit.speciesId = speciesId ?? pokemonToEdit.speciesId;
-                    pokemonToEdit.abilityId = abilityId ?? pokemonToEdit.abilityId;
+                    abilityId && abilityId !== -1 ? pokemonToEdit.abilityId = abilityId : console.log("No ability set");
                     pokemonToEdit.natureId = natureId ?? pokemonToEdit.natureId;
                     pokemonToEdit.level = level ?? pokemonToEdit.level;
 

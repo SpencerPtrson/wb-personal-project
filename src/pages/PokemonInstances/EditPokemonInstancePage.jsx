@@ -21,7 +21,7 @@ export default function EditPokemonInstancePage() {
     } else {
       setErrorMessage("Failed to edit pokemon.");
       console.log("Edit Pokemon Instance failed");
-      alert(res.data.error);
+      alert("There was an error validating your changes!");
       console.error(res.data.error);
     }
   };

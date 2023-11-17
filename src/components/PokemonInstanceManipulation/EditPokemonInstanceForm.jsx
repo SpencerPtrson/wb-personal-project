@@ -25,22 +25,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                                         });
 
 
-    useEffect(() => {
-        setSelectedMoves({
-            move1Id: -1, move1Name: "",
-            move2Id: -1, move2Name: "",
-            move3Id: -1, move3Name: "",
-            move4Id: -1, move4Name: "",
-        });
-        setStateAbility({
-            abilityId: -1,
-            abilityName: null
-        });
-        // Set Selected Ability
 
-    }, [state.speciesId])
-
-    console.log(state);
 
     //#region IVS / EVS
     const maxIVValue = 31;
@@ -92,12 +77,29 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     //#endregion Natures
 
 
+    console.log("State:", state);
+    console.log("Selected Moves State:", selectedMoves);
+
+    useEffect(() => {
+        setSelectedMoves({
+            move1Id: -1, move1Name: "",
+            move2Id: -1, move2Name: "",
+            move3Id: -1, move3Name: "",
+            move4Id: -1, move4Name: "",
+        });
+        setStateAbility({
+            abilityId: -1,
+            abilityName: null
+        });
+    }, [state.speciesId])
+
+
     return (
         <form>
             <Button onClick={e => {
                 e.preventDefault();
                 editPokemonFunction(pokemonInstance.pokemonInstanceId, {
-                    speciesId: state.speciesId, abilityId: stateAbility.abilityId, natureId: stateNature.natureId, level: state.level,
+                    speciesId: state.speciesId, abilityId: stateAbility.abilityId, natureId: stateNature.natureId, level: state.level, moves: selectedMoves,
                     hpIV: state.hpIV, atkIV: state.atkIV, defIV: state.defIV, spATKIV: state.spATKIV, spDEFIV: state.spDEFIV, speedIV: state.speedIV,
                     hpEV: state.hpEV, atkEV: state.atkEV, defEV: state.defEV, spATKEV: state.spATKEV, spDEFEV: state.spDEFEV, speedEV: state.speedEV,
                 });

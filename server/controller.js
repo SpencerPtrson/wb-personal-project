@@ -387,6 +387,10 @@ const handlerFunctions = {
                     ]
                 });
 
+                let moveIds = [moves.move1Id, moves.move2Id, moves.move3Id, moves.move4Id];
+                // make all moveIds unique so that the same move isn't added twice
+                moveIds = moveIds.filter((value, index, array) => moveIds.indexOf(value) === index);
+
                 if (pokemonToEdit) {
                     pokemonToEdit.speciesId = speciesId ?? pokemonToEdit.speciesId;
                     abilityId && abilityId !== -1 ? pokemonToEdit.abilityId = abilityId : console.log("No ability set");
@@ -397,6 +401,14 @@ const handlerFunctions = {
                     // Delete all moves currently existing on the pokemon instance, then add new ones from the req.body moves object
                     await pokemonToEdit.setPokemonMoves([]);
 
+                    // check through all move ids. If they're valid and not -1, find the corresponding move in the database and add it to the pokemon instance
+                    for (const moveId of moveIds) {
+                        if (moveId && moveId > 0) {
+                            const moveToAdd = await PokemonMove.findByPk(moveId);
+                            console.log(moveToAdd);
+                            await pokemonToEdit.addPokemonMove(moveToAdd);
+                        }
+                    }
 
                     // IVs
                     pokemonToEdit.hpIV = hpIV ?? pokemonToEdit.hpIV;

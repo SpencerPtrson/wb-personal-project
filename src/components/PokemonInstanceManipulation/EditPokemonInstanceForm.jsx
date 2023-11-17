@@ -27,8 +27,6 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                                         });
 
 
-
-
     //#region IVS / EVS
     const maxIVValue = 31;
     const minIVValue = 0;
@@ -78,6 +76,18 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
         });
     //#endregion Natures
 
+
+    //#region DisplayFields
+        const [displayFields, setDisplayFields] = useState({
+            displaySpeciesList: false,
+            displayStats: false,
+            displayAbilityList: false,
+            displayNatureList: false,
+            displayMoveList: false,
+        });
+    //#endregion
+
+
     console.log("Ability:", stateAbility);
     console.log("State:", state);
     console.log("Selected Moves State:", selectedMoves);
@@ -107,21 +117,9 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                 });
             }}>Save Changes</Button>
 
-            {/* Species */}
-            <>
-                <h1><PokemonSpriteImg name={state.name} sprite={state.imgUrl} width={200}/></h1>
-                <h1>{state.name}</h1>
-                <br />
-
-                {/* SPECIES EDITOR */}
-                <p>Click a row to change Species!</p>
-                <ScrollableSpeciesTable speciesList={speciesList} state={state} setStateVals={setState} />
-            </>
-
+            <h1><PokemonSpriteImg name={state.name} sprite={state.imgUrl} width={200}/></h1>
+            <h1>{state.name}</h1>
             <br />
-            <label htmlFor="levelEditor">Level:</label>
-            <input type="number" min={1} max={100} defaultValue={state.level} placeholder="Anywhere from 0-100" onChange={(e) => setState({...state, level: e.target.value})}/>
-
 
             <CalculatedStatsTable 
                 baseStats = {{baseHP: state.baseHP, baseATK: state.baseATK, baseDEF:state.baseDEF, 
@@ -134,64 +132,13 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                 nature = {{ increasedStat: stateNature.increasedStat, decreasedStat: stateNature.decreasedStat}}        
             />
 
-            {/* IV Editors */}
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>HP IV:</th>
-                        <th>ATK IV:</th>
-                        <th>DEF IV:</th>
-                        <th>SPATK IV:</th>
-                        <th>SPDEF IV:</th>
-                        <th>SPEED IV:</th>
-                    </tr>
-                </thead>
-                <tbody className="tr-bordered">
-                    <tr>
-                        {IVCells}
-                    </tr>
-                </tbody>
-            </table>
-            <hr />
-
-            {/* EV Editors */}
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>HP EV:</th>
-                        <th>ATK EV:</th>
-                        <th>DEF EV:</th>
-                        <th>SPATK EV:</th>
-                        <th>SPDEF EV:</th>
-                        <th>SPEED EV:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        {EVCells}
-                    </tr>
-                </tbody>
-            </table>
-
             <br />
-            <br />
-
-            {/* ABILITIES */}
-            <h5>Selected Ability: {stateAbility.abilityName ?? "None"}</h5>
-            <h5>Available Abilities</h5>
-                <ScrollableAbilityTable currentSpeciesId={state.speciesId} abilityList={abilityList} stateAbility={stateAbility} setStateAbility={setStateAbility}/>
-                <br />
-                <br />
-
-            {/* NATURES */}
-            <h5>Selected Nature: {stateNature.natureName ?? "None"}</h5>
-            <h5>Natures</h5>
-                <ScrollableNatureTable natureList={natureList} stateNature={stateNature} setStateNature={setStateNature}/>
-                <br />
-                <br />
+            <label htmlFor="levelEditor">Level:</label>
+            <input type="number" min={1} max={100} defaultValue={state.level} placeholder="Anywhere from 0-100" onChange={(e) => setState({...state, level: e.target.value})}/>
+            <h5>Ability: {stateAbility.abilityName ?? "None"}</h5>
+            <h5>Nature: {stateNature.natureName ?? "None"}</h5>
 
 
-            {/* Moves */}
             <>
                 <h5>Selected Moves</h5>
                     <label htmlFor="move1">Move 1: </label>
@@ -205,11 +152,163 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                     <br />
                     <label htmlFor="move4">Move 4: </label>
                     <input readOnly={true} value={selectedMoves.move4Name} type="text" id="move4" onSelect={(e) => setCurrentSelectedMoveNum(4)}/>
-                    <br />
-                    <br />
-                <h5>Available Moves</h5>
-                <ScrollableMoveTable currentSpeciesId={state.speciesId} moveList={movesList} selectedMoves={selectedMoves} selectedMoveNum={currentSelectedMoveNum} setSelectedMove={setSelectedMoves}/>
             </>
+
+
+            <br />
+            <br />
+            <Button onClick={e => {
+                e.preventDefault();
+                setDisplayFields({
+                    displaySpeciesList: true,
+                    displayStats: false,
+                    displayAbilityList: false,
+                    displayNatureList: false,
+                    displayMoveList: false,
+                })
+            }}>Species</Button>
+
+            <Button onClick={e => {
+                e.preventDefault();
+                setDisplayFields({
+                    displaySpeciesList: false,
+                    displayStats: true,
+                    displayAbilityList: false,
+                    displayNatureList: false,
+                    displayMoveList: false,
+                })
+            }}>IVs and EVs</Button>
+
+            <Button onClick={e => {
+                e.preventDefault();
+                setDisplayFields({
+                    displaySpeciesList: false,
+                    displayStats: false,
+                    displayAbilityList: true,
+                    displayNatureList: false,
+                    displayMoveList: false,
+                })
+            }}>Abilities</Button>
+
+            <Button onClick={e => {
+                e.preventDefault();
+                setDisplayFields({
+                    displaySpeciesList: false,
+                    displayStats: false,
+                    displayAbilityList: false,
+                    displayNatureList: true,
+                    displayMoveList: false,
+                })
+            }}>Natures</Button>
+
+            <Button onClick={e => {
+                e.preventDefault();
+                setDisplayFields({
+                    displaySpeciesList: false,
+                    displayStats: false,
+                    displayAbilityList: false,
+                    displayNatureList: false,
+                    displayMoveList: true,
+                })
+            }}>Natures</Button>
+
+            <br />
+            <br />
+            <hr />
+
+            {/* Species */}
+            {
+                displayFields.displaySpeciesList
+                ? <>
+                {/* SPECIES EDITOR */}
+                <p>Click a row to change Species!</p>
+                <ScrollableSpeciesTable speciesList={speciesList} state={state} setStateVals={setState} />
+                </>
+                : <></>
+            }
+
+            {/* IVs and EVs */}
+            {
+                displayFields.displayStats
+                ? <>
+                   
+                    {/* IV Editors */}
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>HP IV:</th>
+                                <th>ATK IV:</th>
+                                <th>DEF IV:</th>
+                                <th>SPATK IV:</th>
+                                <th>SPDEF IV:</th>
+                                <th>SPEED IV:</th>
+                            </tr>
+                        </thead>
+                        <tbody className="tr-bordered">
+                            <tr>
+                                {IVCells}
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr />
+
+                    {/* EV Editors */}
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>HP EV:</th>
+                                <th>ATK EV:</th>
+                                <th>DEF EV:</th>
+                                <th>SPATK EV:</th>
+                                <th>SPDEF EV:</th>
+                                <th>SPEED EV:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {EVCells}
+                            </tr>
+                        </tbody>
+                    </table>
+                </>
+                : <></>
+            }
+
+
+            {/* ABILITIES */}
+            {
+                displayFields.displayAbilityList
+                ? <>
+                    <h5>Available Abilities</h5>
+                    <ScrollableAbilityTable currentSpeciesId={state.speciesId} abilityList={abilityList} stateAbility={stateAbility} setStateAbility={setStateAbility}/>
+                </>
+                : <></>
+            }
+
+            {/* NATURES */}
+            {
+                displayFields.displayNatureList
+                ? <>
+                    <h5>Natures</h5>
+                    <ScrollableNatureTable natureList={natureList} stateNature={stateNature} setStateNature={setStateNature}/>
+                </>
+                : <></>
+            }
+  
+
+            {/* Moves */}
+            {
+                displayFields.displayMoveList
+                ? <>
+                    <h5>Available Moves</h5>
+                    <ScrollableMoveTable currentSpeciesId={state.speciesId} moveList={movesList} selectedMoves={selectedMoves} selectedMoveNum={currentSelectedMoveNum} setSelectedMove={setSelectedMoves}/>
+                </>
+                : <></>
+            }
+
+
+
+
 
         </form>
     )

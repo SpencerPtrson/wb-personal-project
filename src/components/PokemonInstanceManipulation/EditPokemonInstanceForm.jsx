@@ -78,7 +78,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
         });
     //#endregion Natures
 
-
+    console.log("Ability:", stateAbility);
     console.log("State:", state);
     console.log("Selected Moves State:", selectedMoves);
 

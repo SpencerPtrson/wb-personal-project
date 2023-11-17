@@ -210,7 +210,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                     displayNatureList: false,
                     displayMoveList: true,
                 })
-            }}>Natures</Button>
+            }}>Moves</Button>
 
             <br />
             <br />

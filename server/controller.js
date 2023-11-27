@@ -327,7 +327,8 @@ const handlerFunctions = {
                     { model: PokemonTeam, include: { model: User } },
                     { model: PokemonSpecies },
                     { model: Ability },
-                    { model: PokemonMove }
+                    { model: PokemonMove },
+                    { model: PokemonNature }
                 ],
                 order: [
                     [PokemonTeam, User, 'email', 'ASC']
@@ -343,7 +344,8 @@ const handlerFunctions = {
                     { model: PokemonSpecies,
                         include: Ability
                     },
-                    { model: PokemonMove }
+                    { model: PokemonMove },
+                    { model: PokemonNature }
                 ]
             });
             res.json(pokemonInstance);

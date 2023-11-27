@@ -15,18 +15,7 @@ export default function MainNav() {
           <Navbar.Toggle />
 
           <Navbar.Collapse>
-            {/* Personal Links */}
-            <Nav className="me-auto">
-              <NavLink style={{ color: 'lightblue' }} href={'https://dev.azure.com/spetersonwi/'}>
-                Azure DevOps
-              </NavLink>
-              <NavLink style={{ color: 'white' }} href={'https://github.com/SpencerPtrson'}>
-                GitHub
-              </NavLink>
-              <NavLink style={{ color: 'blue' }} href={'https://www.linkedin.com/in/spencer-peterson-9a81b6198/'}>
-                LinkedIn
-              </NavLink>
-            </Nav>
+
 
             {/* Site Navigation */}
             <Nav className="me-auto">

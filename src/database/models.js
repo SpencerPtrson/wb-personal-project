@@ -484,6 +484,11 @@ Ability.hasMany(PokemonInstance, { foreignKey: 'abilityId' });
 PokemonInstance.belongsTo(Ability, { foreignKey: 'abilityId' })
 
 
+// Pokemon Instance - Natures Foreign Keys
+PokemonNature.hasMany(PokemonInstance, { foreignKey: 'natureId' });
+PokemonInstance.belongsTo(PokemonNature, { foreignKey: 'natureId' });
+
+
 // Team - Pokemon Instance Association Table
 PokemonTeam.hasMany(PokemonInstance, { foreignKey: 'teamId' });
 PokemonInstance.belongsTo(PokemonTeam, { foreignKey: 'teamId' });

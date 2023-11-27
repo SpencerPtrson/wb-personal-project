@@ -14,6 +14,7 @@ export default function TeamPokemonInstanceTable({ instanceList, creatorEmail })
           <th></th>
           <th>IVs</th>
           <th>EVs</th>
+          <th>Moves</th>
         </tr>
       </thead>
       <tbody>

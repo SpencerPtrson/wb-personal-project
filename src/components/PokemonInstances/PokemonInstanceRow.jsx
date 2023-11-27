@@ -8,7 +8,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
     const email = useSelector(state => state.user.email);
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
-            PokemonTeam, PokemonSpecy, PokemonMoves, ability } = pokemonInstance;
+            PokemonTeam, PokemonSpecy, PokemonMoves, ability, PokemonNature } = pokemonInstance;
     
     let name = PokemonSpecy.name.replace(PokemonSpecy.name[0], PokemonSpecy.name[0].toUpperCase());
     
@@ -17,7 +17,9 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
     // console.log(PokemonMoves);
 
     let abilityName = null;
+    let natureName = null;
     if (ability) abilityName = ability.name.replace(ability.name[0], ability.name[0].toUpperCase());
+    if (PokemonNature) natureName = PokemonNature.name.replace(PokemonNature.name[0], PokemonNature.name[0].toUpperCase());
 
     console.log(pokemonInstance);
     return (
@@ -40,11 +42,20 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                     <br />
                     { abilityName
                         ? <>
-                            <h6>Ability</h6>
+                            <h5>Ability</h5>
                             <p>{abilityName}</p>
                           </>
-                        : <h6>No Specified Ability</h6>
-                    }    
+                        : <h5>No Specified Ability</h5>
+                    }
+                    <br />
+                    {
+                        natureName
+                        ? <>
+                            <h5>Nature</h5>
+                            <p>{natureName}</p>
+                        </>
+                        : <h5>No Specified Nature</h5>
+                    }
                 </td>
 
                 {/* IVs */}

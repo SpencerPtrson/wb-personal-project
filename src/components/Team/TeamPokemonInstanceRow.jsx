@@ -8,14 +8,19 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
     const email = useSelector(state => state.user.email);
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
             hpEV, atkEV, defEV, spATKEV, spDEFEV, speedEV,
-            PokemonSpecy, PokemonMoves, ability } = pokemonInstance;
+            PokemonSpecy, PokemonMoves, ability, PokemonNature } = pokemonInstance;
     
     let name = PokemonSpecy.name.slice(0,1).toUpperCase() + PokemonSpecy.name.slice(1);
     // console.log("TeamPokemonInstanceRow: instance Data:", pokemonInstance);
     // console.log(`Ability for ${PokemonSpecy?.name}: ${ability?.name}`)
     
+    console.log(pokemonInstance)
+
     let abilityName = null;
-    if (ability) abilityName = ability.name.replace(ability.name[0], ability.name[0].toUpperCase()); 
+    let natureName = null;
+    if (ability) abilityName = ability.name.replace(ability.name[0], ability.name[0].toUpperCase());
+    if (PokemonNature) natureName = PokemonNature.name.replace(PokemonNature.name[0], PokemonNature.name[0].toUpperCase());
+
     
     return (
         <>
@@ -31,6 +36,16 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
                             <p>{abilityName}</p>
                           </>
                         : <h6>No Specified Ability</h6>
+                    }
+                    <br />
+                    <br />
+                    {
+                        natureName
+                        ? <>
+                            <h5>Nature</h5>
+                            <p>{natureName}</p>
+                        </>
+                        : <h6>No Specified Nature</h6>
                     }
                 </td>
                 <td>

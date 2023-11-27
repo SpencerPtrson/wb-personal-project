@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/styles.css'
-import { RouterProvider, Routes, Route, createRoutesFromElements, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, Route, createRoutesFromElements, createBrowserRouter } from 'react-router-dom'
 
 import axios from 'axios';
 import PageContent from './pages/Shared/PageContent.jsx';
@@ -19,7 +19,7 @@ import EditPokemonInstancePage from './pages/PokemonInstances/EditPokemonInstanc
 import TeamListPage from './pages/Teams/TeamListPage.jsx';
 import TeamDetailsPage from './pages/Teams/TeamDetailsPage.jsx';
 
-
+import { sample } from 'lodash';
 
 export default function App() {
   
@@ -27,7 +27,13 @@ export default function App() {
     createRoutesFromElements(
       <Route path='/' element={<PageContent />} errorElement={<ErrorPage />}>            
 
-        <Route index element={<IndexPage />} />
+        <Route index 
+          element={<IndexPage />}
+          loader={ async() => {
+            const res = await axios.get('/api/teams');
+            return { teamSample: sample(res.data) }
+          }}
+        />
 
         // #region species
           {/* All Pokemon Species */}
@@ -112,8 +118,6 @@ export default function App() {
               path='/pokemoninstances/edit/:pokemonInstanceId'
               element={<EditPokemonInstancePage />}
               loader={ async({ params }) => {
-                console.log("Params for rendering the EditPokemonInstancePage:", params);
-                console.log("Loading pokemon instance in preparation for editing:", params.pokemonInstanceId);
                 const instanceRes = await axios.get(`/api/pokemoninstances/${params.pokemonInstanceId}`)
                 const speciesListRes = await axios.get('/api/pokemonspecies');
                 const moveList = await axios.get('/api/moves');

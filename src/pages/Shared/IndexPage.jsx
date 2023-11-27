@@ -16,9 +16,13 @@ export default function IndexPage() {
 
   return (
       <Container fluid>
-        <div className="container">
+          <br />
+          <br />
+          <br />
+
+
           <Row>
-            <Col xs={{offset: 4}}>
+            <Col xs={{ span: 4, offset: 4}}  align='center' style={{ backgroundColor: `rgba(129, 29, 29, 0.623)`, color: 'white' }}>
               { !email || email === ''
                 ? <>Login or create an account!</>
                 : <>Manage Your Stuff!</>
@@ -28,27 +32,28 @@ export default function IndexPage() {
           <Row>
             {email === '' || !email
               ? <>
-                  <Col xs={{}}>
+                  <Col xs={{span: 2, offset: 4}} align='center'>
                     <LoginButton />
                   </Col>
-                  <Col>
+                  <Col xs={{span: 2}} align='center'>
                     <CreateAccountButton />
                   </Col>
                 </>
               : <>
-                <Col xs={{ span:4, offset: 4}}>
+                <Col xs={{ span:2, offset: 4}} align='center'>
                   <Button href={`/teams/users/${userId}`}>My Teams</Button>
-                  <DeleteAccountButton />
                 </Col> 
+                <Col xs={{ span:2 }} align='center'>
+                  <DeleteAccountButton />
+                </Col>
               </>
             }
           </Row>
-        </div>
 
         <br />
         <Row>
-          <Col xs={{ offset: 5}}>
-            Want Ideas? Check out this team!
+          <Col xs={{ span: 4, offset: 4}}  align='center' style={{ backgroundColor: `rgba(129, 29, 29, 0.623)`, color: 'white' }}>
+            Want ideas? Check out this team!
           </Col>
         </Row>
         <Row>

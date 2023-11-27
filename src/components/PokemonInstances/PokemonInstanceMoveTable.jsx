@@ -8,7 +8,7 @@ export default function PokemonInstanceMoveTable({ moveList }) {
 
   return (
     <>
-      <table className="table-sm">
+      <table className="table-sm subtable">
         <tbody>
           { 
             moveRows && moveList.length > 0

@@ -5,6 +5,9 @@ export default function EditPokemonInstanceSelectNatureRow({
 }) {
   let { natureId, name, increasedStat, decreasedStat } = nature;
   name = name.replace(name[0], name[0].toUpperCase());
+  increasedStat = increasedStat?.replace(increasedStat[0], increasedStat[0].toUpperCase());
+  decreasedStat = decreasedStat?.replace(decreasedStat[0], decreasedStat[0].toUpperCase());
+
 
   return (
     <>

@@ -49,7 +49,7 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
                     }
                 </td>
                 <td>
-                    <table className="table-sm">
+                    <table className="table-sm subtable">
                         <tbody>
                             <tr><td>HP: {hpIV}</td></tr>
                             <tr><td>Attack: {atkIV}</td></tr>
@@ -61,7 +61,7 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
                     </table>
                 </td>
                 <td>
-                    <table className="table-sm">
+                    <table className="table-sm subtable">
                         <tbody>
                             <tr><td>HP: {hpEV}</td></tr>
                             <tr><td>Attack: {atkEV}</td></tr>

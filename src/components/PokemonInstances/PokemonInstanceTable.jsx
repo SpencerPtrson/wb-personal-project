@@ -1,6 +1,10 @@
 import PokemonInstanceRow from "./PokemonInstanceRow";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 export default function PokemonInstanceTable({ instanceList, isTeamView }) {
+  const email = useSelector(state => state.user.email);
+
+
   const instanceRows = instanceList.map((pokemonInstance) => {
     return <PokemonInstanceRow key={pokemonInstance.pokemonInstanceId} pokemonInstance={pokemonInstance} isTeamView={isTeamView} />
   });
@@ -24,6 +28,8 @@ export default function PokemonInstanceTable({ instanceList, isTeamView }) {
           <th>IVs</th>
           <th>EVs</th>
           <th>Moves</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>

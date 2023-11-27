@@ -60,7 +60,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
 
                 {/* IVs */}
                 <td>
-                    <table className="table-sm">
+                    <table className="table-sm subtable">
                         <tbody>
                             <tr><td>HP: {hpIV}</td></tr>
                             <tr><td>Attack: {atkIV}</td></tr>
@@ -74,7 +74,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
 
                 {/* EVs */}
                 <td>
-                    <table className="table-sm">
+                    <table className="table-sm subtable" >
                         <tbody>
                             <tr><td>HP: {hpEV}</td></tr>
                             <tr><td>Attack: {atkEV}</td></tr>
@@ -88,7 +88,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
 
                 {/* Moves */}
                 <td>
-                    <PokemonInstanceMoveTable moveList={PokemonMoves}/>
+                    <PokemonInstanceMoveTable moveList={PokemonMoves} />
                 </td>
 
 
@@ -97,7 +97,10 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                     <td><EditPokemonInstanceButton pokemonInstanceId={pokemonInstance.pokemonInstanceId}/></td>
                     <td><DeletePokemonInstanceButton pokemonInstanceId={pokemonInstance.pokemonInstanceId}/></td>
                 </>
-                : <></>}
+                : <>
+                    <td></td>
+                    <td></td>
+                </>}
             </tr>
         </>
     )

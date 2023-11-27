@@ -12,6 +12,7 @@ export default function TeamTable({ teamList }) {
             <th>Team Name</th>
             <th>Team Creator</th>
             <th>Pokemon On Team</th>
+            <th>Update your teams!</th>
           </tr>
         </thead>
         <tbody>

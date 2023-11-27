@@ -35,14 +35,16 @@ export default function TeamRow({ team }) {
                     }
                 </td>
                 {email === team.user.email
-                ? <>
+                ? <td>
                     { team.pokemoninstances.length < 6
                         ? <CreatePokemonInstanceButton teamId={team.teamId}/>
                         : <></>
                     }
+                    <br/>
+                    <br />
                     <DeleteTeamButton teamId={teamId}/>
-                </>
-                : <></>
+                </td>
+                : <td></td>
                 }
             </tr>
         </>

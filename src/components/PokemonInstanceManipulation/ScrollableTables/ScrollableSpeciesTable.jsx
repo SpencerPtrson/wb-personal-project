@@ -6,7 +6,7 @@ export default function ScrollableSpeciesTable({ speciesList, state, setStateVal
     });
 
     return (
-        <div className='table-responsive scrollable' style={{border: '1px solid black'}}>
+        <div className='table-responsive speciesScrollable' style={{border: '1px solid black'}}>
             <table className='table'>
                 <thead>
                 <tr>

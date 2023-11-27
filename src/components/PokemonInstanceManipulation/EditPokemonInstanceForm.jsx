@@ -2,10 +2,11 @@ import PokemonSpriteImg from "../PokemonSpriteImg";
 import ScrollableSpeciesTable from "./ScrollableTables/ScrollableSpeciesTable";
 import ScrollableMoveTable from "./ScrollableTables/ScrollableMoveTable";
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 import ScrollableAbilityTable from "./ScrollableTables/ScrollableAbilityTable";
 import ScrollableNatureTable from "./ScrollableTables/ScrollableNatureTable";
 import CalculatedStatsTable from "../CalculatedStatsTable";
+
+import { Container, Row, Col, Button } from "react-bootstrap";
 
 export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, movesList, abilityList, natureList, editPokemonFunction }) {
     const { hpIV, atkIV, defIV, spATKIV, spDEFIV, speedIV,
@@ -107,7 +108,33 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
 
 
     return (
-        <form>
+        <Container fluid>
+
+            <Row>
+                <Col className="align-baseline">
+                    <h1><PokemonSpriteImg name={state.name} sprite={state.imgUrl} width={200}/></h1>
+                    <h1>{state.name}</h1>
+                </Col>
+                <Col className="align-baseline">
+                    <h5>Ability: {stateAbility.abilityName ?? "None"}</h5>
+                    <h5>Nature: {stateNature.natureName ?? "None"}</h5>
+                </Col>
+                <Col className="align-baseline">
+                    <h5>Selected Moves</h5>
+                        <label htmlFor="move1">Move 1: </label>
+                        <input readOnly={true} value={selectedMoves.move1Name} type="text" id="move1" onSelect={(e) => setCurrentSelectedMoveNum(1)}/>
+                        <br />
+                        <label htmlFor="move2">Move 2: </label>
+                        <input readOnly={true} value={selectedMoves.move2Name} type="text" id="move2" onSelect={(e) => setCurrentSelectedMoveNum(2)}/>
+                        <br />
+                        <label htmlFor="move3">Move 3: </label>
+                        <input readOnly={true} value={selectedMoves.move3Name} type="text" id="move3" onSelect={(e) => setCurrentSelectedMoveNum(3)}/>
+                        <br />
+                        <label htmlFor="move4">Move 4: </label>
+                        <input readOnly={true} value={selectedMoves.move4Name} type="text" id="move4" onSelect={(e) => setCurrentSelectedMoveNum(4)}/>
+                </Col>
+            </Row>
+
             <Button onClick={e => {
                 e.preventDefault();
                 editPokemonFunction(pokemonInstance.pokemonInstanceId, {
@@ -117,8 +144,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                 });
             }}>Save Changes</Button>
 
-            <h1><PokemonSpriteImg name={state.name} sprite={state.imgUrl} width={200}/></h1>
-            <h1>{state.name}</h1>
+
             <br />
 
             <CalculatedStatsTable 
@@ -135,28 +161,8 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             <br />
             <label htmlFor="levelEditor">Level:</label>
             <input type="number" min={1} max={100} defaultValue={state.level} placeholder="Anywhere from 0-100" onChange={(e) => setState({...state, level: +(e.target.value)})}/>
-            <h5>Ability: {stateAbility.abilityName ?? "None"}</h5>
-            <h5>Nature: {stateNature.natureName ?? "None"}</h5>
 
 
-            <>
-                <h5>Selected Moves</h5>
-                    <label htmlFor="move1">Move 1: </label>
-                    <input readOnly={true} value={selectedMoves.move1Name} type="text" id="move1" onSelect={(e) => setCurrentSelectedMoveNum(1)}/>
-                    <br />
-                    <label htmlFor="move2">Move 2: </label>
-                    <input readOnly={true} value={selectedMoves.move2Name} type="text" id="move2" onSelect={(e) => setCurrentSelectedMoveNum(2)}/>
-                    <br />
-                    <label htmlFor="move3">Move 3: </label>
-                    <input readOnly={true} value={selectedMoves.move3Name} type="text" id="move3" onSelect={(e) => setCurrentSelectedMoveNum(3)}/>
-                    <br />
-                    <label htmlFor="move4">Move 4: </label>
-                    <input readOnly={true} value={selectedMoves.move4Name} type="text" id="move4" onSelect={(e) => setCurrentSelectedMoveNum(4)}/>
-            </>
-
-
-            <br />
-            <br />
             <Button onClick={e => {
                 e.preventDefault();
                 setDisplayFields({
@@ -310,6 +316,6 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
 
 
 
-        </form>
+        </Container>
     )
 }

@@ -25,21 +25,12 @@ export default function PageContent() {
   }, []);
   
   return (
-        <div className="bg-image" 
-          style={{ minHeight: '100vh', 
-                   backgroundImage: `url('https://www.rpgfan.com/wp-content/uploads/2020/10/Pokemon-Mystery-Dungeon-Explorers-of-Sky-Artwork-003.jpg')`,
-                   backgroundRepeat: 'no-repeat',
-                   backgroundSize: '100%',
-                   backgroundAttachment: 'fixed'
-        }}>
-      <Container fluid style={{padding: 0}}>
-
-        <MainNav email={email}/>
-        <Outlet />
-
-
-      </Container>
-        </div>
+      <div className="bg" >
+        <Container fluid style={{padding: 0}}>
+          <MainNav email={email}/>
+          <Outlet />
+        </Container>
+      </div>
     );
   }
   

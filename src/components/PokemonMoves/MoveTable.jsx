@@ -8,10 +8,10 @@ export default function MoveTable({ moves }) {
     console.log(moves);
 
     return (
-        <>
+        <div className='table-responsive speciesScrollable' style={{border: '1px solid black'}}>
             {
                 moveRows && moves.length > 0
-                ? <h5>Available Moves</h5>
+                ? <></>
                 : <h5>No Moves Listed</h5>
             }
             <table className="table scrollable">
@@ -32,6 +32,6 @@ export default function MoveTable({ moves }) {
                     }
                 </tbody>
             </table>
-        </>
+        </div>
     );
   }

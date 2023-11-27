@@ -31,7 +31,8 @@ export default function App() {
           element={<IndexPage />}
           loader={ async() => {
             const res = await axios.get('/api/teams');
-            return { teamSample: sample(res.data) }
+            const teams = res.data.filter(team => team.pokemoninstances.length > 0);
+            return { teamSample: sample(teams) }
           }}
         />
 
@@ -140,7 +141,8 @@ export default function App() {
               loader={ async({ params }) => {
                 console.log("Attempting to get teams");
                 const res = await axios.get(`/api/teams`)
-                return { teams: res.data };
+                const teams = res.data.filter(team => team.pokemoninstances.length > 0);
+                return { teams: teams };
               }}
             />
 
@@ -168,6 +170,7 @@ export default function App() {
             />
 
         // #endregion teams
+
       </Route>
     )
   );

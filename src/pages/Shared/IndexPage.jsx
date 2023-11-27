@@ -1,40 +1,43 @@
-import { useSelector } from "react-redux";
 import LoginButton from '../../components/AccountManagement/LoginButton';
 import CreateAccountButton from "../../components/AccountManagement/CreateAccountButton";
 import DeleteAccountButton from "../../components/AccountManagement/DeleteAccountButton";
-import { useLoaderData } from "react-router-dom";
 import TeamTable from "../../components/Team/TeamTable";
 import MyLinkList from "../../components/MyLinkList";
-import { Container, Row, Col } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useLoaderData } from "react-router-dom";
+import { Container, Row, Col, Button } from "react-bootstrap";
 export default function IndexPage() {
   const email = useSelector(state => state.user.email);
+  const userId = useSelector(state => state.user.userId);
+
   const { teamSample } = useLoaderData();
   console.log(teamSample);
 
 
   return (
       <Container fluid>
-        <div className="bg-light container" style={{width: 500, border: '1px solid black'}}>
+        <div className="container">
           <Row>
             <Col xs={{offset: 4}}>
               { !email || email === ''
                 ? <>Login or create an account!</>
-                : <>Manage Your Account!</>
+                : <>Manage Your Stuff!</>
               }
             </Col>
           </Row>
           <Row>
             {email === '' || !email
               ? <>
-                  <Col xs={{ span:4, offset: 2}}>
+                  <Col xs={{}}>
                     <LoginButton />
                   </Col>
-                  <Col xs={{ span: 4, offset: 1}}>
+                  <Col>
                     <CreateAccountButton />
                   </Col>
                 </>
               : <>
                 <Col xs={{ span:4, offset: 4}}>
+                  <Button href={`/teams/users/${userId}`}>My Teams</Button>
                   <DeleteAccountButton />
                 </Col> 
               </>
@@ -53,7 +56,6 @@ export default function IndexPage() {
               <TeamTable teamList={[teamSample]}/>
             </Col>
         </Row>
-
 
         <MyLinkList />
       </Container>

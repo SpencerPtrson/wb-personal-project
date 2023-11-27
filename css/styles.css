@@ -3,7 +3,7 @@
 }
 
 .speciesScrollable {
-  max-height: 600px;
+  max-height: 700px;
 }
 
 .teamScrollable {
@@ -11,6 +11,27 @@
 }
 
 table tr td, table tr th {
-  background-color: rgba(216, 207, 207, 0.253) !important;
-  color: white
+  background-color: rgba(129, 29, 29, 0.623) !important;
+  color: white !important
+}
+
+thead {
+  position: sticky !important;
+  top: 0px;
+  color: white !important;
+  background-color: black !important;
+}
+
+.bg {
+  min-height: 100vh;
+  background-image: url('https://www.rpgfan.com/wp-content/uploads/2020/10/Pokemon-Mystery-Dungeon-Explorers-of-Sky-Artwork-003.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+}
+
+@media (max-width: 1000px) {
+  .bg {
+    background-size: 1000px 800px;
+  }
 }

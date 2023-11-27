@@ -6,7 +6,7 @@ export default function TeamTable({ teamList }) {
       });
 
     return (
-      <table className='table'>
+      <table className='table bg-transparent'>
         <thead>
           <tr>
             <th>Team Name</th>

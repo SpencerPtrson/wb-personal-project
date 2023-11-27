@@ -9,7 +9,7 @@ export default function MainNav() {
   const userId = useSelector(state => state.user.userId);
   return (
     <>
-      <Navbar expand='lg' className="bg-dark navbar-dark">
+      <Navbar expand='lg' className="bg-dark navbar-dark sticky-top">
         <Container fluid>
           <Navbar.Brand href="/">PokePower</Navbar.Brand>
           <Navbar.Toggle />
@@ -26,7 +26,7 @@ export default function MainNav() {
                 All Pokemon Moves
               </NavLink>
               <NavLink key={"allpokemoninstances"} href="/pokemoninstances">
-                All Pokemon Instances
+                All Pokemon Sets
               </NavLink>
               <NavLink key={"allteams"} href="/teams">
                 All Teams

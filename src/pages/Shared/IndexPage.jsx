@@ -5,6 +5,7 @@ import DeleteAccountButton from "../../components/AccountManagement/DeleteAccoun
 import { useLoaderData } from "react-router-dom";
 import TeamTable from "../../components/Team/TeamTable";
 import MyLinkList from "../../components/MyLinkList";
+import { Container, Row, Col } from "react-bootstrap";
 export default function IndexPage() {
   const email = useSelector(state => state.user.email);
   const { teamSample } = useLoaderData();
@@ -12,25 +13,50 @@ export default function IndexPage() {
 
 
   return (
-      <>
-        {email === '' || !email
-          ? <>
-              <LoginButton />
-              <CreateAccountButton />
-            </>
-          : <> 
-            {email}
-            <DeleteAccountButton />
-          </>
-        }
-
-        <p>Want Ideas? Check out this team!</p>
-        <TeamTable teamList={[teamSample]} />
-
+      <Container fluid>
+        <div className="bg-light container" style={{width: 500, border: '1px solid black'}}>
+          <Row>
+            <Col xs={{offset: 4}}>
+              { !email || email === ''
+                ? <>Login or create an account!</>
+                : <>Manage Your Account!</>
+              }
+            </Col>
+          </Row>
+          <Row>
+            {email === '' || !email
+              ? <>
+                  <Col xs={{ span:4, offset: 2}}>
+                    <LoginButton />
+                  </Col>
+                  <Col xs={{ span: 4, offset: 1}}>
+                    <CreateAccountButton />
+                  </Col>
+                </>
+              : <>
+                <Col xs={{ span:4, offset: 4}}>
+                  <DeleteAccountButton />
+                </Col> 
+              </>
+            }
+          </Row>
+        </div>
 
         <br />
+        <Row>
+          <Col xs={{ offset: 5}}>
+            Want Ideas? Check out this team!
+          </Col>
+        </Row>
+        <Row>
+            <Col>
+              <TeamTable teamList={[teamSample]}/>
+            </Col>
+        </Row>
+
+
         <MyLinkList />
-      </>
+      </Container>
     );
   }
   

@@ -11,12 +11,12 @@
 }
 
 table tr td, table tr th {
-  background-color: rgba(129, 29, 29, 0.623) !important;
+  background-color: rgba(129, 29, 29, 0.8) !important;
   color: white !important
 }
 
 table tr td, table tr {
-  background-color: rgba(0,0,0, 0.2) !important;
+  background-color: rgba(0,0,0, .4) !important;
 }
 
 thead {

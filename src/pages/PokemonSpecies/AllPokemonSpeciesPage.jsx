@@ -7,7 +7,8 @@ export default function AllPokemonSpeciesPage() {
 
   return (
     <>
-      <ScrollableSpeciesTable speciesList={pokemonspecies} />
+      <PokemonSpeciesTable speciesList={pokemonspecies} />
+      {/* <ScrollableSpeciesTable speciesList={pokemonspecies} /> */}
     </>
   );
 }

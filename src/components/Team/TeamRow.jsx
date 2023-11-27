@@ -20,7 +20,7 @@ export default function TeamRow({ team }) {
     return (
         <>
             <tr>
-                <td><NavLink key={teamName} href={`/teams/${teamId}`} className="nav">{teamName}</NavLink></td>
+                <td><NavLink key={teamName} href={`/teams/${teamId}`} className="nav" style={{ color: "white", textDecoration: 'underline'}}>{teamName}</NavLink></td>
                 <td>{user.email}</td>
                 <td>
                     {

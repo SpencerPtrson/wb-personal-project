@@ -14,7 +14,7 @@ export default function MoveTable({ moves }) {
                 ? <h5>Available Moves</h5>
                 : <h5>No Moves Listed</h5>
             }
-            <table className="table">
+            <table className="table scrollable">
                 <thead>
                     <tr>
                         <th>Move Name</th>

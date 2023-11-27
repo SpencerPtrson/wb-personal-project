@@ -1,3 +1,16 @@
 .scrollable {
   max-height: 400px;
 }
+
+.speciesScrollable {
+  max-height: 600px;
+}
+
+.teamScrollable {
+  max-height: 400px;
+}
+
+table tr td, table tr th {
+  background-color: rgba(216, 207, 207, 0.253) !important;
+  color: white
+}

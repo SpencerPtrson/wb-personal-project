@@ -6,7 +6,7 @@ export default function TeamTable({ teamList }) {
       });
 
     return (
-      <table className='table bg-transparent'>
+      <table className='table teamScrollable'>
         <thead>
           <tr>
             <th>Team Name</th>

@@ -359,7 +359,7 @@ const handlerFunctions = {
                 const newPokemonInstance = await PokemonInstance.create({
                     speciesId: speciesId,
                     teamId: teamId,
-                    natureId: 0,
+                    natureId: 1,
                     level: 100,
                     move1Id: 0,
 

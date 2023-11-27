@@ -29,7 +29,8 @@ export default function PageContent() {
           style={{ minHeight: '100vh', 
                    backgroundImage: `url('https://www.rpgfan.com/wp-content/uploads/2020/10/Pokemon-Mystery-Dungeon-Explorers-of-Sky-Artwork-003.jpg')`,
                    backgroundRepeat: 'no-repeat',
-                   backgroundSize: '100%'
+                   backgroundSize: '100%',
+                   backgroundAttachment: 'fixed'
         }}>
       <Container fluid style={{padding: 0}}>
 

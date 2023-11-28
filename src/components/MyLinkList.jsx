@@ -4,7 +4,7 @@ import { ModalFooter } from "react-bootstrap"
 
 export default function MyLinkList() {
     return (
-        <ModalFooter class="footer fixed-bottom py-3" style={{backgroundColor: `rgba(129, 29, 29, 0.8)`, color: "white"}}>
+        <ModalFooter className="footer fixed-bottom py-3" style={{backgroundColor: `rgba(129, 29, 29, 0.8)`, color: "white"}}>
             <Row>
                 <Col align='center'>
                     Want to check out my other work? Here are some links!

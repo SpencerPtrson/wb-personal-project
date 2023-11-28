@@ -33,7 +33,7 @@ export default function ScrollableAbilityTable({ currentSpeciesId, abilityList, 
                         }
                     </tbody>
                 </table>
-                : <h6>No Legal Abilities</h6>
+                : <h6 style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', textAlign: 'center', border: '1px solid white' }}>No Legal Abilities</h6>
             }
             
         </div>

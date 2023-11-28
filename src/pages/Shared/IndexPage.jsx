@@ -9,10 +9,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 export default function IndexPage() {
   const email = useSelector(state => state.user.email);
   const userId = useSelector(state => state.user.userId);
-
   const { teamSample } = useLoaderData();
-  console.log(teamSample);
-
 
   return (
       <Container fluid>
@@ -21,7 +18,7 @@ export default function IndexPage() {
           <br />
 
           <Row>
-            <Col xs={{ span: 4, offset: 4}}  align='center' style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white' }}>
+            <Col xs={{ span: 4, offset: 4}}  align='center' style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', border: '1px solid white' }}>
               { !email || email === ''
                 ? <h4>Login or create an account!</h4>
                 : <h4>Manage Your Stuff!</h4>
@@ -58,7 +55,7 @@ export default function IndexPage() {
 
 
         <Row>
-          <Col xs={{ span: 4, offset: 4}}  align='center' style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white' }}>
+          <Col xs={{ span: 4, offset: 4}}  align='center' style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', border: '1px solid white' }}>
             Want ideas? Check out this team!
           </Col>
         </Row>

@@ -1,27 +1,29 @@
 import { useSelector } from "react-redux";
+import { Button, Form } from "react-bootstrap";
 export default function CreateTeamForm({ onCreateTeam }) {
   const userId = useSelector(state => state.user.userId)
-    return (
-      <form method='post'
-        onSubmit={(e) => {
+  
+  return (
+    <Form>
+      <Form.Group className="mb-3" controlId='formTeamName' align='center'>
+        <Form.Label>Team Name</Form.Label>
+        <Form.Control type='text' placeholder='Enter Team Name' required />
+        <Form.Text style={{ color: 'white'}}>Remember that your teams are public information! Please enter an appropriate name!</Form.Text>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="submitButton" align='center'>
+        <Button variant="primary" onClick={(e) => {
           e.preventDefault();
+          if (!formTeamName.value || formTeamName.value.trim() === ''){
+            alert("Please enter a name for your new team!");
+            return;
+          }
           onCreateTeam(e, {
             userId: userId,
-            teamName: teamName.value,
-          });
-        }}
-      >
-        <div className="form-group">
-          <label htmlFor="teamName">Team Name:</label>
-          <input className="form-control-sm"
-            name="teamName"
-            id="teamName"
-            type="text"
-            required
-          />
-          <button type="submit">Create Team</button>
-        </div>
-      </form>
-    );
-  }
-  
+            teamName: formTeamName.value
+          })
+        }}>Create Your Team!</Button>
+      </Form.Group>
+    </Form>
+  );
+}

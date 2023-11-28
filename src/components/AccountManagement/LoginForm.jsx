@@ -1,30 +1,27 @@
+import { Form, Button } from "react-bootstrap";
+
 export default function LoginForm({ onLogin }) {
   return (
-    <form method='get' 
-      onSubmit={(e) => {
-        e.preventDefault();
-        onLogin(e, {
-          email: email.value,
-          password: password.value,
-        });
-      }}
-    >
-      <label htmlFor="email">Email:</label>
-      <input
-        name="email"
-        id="email"
-        type="text"
-        required
-      />
-      <br />
-      <label htmlFor="password">Password:</label>
-      <input
-        name="password"
-        id="password"
-        type="password"
-        required
-      />
-      <button type="submit">Log In</button>
-    </form>
+    <Form>
+      <Form.Group className="mb-3" controlId="formEmail" align='center' >
+        <Form.Label>Email Address</Form.Label>
+        <Form.Control type='email' placeholder="Enter Email" required />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId='formPassword' align='center'>
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" required />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="submitButton" align='center'>
+        <Button variant='primary'  onClick={(e) => {
+          e.preventDefault();
+          onLogin(e, {
+            email: formEmail.value,
+            password: formPassword.value
+          });
+        }}>Create an Account!</Button>
+      </Form.Group>
+    </Form>
   );
 }

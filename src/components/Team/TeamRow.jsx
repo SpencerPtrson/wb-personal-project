@@ -8,12 +8,12 @@ export default function TeamRow({ team }) {
     const email = useSelector(state => state.user.email);
 
     const spriteImgs = pokemoninstances?.map(pokemonInstance => {
-        return <td><img src={pokemonInstance.PokemonSpecy.sprite} alt={pokemonInstance.PokemonSpecy.name}/></td>
+        return <td key={pokemonInstance.PokemonSpecy.sprite}><img src={pokemonInstance.PokemonSpecy.sprite} alt={pokemonInstance.PokemonSpecy.name}/></td>
     });
 
     const pokemonNames = pokemoninstances?.map(pokemonInstance => {
         let name = pokemonInstance.PokemonSpecy.name;
-        return <td>{name.slice(0,1).toUpperCase() + name.slice(1)}</td>
+        return <td key={pokemonInstance.pokemonInstanceId}>{name.slice(0,1).toUpperCase() + name.slice(1)}</td>
     });
 
     

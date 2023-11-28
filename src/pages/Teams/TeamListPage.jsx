@@ -3,6 +3,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import TeamTable from '../../components/Team/TeamTable';  
 import CreateTeamForm from "../../components/Team/CreateTeamForm";
+import { Col, Container, Row } from 'react-bootstrap';
 
 export default function TeamListPage() {
   const email = useSelector(state => state.user.email)
@@ -16,7 +17,8 @@ export default function TeamListPage() {
     console.log(res.data);
     if (res.data.success) { 
       console.log("Create Team succeeded");
-      navigate(0); 
+      console.log("New Team", res.data.newTeam)
+      navigate(`/teams/${res.data.newTeam.teamId}`); 
     }
     else {
       setErrorMessage("Failed to create team.");
@@ -30,10 +32,19 @@ export default function TeamListPage() {
     <>
       { email
         ? <>
-          <div className="container mx-auto">
-            <p style={{justifyContent: "center"}}>Want to submit a team? Enter a name below and then add some pokemon!</p>
-            <CreateTeamForm onCreateTeam={handleCreateTeam}/>
-          </div>
+            <Container style={{backgroundColor: `rgba(129, 29, 29, 0.8)`, color: "white", border: '1px solid white'}}>
+              <Row>
+                <Col align='center'>
+                  Want to submit a team? Enter a name below and then add some pokemon!
+                </Col>
+              </Row>
+
+              <Row>
+                <Col align='center'>
+                  <CreateTeamForm onCreateTeam={handleCreateTeam} />
+                </Col>
+              </Row>
+            </Container>
           <hr />
         </>
         : <></>

@@ -1,11 +1,9 @@
 import MoveRow from "./MoveRow";
 
 export default function MoveTable({ moves }) {
-    console.log("Moves", moves);
     const moveRows = moves.map((move) => {
         return <MoveRow key={move.moveId} move={move} />
-      });
-    console.log(moves);
+    });
 
     return (
         <div className='table-responsive speciesScrollable' style={{border: '1px solid black'}}>

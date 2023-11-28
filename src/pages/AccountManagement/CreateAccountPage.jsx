@@ -32,14 +32,23 @@ export default function CreateAccountPage({createAccount}) {
       <br />
       <br />
       <br />
-      <Container style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white' }}>
+      <Container style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', border: '1px solid white' }}>
         <Row>
-          <Col align="center">
-            <h1>Create Account</h1>
+          <Col align='center'>
+            <h1>CREATE ACCOUNT</h1>
           </Col>
         </Row>
-        <CreateAccountForm onCreateAccount={handleCreateAccount} />
-        {errorMessage}
+
+        <Row>
+          <Col align='center'>
+            <CreateAccountForm onCreateAccount={handleCreateAccount} />
+          </Col>
+        </Row>
+        <Row>
+          <Col align='center'>
+            {errorMessage}
+          </Col>
+        </Row>
       </Container>
     </>
   );

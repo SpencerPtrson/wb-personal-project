@@ -3,6 +3,6 @@ export default function SpeciesTypings({ type1, type2 }) {
     if (type2) type2 = type2.slice(0,1).toUpperCase() + type2.slice(1);  
     
     return (
-        <>Type(s): {type1} {type2}</>
+        <div style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', textAlign: 'center', border: '1px solid white' }}>Type(s): {type1} {type2}</div>
     )
 }

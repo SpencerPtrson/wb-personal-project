@@ -27,7 +27,7 @@ export default function CreatePokemonInstancePage() {
 
   return (
     <>
-      <h1>Choose a Pokemon to add to your team!</h1>
+      <h1 style={{backgroundColor: `rgba(129, 29, 29, 0.8)`, color: "white", border: '1px solid white', textAlign: 'center'}}>Choose a Pokemon to add to your team!</h1>
       <PokemonSpeciesSelectorTable speciesList={speciesList} handleCreatePokemonFunction={handleCreatePokemon}/>
       {errorMessage}
     </>

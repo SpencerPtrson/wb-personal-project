@@ -6,7 +6,7 @@ export default function MoveTable({ moves }) {
     });
 
     return (
-        <div className='table-responsive speciesScrollable' style={{border: '1px solid black'}}>
+        <div className='table-responsive' style={{border: '1px solid black'}}>
             {
                 moveRows && moves.length > 0
                 ? <></>

@@ -7,7 +7,7 @@ export default function CreateTeamForm({ onCreateTeam }) {
     <Form>
       <Form.Group className="mb-3" controlId='formTeamName' align='center'>
         <Form.Label>Team Name</Form.Label>
-        <Form.Control type='text' placeholder='Enter Team Name' required />
+        <Form.Control type='text' className="form-control text-center" placeholder='Enter Team Name' required />
         <Form.Text style={{ color: 'white'}}>Remember that your teams are public information! Please enter an appropriate name!</Form.Text>
       </Form.Group>
 

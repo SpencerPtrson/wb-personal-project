@@ -28,8 +28,8 @@ export default function PokemonInstanceTable({ instanceList, isTeamView }) {
           <th>IVs</th>
           <th>EVs</th>
           <th>Moves</th>
-          <th></th>
-          <th></th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>

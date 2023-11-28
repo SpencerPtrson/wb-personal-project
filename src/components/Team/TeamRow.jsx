@@ -25,7 +25,7 @@ export default function TeamRow({ team }) {
                 <td>
                     {
                         pokemoninstances.length > 0
-                        ? <table className="table">
+                        ? <table className="table subtable">
                             <tbody>
                                 <tr>{spriteImgs}</tr>
                                 <tr>{pokemonNames}</tr>

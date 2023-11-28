@@ -24,11 +24,14 @@ export default function IndexPage() {
           <Row>
             <Col xs={{ span: 4, offset: 4}}  align='center' style={{ backgroundColor: `rgba(129, 29, 29, 0.623)`, color: 'white' }}>
               { !email || email === ''
-                ? <>Login or create an account!</>
-                : <>Manage Your Stuff!</>
+                ? <h4>Login or create an account!</h4>
+                : <h4>Manage Your Stuff!</h4>
               }
             </Col>
           </Row>
+
+          <br />
+
           <Row>
             {email === '' || !email
               ? <>
@@ -51,11 +54,19 @@ export default function IndexPage() {
           </Row>
 
         <br />
+        <br />
+        <br />
+
+
+
         <Row>
           <Col xs={{ span: 4, offset: 4}}  align='center' style={{ backgroundColor: `rgba(129, 29, 29, 0.623)`, color: 'white' }}>
             Want ideas? Check out this team!
           </Col>
         </Row>
+
+          <br />
+
         <Row>
             <Col>
               <TeamTable teamList={[teamSample]}/>

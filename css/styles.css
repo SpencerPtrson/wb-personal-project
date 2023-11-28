@@ -26,6 +26,17 @@ thead {
   background-color: black !important;
 }
 
+th, tr, td {
+  border-collapse: collapse;
+  text-align: center;
+  justify-content: center;
+  vertical-align: middle;
+  align-items: center;
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .bg {
   min-height: 100vh;
   background-image: url('https://www.rpgfan.com/wp-content/uploads/2020/10/Pokemon-Mystery-Dungeon-Explorers-of-Sky-Artwork-003.jpg');
@@ -37,6 +48,10 @@ thead {
 .subtable {
   border: 1px solid white;
   width: 155px;
+
+  text-align: center;
+  margin: auto;
+
 }
 
 @media (max-width: 1000px) {

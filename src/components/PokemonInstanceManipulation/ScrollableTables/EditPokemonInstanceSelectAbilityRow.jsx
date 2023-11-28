@@ -4,7 +4,7 @@ export default function EditPokemonInstanceSelectAbilityRow({ ability, stateAbil
 
     return (
         <>
-            <tr key={abilityId} onClick={(e) => setStateAbility({...stateAbility, abilityId: abilityId, abilityName: name})}>
+            <tr key={abilityId} onClick={(e) => setStateAbility({...stateAbility, abilityId: abilityId, abilityName: name, abilityDesc: shortDescription})}>
                 <td>{name}</td>
                 <td>{flavorText}</td>
                 <td>{shortDescription}</td>

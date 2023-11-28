@@ -30,7 +30,6 @@ export default function EditPokemonInstancePage() {
 
   return (
     <>
-      <h1>Edit Pokemon Page!</h1>
       <EditPokemonInstanceForm
         pokemonInstance={pokemonInstance}
         speciesList={speciesList}

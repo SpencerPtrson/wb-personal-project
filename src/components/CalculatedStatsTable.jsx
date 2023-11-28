@@ -61,8 +61,7 @@ export default function CalculatedStatsTable({ baseStats, IVs, EVs, level, natur
 
   return (
       <>
-        <h5>Calculated Stats</h5>
-        <table className="table">
+        <table className="table" style={{ tableLayout: 'fixed'}}>
           <thead>
                 <tr>
                     <th>HP</th>

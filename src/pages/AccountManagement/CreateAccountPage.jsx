@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useState } from 'react';
 
 import CreateAccountForm from '../../components/AccountManagement/CreateAccountForm';
+import { Container, Row, Col } from 'react-bootstrap';
 
 export default function CreateAccountPage({createAccount}) {
   const [errorMessage, setErrorMessage] = useState();
@@ -27,9 +28,19 @@ export default function CreateAccountPage({createAccount}) {
 
   return (
     <>
-      <h1>Create Account</h1>
-      <CreateAccountForm onCreateAccount={handleCreateAccount} />
-      {errorMessage}
+      <br />
+      <br />
+      <br />
+      <br />
+      <Container style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white' }}>
+        <Row>
+          <Col align="center">
+            <h1>Create Account</h1>
+          </Col>
+        </Row>
+        <CreateAccountForm onCreateAccount={handleCreateAccount} />
+        {errorMessage}
+      </Container>
     </>
   );
 }

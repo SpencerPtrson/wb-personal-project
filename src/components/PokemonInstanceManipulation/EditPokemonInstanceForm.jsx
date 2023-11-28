@@ -38,10 +38,11 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     const IVCells = ivArr.map(ivValue => {
         const key = ivValue[0];
         return <td key={key}>
-            <input type="number" min={minIVValue} max={maxIVValue} defaultValue={ivValue[1]} placeholder="Anywhere from 0-31" onChange={(e) => {
+            <input type="number" min={minIVValue} max={maxIVValue} defaultValue={ivValue[1]} id={ivValue[0]} placeholder="Anywhere from 0-31" onChange={(e) => {
                 let val = +(e.target.value);
                 if (val < minIVValue) val = minIVValue;
                 if (val > maxIVValue) val = maxIVValue;
+                document.getElementById(ivValue[0]).value = val;
                 setState({...state, [key]: val})
             }}/>
         </td>
@@ -49,14 +50,14 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
 
     const evArr = [["hpEV", hpEV], ["atkEV", atkEV], ["defEV", defIV], ["spATKEV", spATKEV], ["spDEFEV", spDEFEV], ["speedEV", speedEV]];
     const EVCells = evArr.map(evValue => {
-        const key = evValue[0];
+        const key = evValue[0];        
 
-        return <td key={key}>
-            <input type="number" min={minEVValue} max={maxEVValue} defaultValue={evValue[1]} placeholder="Anywhere from 0-31" onChange={(e) => {
+        return <td key={key} >
+            <input type="number" min={minEVValue} max={maxEVValue} defaultValue={evValue[1]} id={evValue[0]} placeholder="Anywhere from 0-31" onChange={(e) => {
                 let val = +(e.target.value);
                 if (val < minEVValue) val = minEVValue;
                 if (val > maxEVValue) val = maxEVValue;
-                
+                document.getElementById(evValue[0]).value = val;
                 setState({...state, [key]: val})
             }}/>
         </td>
@@ -76,7 +77,8 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     //#region Abilities
         const [stateAbility, setStateAbility] = useState({
             abilityId: -1,
-            abilityName: null
+            abilityName: null,
+            abilityDesc: null,
         });
     //#endregion Abilities
 
@@ -100,10 +102,6 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     //#endregion
 
 
-    console.log("Ability:", stateAbility);
-    console.log("State:", state);
-    console.log("Selected Moves State:", selectedMoves);
-
     useEffect(() => {
         setSelectedMoves({
             move1Id: -1, move1Name: "",
@@ -113,7 +111,8 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
         });
         setStateAbility({
             abilityId: -1,
-            abilityName: null
+            abilityName: null,
+            abilityDesc: null
         });
     }, [state.speciesId])
 
@@ -121,39 +120,56 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     return (
         <Container fluid>
 
-            <Row>
-                <Col className="align-baseline">
+            <Row style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', border: '1px solid white' }}>
+                <Col className="align-baseline my-auto" align='center'>
                     <h1><PokemonSpriteImg name={state.name} sprite={state.imgUrl} width={200}/></h1>
                     <h1>{state.name}</h1>
                 </Col>
-                <Col className="align-baseline">
-                    <h5>Ability: {stateAbility.abilityName ?? "None"}</h5>
-                    <h5>Nature: {stateNature.natureName ?? "None"}</h5>
+
+                <Col className="align-baseline my-auto" align='center'>
+                    <Row>
+                        <Col align='center'>
+                            Ability: {stateAbility.abilityName ?? "None"}
+                            { <><br /> {stateAbility.abilityDesc}</> ?? "" }
+                        </Col>
+                    </Row>
+                    <br />
+                    <Row>
+                        <Col align='center'>
+                            Nature: {stateNature.natureName ?? "None"}
+                            { <><br /> Increased Stat: {stateNature.increasedStat}</> ?? "None" }
+                            { <><br /> Decreased Stat: {stateNature.decreasedStat}</> ?? "None" }
+                        </Col>
+                    </Row>
                 </Col>
-                <Col className="align-baseline">
-                    <h5>Selected Moves</h5>
-                        <label htmlFor="move1">Move 1: </label>
-                        <input readOnly={true} value={selectedMoves.move1Name} type="text" id="move1" onSelect={(e) => setCurrentSelectedMoveNum(1)}/>
-                        <br />
-                        <label htmlFor="move2">Move 2: </label>
-                        <input readOnly={true} value={selectedMoves.move2Name} type="text" id="move2" onSelect={(e) => setCurrentSelectedMoveNum(2)}/>
-                        <br />
-                        <label htmlFor="move3">Move 3: </label>
-                        <input readOnly={true} value={selectedMoves.move3Name} type="text" id="move3" onSelect={(e) => setCurrentSelectedMoveNum(3)}/>
-                        <br />
-                        <label htmlFor="move4">Move 4: </label>
-                        <input readOnly={true} value={selectedMoves.move4Name} type="text" id="move4" onSelect={(e) => setCurrentSelectedMoveNum(4)}/>
+
+                <Col className="align-baseline my-auto" align='center'>
+                    <label htmlFor="move1">Move 1: </label>
+                    <input readOnly={true} value={selectedMoves.move1Name} type="text" id="move1" onSelect={(e) => setCurrentSelectedMoveNum(1)}/>
+                    <br />
+                    <label htmlFor="move2">Move 2: </label>
+                    <input readOnly={true} value={selectedMoves.move2Name} type="text" id="move2" onSelect={(e) => setCurrentSelectedMoveNum(2)}/>
+                    <br />
+                    <label htmlFor="move3">Move 3: </label>
+                    <input readOnly={true} value={selectedMoves.move3Name} type="text" id="move3" onSelect={(e) => setCurrentSelectedMoveNum(3)}/>
+                    <br />
+                    <label htmlFor="move4">Move 4: </label>
+                    <input readOnly={true} value={selectedMoves.move4Name} type="text" id="move4" onSelect={(e) => setCurrentSelectedMoveNum(4)}/>
+                </Col>
+
+                <Col className="align-baseline my-auto" align='center'>
+                    <Button onClick={e => {
+                        e.preventDefault();
+                        editPokemonFunction(pokemonInstance.pokemonInstanceId, {
+                        speciesId: state.speciesId, abilityId: stateAbility.abilityId, natureId: stateNature.natureId, level: state.level, moves: selectedMoves,
+                        hpIV: state.hpIV, atkIV: state.atkIV, defIV: state.defIV, spATKIV: state.spATKIV, spDEFIV: state.spDEFIV, speedIV: state.speedIV,
+                        hpEV: state.hpEV, atkEV: state.atkEV, defEV: state.defEV, spATKEV: state.spATKEV, spDEFEV: state.spDEFEV, speedEV: state.speedEV,
+                        });
+                    }}>Save Changes</Button>
                 </Col>
             </Row>
 
-            <Button onClick={e => {
-                e.preventDefault();
-                editPokemonFunction(pokemonInstance.pokemonInstanceId, {
-                    speciesId: state.speciesId, abilityId: stateAbility.abilityId, natureId: stateNature.natureId, level: state.level, moves: selectedMoves,
-                    hpIV: state.hpIV, atkIV: state.atkIV, defIV: state.defIV, spATKIV: state.spATKIV, spDEFIV: state.spDEFIV, speedIV: state.speedIV,
-                    hpEV: state.hpEV, atkEV: state.atkEV, defEV: state.defEV, spATKEV: state.spATKEV, spDEFEV: state.spDEFEV, speedEV: state.speedEV,
-                });
-            }}>Save Changes</Button>
+
 
 
             <br />
@@ -170,64 +186,88 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             />
 
             <br />
-            <label htmlFor="levelEditor">Level:</label>
-            <input type="number" min={1} max={100} defaultValue={state.level} placeholder="Anywhere from 0-100" onChange={(e) => setState({...state, level: +(e.target.value)})}/>
 
 
-            <Button onClick={e => {
-                e.preventDefault();
-                setDisplayFields({
-                    displaySpeciesList: true,
-                    displayStats: false,
-                    displayAbilityList: false,
-                    displayNatureList: false,
-                    displayMoveList: false,
-                })
-            }}>Species</Button>
 
-            <Button onClick={e => {
-                e.preventDefault();
-                setDisplayFields({
-                    displaySpeciesList: false,
-                    displayStats: true,
-                    displayAbilityList: false,
-                    displayNatureList: false,
-                    displayMoveList: false,
-                })
-            }}>IVs and EVs</Button>
+            <Container fluid>
+                <Row style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', border: '1px solid white', height: 'fit-content', padding: '10px' }} >
+                <Col align="center" className="my-auto">
+                        <label htmlFor="levelEditor">Level:</label>
+                        <input type="number" min={1} max={100} defaultValue={state.level} id="levelMod" placeholder="Anywhere from 0-100" onChange={(e) => {
+                            let val = +(e.target.value);
+                            if (val < 1) val = 1;
+                            if (val > 100) val = 100;
+                            document.getElementById('levelMod').value = val;
+                            setState({...state, level: val})
+                        }}/>
+                    </Col>
 
-            <Button onClick={e => {
-                e.preventDefault();
-                setDisplayFields({
-                    displaySpeciesList: false,
-                    displayStats: false,
-                    displayAbilityList: true,
-                    displayNatureList: false,
-                    displayMoveList: false,
-                })
-            }}>Abilities</Button>
+                    <Col align="center" className="my-auto">
+                        <Button onClick={e => {
+                            e.preventDefault();
+                            setDisplayFields({
+                                displaySpeciesList: true,
+                                displayStats: false,
+                                displayAbilityList: false,
+                                displayNatureList: false,
+                                displayMoveList: false,
+                            });
+                        }}>Species</Button>
+                    </Col>
 
-            <Button onClick={e => {
-                e.preventDefault();
-                setDisplayFields({
-                    displaySpeciesList: false,
-                    displayStats: false,
-                    displayAbilityList: false,
-                    displayNatureList: true,
-                    displayMoveList: false,
-                })
-            }}>Natures</Button>
+                    <Col align="center" className="my-auto">
+                        <Button onClick={e => {
+                            e.preventDefault();
+                            setDisplayFields({
+                                displaySpeciesList: false,
+                                displayStats: true,
+                                displayAbilityList: false,
+                                displayNatureList: false,
+                                displayMoveList: false,
+                            })
+                        }}>IVs and EVs</Button>
+                    </Col>
 
-            <Button onClick={e => {
-                e.preventDefault();
-                setDisplayFields({
-                    displaySpeciesList: false,
-                    displayStats: false,
-                    displayAbilityList: false,
-                    displayNatureList: false,
-                    displayMoveList: true,
-                })
-            }}>Moves</Button>
+                    <Col align="center" className="my-auto">
+                        <Button onClick={e => {
+                            e.preventDefault();
+                            setDisplayFields({
+                                displaySpeciesList: false,
+                                displayStats: false,
+                                displayAbilityList: true,
+                                displayNatureList: false,
+                                displayMoveList: false,
+                            })
+                        }}>Abilities</Button>
+                    </Col>
+
+                    <Col align="center" className="my-auto">
+                        <Button onClick={e => {
+                            e.preventDefault();
+                            setDisplayFields({
+                                displaySpeciesList: false,
+                                displayStats: false,
+                                displayAbilityList: false,
+                                displayNatureList: true,
+                                displayMoveList: false,
+                            })
+                        }}>Natures</Button>
+                    </Col>
+
+                    <Col align="center" className="my-auto">
+                        <Button onClick={e => {
+                            e.preventDefault();
+                            setDisplayFields({
+                                displaySpeciesList: false,
+                                displayStats: false,
+                                displayAbilityList: false,
+                                displayNatureList: false,
+                                displayMoveList: true,
+                            })
+                        }}>Moves</Button>
+                    </Col>
+                </Row>
+            </Container>
 
             <br />
             <br />
@@ -238,7 +278,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                 displayFields.displaySpeciesList
                 ? <>
                 {/* SPECIES EDITOR */}
-                <p>Click a row to change Species!</p>
+                <h5 style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', textAlign: 'center', border: '1px solid white' }}>Click a row to change Species!</h5>
                 <ScrollableSpeciesTable speciesList={speciesList} state={state} setStateVals={setState} />
                 </>
                 : <></>
@@ -267,7 +307,6 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                             </tr>
                         </tbody>
                     </table>
-                    <hr />
 
                     {/* EV Editors */}
                     <table className="table">
@@ -296,7 +335,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             {
                 displayFields.displayAbilityList
                 ? <>
-                    <h5>Available Abilities</h5>
+                    <h5 style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', textAlign: 'center', border: '1px solid white' }} >Available Abilities</h5>
                     <ScrollableAbilityTable currentSpeciesId={state.speciesId} abilityList={abilityList} stateAbility={stateAbility} setStateAbility={setStateAbility}/>
                 </>
                 : <></>
@@ -306,7 +345,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             {
                 displayFields.displayNatureList
                 ? <>
-                    <h5>Natures</h5>
+                    <h5 style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', textAlign: 'center', border: '1px solid white' }}>Natures</h5>
                     <ScrollableNatureTable natureList={natureList} stateNature={stateNature} setStateNature={setStateNature}/>
                 </>
                 : <></>
@@ -317,7 +356,7 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             {
                 displayFields.displayMoveList
                 ? <>
-                    <h5>Available Moves</h5>
+                    <h5 style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', textAlign: 'center', border: '1px solid white' }}>Available Moves</h5>
                     <ScrollableMoveTable currentSpeciesId={state.speciesId} moveList={movesList} selectedMoves={selectedMoves} selectedMoveNum={currentSelectedMoveNum} setSelectedMove={setSelectedMoves}/>
                 </>
                 : <></>

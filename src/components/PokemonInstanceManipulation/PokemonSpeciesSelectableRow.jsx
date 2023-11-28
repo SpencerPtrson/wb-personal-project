@@ -4,13 +4,12 @@ import SpeciesTypings from "../SpeciesTypings";
 
 export default function PokemonSpeciesSelectableRow({ species: {speciesId, name, sprite, type1, type2, baseHP, baseATK, baseDEF, baseSPATK, baseSPDEF, baseSPEED}, handleCreatePokemon }) {
     name = name.slice(0,1).toUpperCase() + name.slice(1);
-    console.log(speciesId);
     return (
         <>
             <tr>
                 <td><PokemonSpriteImg name={name} sprite={sprite} width={100}/></td>
                 <td><Button onClick={() => handleCreatePokemon(speciesId, 0)}>{name}</Button></td>
-                <SpeciesTypings type1={type1} type2={type2}/>
+                <td><SpeciesTypings type1={type1} type2={type2}/></td>
                 <td>
                     <table className="table">
                         <thead>

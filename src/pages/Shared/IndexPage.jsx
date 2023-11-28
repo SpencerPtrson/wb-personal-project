@@ -20,9 +20,8 @@ export default function IndexPage() {
           <br />
           <br />
 
-
           <Row>
-            <Col xs={{ span: 4, offset: 4}}  align='center' style={{ backgroundColor: `rgba(129, 29, 29, 0.623)`, color: 'white' }}>
+            <Col xs={{ span: 4, offset: 4}}  align='center' style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white' }}>
               { !email || email === ''
                 ? <h4>Login or create an account!</h4>
                 : <h4>Manage Your Stuff!</h4>
@@ -58,14 +57,13 @@ export default function IndexPage() {
         <br />
 
 
-
         <Row>
-          <Col xs={{ span: 4, offset: 4}}  align='center' style={{ backgroundColor: `rgba(129, 29, 29, 0.623)`, color: 'white' }}>
+          <Col xs={{ span: 4, offset: 4}}  align='center' style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white' }}>
             Want ideas? Check out this team!
           </Col>
         </Row>
 
-          <br />
+        <br />
 
         <Row>
             <Col>

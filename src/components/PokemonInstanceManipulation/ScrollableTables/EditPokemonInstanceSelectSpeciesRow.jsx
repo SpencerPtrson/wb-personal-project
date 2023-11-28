@@ -7,13 +7,11 @@ export default function EditPokemonInstanceSelectSpeciesRow({ species: {speciesI
     return (
         <>
             <tr key={speciesId} onClick={(e) => setStateVals({...state, speciesId: speciesId, name: name, imgUrl: sprite, 
-                                                                baseHP: baseHP, baseATK: baseATK, baseDEF: baseDEF, baseSPATK: baseSPATK, baseSPDEF, baseSPDEF, baseSPEED, baseSPEED})}>
+                                                                baseHP: baseHP, baseATK: baseATK, baseDEF: baseDEF, baseSPATK: baseSPATK, baseSPDEF: baseSPDEF, baseSPEED: baseSPEED})}>
                 <td><PokemonSpriteImg name={name} sprite={sprite}/></td>
                 <td>{name}</td>
-                <SpeciesTypings type1={type1} type2={type2}/>
-                <td>
-                    <BaseStatsList baseHP={baseHP} baseATK={baseATK} baseDEF={baseDEF} baseSPATK={baseSPATK} baseSPDEF={baseSPDEF} baseSPEED={baseSPEED}/>
-                </td>
+                <td><SpeciesTypings type1={type1} type2={type2}/></td>
+                <td><BaseStatsList baseHP={baseHP} baseATK={baseATK} baseDEF={baseDEF} baseSPATK={baseSPATK} baseSPDEF={baseSPDEF} baseSPEED={baseSPEED}/></td>
             </tr>
         </>
     )

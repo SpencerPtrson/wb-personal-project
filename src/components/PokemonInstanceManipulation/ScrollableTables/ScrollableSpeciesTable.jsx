@@ -17,7 +17,7 @@ export default function ScrollableSpeciesTable({ speciesList, state, setStateVal
                 </tr>
                 </thead>
                 <tbody>
-                {speciesRows}
+                    {speciesRows}
                 </tbody>
             </table>
         </div>

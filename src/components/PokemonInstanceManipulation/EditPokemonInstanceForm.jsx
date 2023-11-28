@@ -38,15 +38,27 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
     const IVCells = ivArr.map(ivValue => {
         const key = ivValue[0];
         return <td key={key}>
-            <input type="number" min={minIVValue} max={maxIVValue} defaultValue={ivValue[1]} placeholder="Anywhere from 0-31" onChange={(e) => setState({...state, [key]: +(e.target.value)})}/>
+            <input type="number" min={minIVValue} max={maxIVValue} defaultValue={ivValue[1]} placeholder="Anywhere from 0-31" onChange={(e) => {
+                let val = +(e.target.value);
+                if (val < minIVValue) val = minIVValue;
+                if (val > maxIVValue) val = maxIVValue;
+                setState({...state, [key]: val})
+            }}/>
         </td>
     });
 
     const evArr = [["hpEV", hpEV], ["atkEV", atkEV], ["defEV", defIV], ["spATKEV", spATKEV], ["spDEFEV", spDEFEV], ["speedEV", speedEV]];
     const EVCells = evArr.map(evValue => {
         const key = evValue[0];
+
         return <td key={key}>
-            <input type="number" min={minEVValue} max={maxEVValue} defaultValue={evValue[1]} placeholder="Anywhere from 0-31" onChange={(e) => setState({...state, [key]: +(e.target.value)})}/>
+            <input type="number" min={minEVValue} max={maxEVValue} defaultValue={evValue[1]} placeholder="Anywhere from 0-31" onChange={(e) => {
+                let val = +(e.target.value);
+                if (val < minEVValue) val = minEVValue;
+                if (val > maxEVValue) val = maxEVValue;
+                
+                setState({...state, [key]: val})
+            }}/>
         </td>
     });
     //#endregion IVS / EVS
@@ -76,7 +88,6 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
             decreasedStat: "Defense"
         });
     //#endregion Natures
-
 
     //#region DisplayFields
         const [displayFields, setDisplayFields] = useState({
@@ -311,10 +322,6 @@ export default function EditPokemonInstanceForm({ pokemonInstance, speciesList, 
                 </>
                 : <></>
             }
-
-
-
-
 
         </Container>
     )

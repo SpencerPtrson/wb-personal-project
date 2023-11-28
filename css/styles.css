@@ -27,14 +27,8 @@ thead {
 }
 
 th, tr, td {
-  border-collapse: collapse;
   text-align: center;
-  justify-content: center;
   vertical-align: middle;
-  align-items: center;
-  align-content: center;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .bg {
@@ -48,10 +42,7 @@ th, tr, td {
 .subtable {
   border: 1px solid white;
   width: 155px;
-
-  text-align: center;
   margin: auto;
-
 }
 
 @media (max-width: 1000px) {

@@ -7,8 +7,10 @@ import EditPokemonInstanceForm from "../../components/PokemonInstanceManipulatio
 export default function EditPokemonInstancePage() {
   const [errorMessage, setErrorMessage] = useState();
   const navigate = useNavigate();
-  const { pokemonInstance, speciesList, movesList, abilityList, natureList } =
-    useLoaderData();
+  const { pokemonInstance, speciesList, movesList, abilityList, natureList } = useLoaderData();
+
+  console.log("Pokemon Instance:", pokemonInstance)
+
 
   const handleEditPokemon = async (pokemonInstanceId, formData) => {
     console.log("Handling Edit Pokemon");
@@ -17,7 +19,7 @@ export default function EditPokemonInstancePage() {
     const res = await axios.put(`/api/pokemoninstances/edit/${pokemonInstanceId}`, formData);
     if (res.data.success) {
       console.log("Edit pokemon succeeded");
-      navigate("/pokemoninstances");
+      navigate(`/teams/${pokemonInstance.teamId}`);
     } else {
       setErrorMessage("Failed to edit pokemon.");
       console.log("Edit Pokemon Instance failed");

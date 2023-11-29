@@ -5,7 +5,7 @@ export default function CalculatedStatsTable({ baseStats, IVs, EVs, level, natur
     return Math.floor((((2 * baseHP + hpIV + hpEV / 4) * level) / 100) + level + 10);
   }
 
-  function calculateNonHPStat(baseStat, statIV, statEV, level, natureModifer) {
+  function calculateNonHPStat(baseStat, statIV, statEV, level) {
     const numerator = Math.floor(2 * baseStat + statIV + statEV / 4) * level;
     let result = Math.floor((numerator / 100) + 5)
     return Math.floor(result);

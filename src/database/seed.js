@@ -8,7 +8,7 @@ await db.sync({force: true}); // Erases all previous data
 //#region Species
     // Get pokemon from the API
     const apiSpeciesList = [];
-    for (let i = 1; i <= 11; i++) {
+    for (let i = 1; i <= 20; i++) {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
         apiSpeciesList.push(response.data);
     }
@@ -77,9 +77,9 @@ await db.sync({force: true}); // Erases all previous data
 
 
 //#region Abilities
-    // Get the first 20 moves from the API
+    // Get the first 30 moves from the API
     const apiAbilities = [];
-    for (let i = 1; i <= 30; i++) {
+    for (let i = 1; i <= 50; i++) {
         const response = await axios.get(`https://pokeapi.co/api/v2/ability/${i}`);
         apiAbilities.push(response.data);
     }

@@ -10,7 +10,7 @@ export default function MoveTable({ moves }) {
             {
                 moveRows && moves.length > 0
                 ? <></>
-                : <h5>No Moves Listed</h5>
+                : <h5 style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', textAlign: 'center', border: '1px solid white' }}>No Moves Listed</h5>
             }
             <table className="table scrollable">
                 <thead>

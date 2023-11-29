@@ -15,8 +15,6 @@ export default function MainNav() {
           <Navbar.Toggle />
 
           <Navbar.Collapse>
-
-
             {/* Site Navigation */}
             <Nav className="me-auto">
               <NavLink key={"allpokemonspecies"} href="/pokemonspecies">

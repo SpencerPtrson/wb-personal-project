@@ -23,14 +23,14 @@ export default function PageContent() {
   useEffect(() => {
     userCheck()
   }, []);
-  
-  return (
-      <div className="bg" >
-        <Container fluid style={{padding: 0}}>
-          <MainNav email={email}/>
-          <Outlet />
-        </Container>
-      </div>
-    );
-  }
+
+return (
+    <div className="bg" >
+      <Container fluid style={{padding: 0}}>
+        <MainNav email={email}/>
+        <Outlet />
+      </Container>
+    </div>
+  );
+}
   

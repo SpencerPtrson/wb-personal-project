@@ -3,6 +3,7 @@ import EditPokemonInstanceButton from "../PokemonInstanceManipulation/EditPokemo
 import DeletePokemonInstanceButton from '../PokemonInstanceManipulation/DeletePokemonInstanceButton';
 import PokemonInstanceMoveTable from "./PokemonInstanceMoveTable";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { NavLink } from "react-bootstrap";
 
 export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
     const email = useSelector(state => state.user.email);
@@ -28,7 +29,7 @@ export default function PokemonInstanceRow({ pokemonInstance, isTeamView }) {
                 {isTeamView ? <>
                     </>
                     : <>
-                        <td>{PokemonTeam.teamName}</td>
+                        <td><NavLink href={`/teams/${PokemonTeam.teamId}`}>{PokemonTeam.teamName}</NavLink></td>
                         <td>{pokemonInstance.PokemonTeam.user.email}</td>
                     </>
                 }

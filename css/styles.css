@@ -45,8 +45,12 @@ th, tr, td {
   margin: auto;
 }
 
-@media (max-width: 1000px) {
+.subtable thead {
+  position:absolute;
+}
+
+@media (max-width: 1600px) {
   .bg {
-    background-size: 1066px 800px;
+    background-size: 1600px 1200px;
   }
 }

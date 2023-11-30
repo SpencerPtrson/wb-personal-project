@@ -9,7 +9,6 @@ import { Col, Container, NavLink, Row } from 'react-bootstrap';
 export default function PokemonSpeciesDetailsPage() {
   let { pokemonspecies: { speciesId, name, sprite, type1, type2, baseHP, baseATK, baseDEF, baseSPATK, baseSPDEF, baseSPEED, PokemonMoves, abilities } } = useLoaderData();
   name = name.slice(0,1).toUpperCase() + name.slice(1);
-  console.log("Abilities - Details Page:", abilities);
 
   let previousSpeciesId = speciesId;
   let nextSpeciesId = speciesId + 1;
@@ -18,7 +17,7 @@ export default function PokemonSpeciesDetailsPage() {
   return (
     <Container fluid>
       <Row style={{ backgroundColor: `rgba(129, 29, 29, 0.8)`, color: 'white', textAlign: 'center', border: '1px solid white' }}>
-        <Col align='center'>
+        <Col align='center' className='my-auto'>
           {
             speciesId > 1
             ? <NavLink href={`/pokemonspecies/${previousSpeciesId}`}>
@@ -26,12 +25,13 @@ export default function PokemonSpeciesDetailsPage() {
               </NavLink>
             : <></>
           }
-
         </Col>
-        <Col align='center'>
+
+        <Col align='center' className='my-auto'>
           <h1 style={{textDecoration: 'underline'}}>{name}</h1>
         </Col>
-        <Col align='center'>
+        
+        <Col align='center' className='my-auto'>
           {
             speciesId < 20
             ?  <NavLink href={`/pokemonspecies/${nextSpeciesId}`}>
@@ -39,7 +39,6 @@ export default function PokemonSpeciesDetailsPage() {
               </NavLink>
             : <></>
           }
-
         </Col>
       </Row>
       

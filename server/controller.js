@@ -331,7 +331,8 @@ const handlerFunctions = {
                     { model: PokemonNature }
                 ],
                 order: [
-                    [PokemonTeam, User, 'email', 'ASC']
+                    [PokemonTeam, User, 'email', 'ASC'],
+                    ['pokemonInstanceId', 'ASC']
                 ]
             });
             res.json(allPokemonInstances);

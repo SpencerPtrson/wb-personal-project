@@ -28,7 +28,7 @@ export default function PokemonSpeciesDetailsPage() {
         </Col>
 
         <Col align='center' className='my-auto'>
-          <h1 style={{textDecoration: 'underline'}}>{name}</h1>
+          <h1 style={{textDecoration: 'underline'}}>#{speciesId}: {name}</h1>
         </Col>
         
         <Col align='center' className='my-auto'>

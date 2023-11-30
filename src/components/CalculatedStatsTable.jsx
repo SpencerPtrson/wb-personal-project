@@ -19,19 +19,19 @@ export default function CalculatedStatsTable({ baseStats, IVs, EVs, level, natur
   let speed = calculateNonHPStat(baseStats.baseSPEED, IVs.speedIV, EVs.speedEV, level);
 
   switch (nature.increasedStat) {
-    case "attack":
+    case "Attack":
       atk = Math.floor(atk * natureModifer);
       break;
-    case "defense":
+    case "Defense":
       def = Math.floor(def * natureModifer);
       break;
-    case "special-attack":
+    case "Special-attack":
       spatk = Math.floor(spatk * natureModifer);
       break;
-    case "special-defense":
+    case "Special-defense":
       spdef = Math.floor(spdef * natureModifer);
       break;
-    case "speed":
+    case "Speed":
       speed = Math.floor(speed * natureModifer);
       break;
     default:
@@ -40,19 +40,19 @@ export default function CalculatedStatsTable({ baseStats, IVs, EVs, level, natur
 
 
   switch (nature.decreasedStat) {
-    case "attack":
+    case "Attack":
       atk = Math.floor(atk / natureModifer);
       break;
-    case "defense":
+    case "Defense":
       def = Math.floor(def / natureModifer);
       break;
-    case "special-attack":
+    case "Special-attack":
       spatk = Math.floor(spatk / natureModifer);
       break;
-    case "special-defense":
+    case "Special-defense":
       spdef = Math.floor(spdef / natureModifer);
       break;
-    case "speed":
+    case "Speed":
       speed = Math.floor(speed / natureModifer);
       break;
     default:

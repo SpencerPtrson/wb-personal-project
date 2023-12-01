@@ -152,9 +152,6 @@ await db.sync({force: true}); // Erases all previous data
 //#endregion teams
 
 
-
-
-
 //#region Foreign Key Data
       let dbSpecies = await PokemonSpecies.findAll();
       let dbMoves = await PokemonMove.findAll();
@@ -303,8 +300,6 @@ await db.sync({force: true}); // Erases all previous data
     });
 
 //#endregion PokemonInstances
-
-
 
 
 // POKEMON INSTANCES - MOVES

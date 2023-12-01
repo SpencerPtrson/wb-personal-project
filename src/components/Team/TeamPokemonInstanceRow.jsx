@@ -14,7 +14,7 @@ export default function TeamPokemonInstanceRow({ pokemonInstance, creatorEmail }
     // console.log("TeamPokemonInstanceRow: instance Data:", pokemonInstance);
     // console.log(`Ability for ${PokemonSpecy?.name}: ${ability?.name}`)
     
-    console.log(pokemonInstance)
+    console.log("Pokemon Instance:", pokemonInstance)
 
     let abilityName = null;
     let natureName = null;

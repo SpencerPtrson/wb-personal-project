@@ -133,7 +133,8 @@ const handlerFunctions = {
                             model: PokemonInstance, include: [
                                 { model: PokemonSpecies },
                                 { model: PokemonMove },
-                                { model: Ability }
+                                { model: Ability },
+                                { model: PokemonNature }
                             ],
                             order: [['pokemonInstanceId', 'ASC']]
                         },
@@ -154,8 +155,9 @@ const handlerFunctions = {
                         attributes: ['pokemonInstanceId'],
                         include: [{
                             model: PokemonSpecies,
-                            attributes: ['sprite', 'name']
-                        }],
+                                attributes: ['sprite', 'name']
+                        },                        
+                    ],
                         order: [['pokemonInstanceId', 'ASC']]
                     },
                     {
